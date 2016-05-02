@@ -6,7 +6,11 @@ var activitySchema = mongoose.Schema({
 	name: String,
 	description: String,
 	course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
-	questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }]
+	questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+	answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+	startDate: Date,
+	endDate: Date,
+	createdAt: Date
 });
 
 module.exports = mongoose.model('Activity', activitySchema);
