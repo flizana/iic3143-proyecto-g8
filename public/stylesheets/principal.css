@@ -1,0 +1,95 @@
+.panel-heading > h3{
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  line-height: normal;
+  width: 75%;
+  padding-top:8px;
+
+}
+
+.avatar {
+  margin:0 auto;
+  text-align: center;
+}
+
+.avatar-img{
+  border-radius: 5%;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.profile_picture {
+
+  width: 20%;
+  display: inline-block;
+  float: left;
+
+}
+
+.container_profile_info {
+  padding-left: 5%
+  display: inline-block;
+  float: left;
+}
+
+.edit_profile{
+  float: right;
+}
+
+.container_profile {
+  display: inline-block;
+  width: 100%;
+}
+
+
+/*######################################################*/
+
+.boton-inscribir-curso{
+  background: rgba(0,0,0,0.1);
+  border: 1px solid #777;
+  border-radius: 4px;
+  padding: 5px 10px;
+  display: block;
+  margin-top: -5px;
+  margin-bottom: auto;
+  float:right;
+}
+
+.boton-inscribir-curso:hover{
+  color: black;
+}
+
+.inscrito,
+.inscrito:hover{
+  color: rgb(0,200,0);
+}
+
+.esperando,
+.esperando:hover{
+  color: orange;
+}
+
+.margin-bottom{
+  margin-bottom: 10px;
+}
+
+
+.titulo-cuestionario{
+  border-radius: 5px;
+  border: 1px solid #BBB;
+}
+
+.pregunta {
+    width: 600px;
+    height: 400px;
+    text-align: left;
+}
+
+.informe{
+    width: 65%;
+}
+
+.alumnos-informe{
+  width: 33%;
+}
