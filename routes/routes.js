@@ -11,6 +11,13 @@ module.exports = function (app, passport){
     app.get('/', function (req, res){
     	indexController.getIndex(req, res);
     });
+
+    // =====================================
+    // STUDENT  ============================
+    // =====================================
+    app.get('/student', function (req, res){
+        indexController.getStudentLogin(req, res);
+    });
 };
 
 // route middleware to make sure a user is logged in
