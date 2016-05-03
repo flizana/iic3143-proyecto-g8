@@ -92,4 +92,59 @@ module.exports = function (passport){
             });
         });
     }));
+
+    // =========================================================================
+    // LOCAL LOGIN =============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for signup
+    // by default, if there was no name, it would just be called 'local'
+
+    passport.use('student-login', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    },
+    function (req, email, password, done){
+        Student.findOne({ 'email': email }, function (err, user){
+            if (err)
+                return done(err);
+
+            if (!user)
+                return done(null, false, req.flash('registerMessage', 'Credenciales inválidas'));
+
+            if (!user.validPassword(password))
+                return done(null, false, req.flash('registerMessage', 'Credenciales inválidas'));
+
+            return done(null, user);
+        });
+    }));
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
