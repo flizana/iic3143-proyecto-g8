@@ -6,7 +6,7 @@ exports.getIndex = function (req, res){
 	if (req.isAuthenticated()){
 		// get current user
 		var user = req.user;
-		if (user.hasOwnProperty('isStudent')){
+		if (user.isStudent){
 			res.redirect('student/dashboard');
 		} else {
 			res.redirect('teacher/dashboard');

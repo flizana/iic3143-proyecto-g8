@@ -39,6 +39,14 @@ module.exports = function (app, passport){
     app.get('/student/dashboard', isLoggedIn, function (req, res){
         dashboardController.getStudentDashboard(req, res);
     });
+
+    // =====================================
+    // LOGOUT  =============================
+    // =====================================
+    app.get('/logout', function (req, res){
+        req.logout();
+        res.redirect('/');
+    });
 };
 
 // route middleware to make sure a user is logged in
