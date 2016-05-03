@@ -7,6 +7,7 @@ var teacherSchema = mongoose.Schema({
 	lastName: String,
 	school: String,
 	profilePicturePath: String,
+	isStudent: Boolean,
 	courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
 });
 
