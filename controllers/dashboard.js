@@ -1,5 +1,8 @@
 // controllers/dashboard.js
 
+var random = require('../config/random');
+var images = require('../config/images');
+
 exports.getStudentDashboard = function (req, res){
 	// get current user
 	var user = req.user;
@@ -24,5 +27,59 @@ exports.editStudentProfile = function (req, res){
 			throw err;
 
 		res.redirect('/student/dashboard');
+	});
+}
+
+exports.editStudentProfilePicture = function (req, res){
+	// get current user
+	var user = req.user;
+
+	// generate new filename
+	var newFilename = random.randomAlphanumericString(64);
+
+	// get mimetype
+	var fileMimetype = req.file.mimetype;
+	var extension = images.extensionForMimeType(fileMimetype);
+
+	// set all file paths
+	var tmpPath = req.file.path;
+	var resizedPath = tmpPath + '_150x150';
+
+	console.log(tmpPath);
+	console.log(resizedPath);
+
+	
+	// resize image
+	images.resizeImage(tmpPath, resizedPath, 150, 150, function (err){
+		if (err)
+			throw err;
+
+		// delete temporary file
+		images.deleteFile(tmpPath, function (err){
+			if (err)
+				throw err;
+
+			// change file location
+			var filePath = '/images/student-profile-pictures/' + newFilename + extension;
+			var fullFilePath = 'public' + filePath;
+
+			console.log(filePath);
+			console.log(fullFilePath);
+			images.changeFileLocation(resizedPath, fullFilePath, function (err){
+				if (err)
+					throw err;
+
+				// update user info
+				user.profilePicturePath = filePath;
+
+				// save user
+				user.save(function (err){
+					if (err)
+						throw err;
+
+					res.redirect('/student/dashboard');
+				});
+			});
+		});
 	});
 }

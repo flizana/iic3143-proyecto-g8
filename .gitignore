@@ -37,3 +37,10 @@ node_modules
 
 # MongoDB
 data
+
+# Uploads
+uploads
+
+# Profile pictures
+public/images/student-profile-pictures
+public/images/teacher-profile-pictures

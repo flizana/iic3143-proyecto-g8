@@ -44,6 +44,10 @@ module.exports = function (app, passport){
         dashboardController.editStudentProfile(req, res);
     });
 
+    app.post('/student/dashboard/edit-profile-picture', isLoggedIn, function (req, res){
+        dashboardController.editStudentProfilePicture(req, res);
+    });
+
     // =====================================
     // LOGOUT  =============================
     // =====================================

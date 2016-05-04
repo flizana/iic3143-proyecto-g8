@@ -28,7 +28,6 @@ module.exports = function (passport){
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done){
-        console.log(id);
         var userType = id.charAt(0);
         var finalId = id.slice(1);
         if (userType == 's'){

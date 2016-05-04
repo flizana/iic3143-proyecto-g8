@@ -22,12 +22,15 @@
 					<div class="panel-heading">Imagen</div>
 					<div class="panel-body">
 						<div class="avatar">
-							<img class="avatar-img" src="<%= user.profilePicturePath %>" alt="Profile Picture">
+							<img class="avatar-img" src="<%= user.profilePicturePath %>" alt="Profile Picture" onclick="uploadProfilePicture();">
 						</div>
 					</div>
 					<div class="panel-footer">
 						<a href="javascript:void(0)" onclick="uploadProfilePicture();">Cambiar Foto</a>
 					</div>
+					<form name="avatar" enctype="multipart/form-data" action="/student/dashboard/edit-profile-picture" method="post" style="display: none;">
+						<input id="photo-upload" type="file" name="avatar" accept="image/*" style="display: none;">
+					</form>
 				</div>
 			</div>
 			<div class="col-lg-9">
@@ -67,6 +70,7 @@
 					<div class="panel-footer">
 						<a id="edit-profile-link" href="#">Editar</a>
 						<button id="edit-profile-submit-btn" style="display: none;" type="submit" form="edit-profile-form" class="btn btn-success">Guardar</button>
+						<button id="edit-profile-cancel-btn" style="display: none;" type="button" class="btn btn-default">Cancelar</button>
 					</div>
 				</div>
 			</div>
@@ -76,13 +80,25 @@
 	<% include ../../scripts %>
 	<script type="text/javascript">
 		$(document).ready(function (){
-			$('#edit-profile-link').on('click', function(event){
+			// edit profile button clicked
+			$('#edit-profile-link').on('click', function (event){
 				$('#profile').hide();
 				$('#edit-profile-link').hide();
 				$('#edit-profile').show();
 				$('#edit-profile-submit-btn').show();
+				$('#edit-profile-cancel-btn').show();
+			});
+
+			// edit profile cancel button clicked
+			$('#edit-profile-cancel-btn').on('click', function (event){
+				$('#profile').show();
+				$('#edit-profile-link').show();
+				$('#edit-profile').hide();
+				$('#edit-profile-submit-btn').hide();
+				$('#edit-profile-cancel-btn').hide();
 			});
 		});
 	</script>
+	<script type="text/javascript" src="/js/upload.js"></script>
 </body>
 </html>
