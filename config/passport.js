@@ -46,6 +46,8 @@ module.exports = function (passport){
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
+
+    // Student Register
     passport.use('student-register', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -58,10 +60,10 @@ module.exports = function (passport){
                     return done(err);
 
                 if (user){
-                    return done(null, false, req.flash('registerMessage', 'Email ya está en uso. Por favor intente con otro email.'));
+                    return done(null, false, req.flash('studentRegisterMessage', 'Email ya está en uso. Por favor intente con otro email.'));
                 } else {
                     if (password != req.body.confirmPassword){
-                        return done(null, false, req.flash('registerMessage', 'Contraseñas no coinciden. Por favor intente nuevamente.'));
+                        return done(null, false, req.flash('studentRegisterMessage', 'Contraseñas no coinciden. Por favor intente nuevamente.'));
                     } else {
                         if (req.body.firstName != "" && req.body.lastName != "" && req.body.school != "" && email != "" && password != ""){
                             // create new student
@@ -79,12 +81,59 @@ module.exports = function (passport){
                             // save student
                             newStudent.save(function (err){
                                 if (err)
-                                    throw err;
+                                    return done(err);
 
                                 return done(null, newStudent);
                             });
                         } else {
-                            return done(null, false, req.flash('registerMessage', 'Por favor rellene todos los campos.'));
+                            return done(null, false, req.flash('studentRegisterMessage', 'Por favor rellene todos los campos.'));
+                        }
+                    }
+                }
+            });
+        });
+    }));
+
+    // Teacher Register
+    passport.use('teacher-register', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    },
+    function (req, email, password, done){
+        process.nextTick(function (){
+            Teacher.findOne({ 'email': email }, function (err, user){
+                if (err)
+                    return done(err);
+
+                if (user){
+                    return done(null, false, req.flash('teacherRegisterMessage', 'Email ya está en uso. Por favor intente con otro email.'));
+                } else {
+                    if (password != req.body.confirmPassword){
+                        return done(null, false, req.flash('teacherRegisterMessage', 'Contraseñas no coinciden. Por favor intente nuevamente.'));
+                    } else {
+                        if (req.body.firstName != "" && req.body.lastName != "" && req.body.school != "" && email != "" && password != ""){
+                            // create new teacher
+                            var newTeacher = new Teacher();
+                            newTeacher.firstName = req.body.firstName;
+                            newTeacher.lastName = req.body.lastName;
+                            newTeacher.email = email;
+                            newTeacher.emailVerified = false;
+                            newTeacher.school = req.body.school;
+                            newTeacher.profilePicturePath = '/images/avatar_placeholder.png';
+                            newTeacher.courses = [];
+                            newTeacher.isStudent = false;
+                            newTeacher.password = newTeacher.generateHash(password);
+
+                            // save teacher
+                            newTeacher.save(function (err){
+                                if (err)
+                                    return done(err);
+
+                                return done(null, newTeacher);
+                            });
+                        } else {
+                            return done(null, false, req.flash('teacherRegisterMessage', 'Por favor rellene todos los campos.'));
                         }
                     }
                 }
@@ -98,6 +147,7 @@ module.exports = function (passport){
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
+    // Student Login
     passport.use('student-login', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -109,10 +159,31 @@ module.exports = function (passport){
                 return done(err);
 
             if (!user)
-                return done(null, false, req.flash('registerMessage', 'Credenciales inválidas'));
+                return done(null, false, req.flash('studentRegisterMessage', 'Credenciales inválidas'));
 
             if (!user.validPassword(password))
-                return done(null, false, req.flash('registerMessage', 'Credenciales inválidas'));
+                return done(null, false, req.flash('studentRegisterMessage', 'Credenciales inválidas'));
+
+            return done(null, user);
+        });
+    }));
+
+    // Teacher Login
+    passport.use('teacher-login', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    },
+    function (req, email, password, done){
+        Teacher.findOne({ 'email': email }, function (err, user){
+            if (err)
+                return done(err);
+
+            if (!user)
+                return done(null, false, req.flash('teacherRegisterMessage', 'Credenciales inválidas'));
+
+            if (!user.validPassword(password))
+                return done(null, false, req.flash('teacherRegisterMessage', 'Credenciales inválidas'));
 
             return done(null, user);
         });

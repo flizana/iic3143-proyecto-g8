@@ -34,18 +34,52 @@ module.exports = function (app, passport){
     }));
 
     // =====================================
-    // DASHBOARD  ==========================
+    // STU. DASHBOARD  =====================
     // =====================================
-    app.get('/student/dashboard', isLoggedIn, function (req, res){
+    app.get('/student/dashboard', isLoggedInAsStudent, function (req, res){
         dashboardController.getStudentDashboard(req, res);
     });
 
-    app.post('/student/dashboard/edit-profile', isLoggedIn, function (req, res){
+    app.post('/student/dashboard/edit-profile', isLoggedInAsStudent, function (req, res){
         dashboardController.editStudentProfile(req, res);
     });
 
-    app.post('/student/dashboard/edit-profile-picture', isLoggedIn, function (req, res){
+    app.post('/student/dashboard/edit-profile-picture', isLoggedInAsStudent, function (req, res){
         dashboardController.editStudentProfilePicture(req, res);
+    });
+
+    // =====================================
+    // TEACHER  ============================
+    // =====================================
+    app.get('/teacher', function (req, res){
+        indexController.getTeacherLogin(req, res);
+    });
+
+    app.post('/teacher/login', passport.authenticate('teacher-login', {
+        successRedirect: '/teacher/dashboard',
+        failureRedirect: '/teacher',
+        failureFlash: true
+    }));
+
+    app.post('/teacher/register', passport.authenticate('teacher-register', {
+        successRedirect: '/teacher/dashboard',
+        failureRedirect: '/teacher',
+        failureFlash: true
+    }));
+
+    // =====================================
+    // TEA. DASHBOARD  =====================
+    // =====================================
+    app.get('/teacher/dashboard', isLoggedInAsTeacher, function (req, res){
+        dashboardController.getTeacherDashboard(req, res);
+    });
+
+    app.post('/teacher/dashboard/edit-profile', isLoggedInAsTeacher, function (req, res){
+        dashboardController.editTeacherProfile(req, res);
+    });
+
+    app.post('/teacher/dashboard/edit-profile-picture', isLoggedInAsTeacher, function (req, res){
+        dashboardController.editTeacherProfilePicture(req, res);
     });
 
     // =====================================
@@ -58,12 +92,25 @@ module.exports = function (app, passport){
 };
 
 // route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
+function isLoggedInAsStudent(req, res, next) {
 
     // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
+    if (req.isAuthenticated()){
+        if (req.user.isStudent){
+            return next();
+        }
+    }
 
     // if they aren't redirect them to the login page
+    res.redirect('/');
+}
+
+function isLoggedInAsTeacher(req, res, next){
+    if (req.isAuthenticated()){
+        if (!req.user.isStudent){
+            return next();
+        }
+    }
+
     res.redirect('/');
 }

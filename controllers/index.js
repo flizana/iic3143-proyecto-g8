@@ -17,5 +17,9 @@ exports.getIndex = function (req, res){
 }
 
 exports.getStudentLogin = function (req, res){
-	res.render('student/pages/login-register-stu', { message: req.flash('registerMessage') });
+	res.render('student/pages/login-register-stu', { message: req.flash('studentRegisterMessage') });
+}
+
+exports.getTeacherLogin = function (req, res){
+	res.render('teacher/pages/login-register-tea', { message: req.flash('teacherRegisterMessage') });
 }
