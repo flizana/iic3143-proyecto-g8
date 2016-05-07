@@ -123,17 +123,31 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/teacher/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cursos<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+
+                        <% for (var i = 0; i < courses.length; i++){ %>
+                            <% var course = courses[i]; %>
+                            <li>
+                                <a href="/teacher/courses/<%= course._id %>"><i class="fa fa-graduation-cap"></i> <%= course.name %></a>
+                            </li>
+                        <% } %>
+
+                        <li>
+                            <a id="add-course-link" href="#modal-course" role="button" data-toggle="modal"><i class="fa fa-plus"></i> Agregar Curso</a>
+                        </li>
+
+                        <!--
                         <li>
                             <a href="curso.ejs">Matematicas 8D</a>
                         </li>
                         <li>
                             <a href="#">Castellano 7A</a>
                         </li>
+                        -->
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
@@ -147,3 +161,38 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
+
+<div id="modal-course" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalCourse" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container">
+                <h3>Agregar Nuevo Curso</h3>
+                <form id="add-new-course" method="post" action="/teacher/add-new-course">
+                    <fieldset>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="courseName" placeholder="Nombre">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="submit" class="btn btn-MD btn-primary">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('#add-course-link').on('show.bs.modal', function (){
+            $('#page-wrapper').addClass('blur');
+        });
+        $('#add-course-link').on('hide.bs.modal', function (){
+            $('#page-wrapper').removeClass('blur');
+        });
+    });
+</script>

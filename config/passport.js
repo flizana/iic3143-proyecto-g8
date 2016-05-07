@@ -4,6 +4,8 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
+var bcrypt = require('bcrypt-nodejs');
+
 var Student = require('../models/student');
 var Teacher = require('../models/teacher');
 

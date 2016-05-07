@@ -3,6 +3,8 @@
 var random = require('../config/random');
 var images = require('../config/images');
 
+var Course = require('../models/course');
+
 exports.getStudentDashboard = function (req, res){
 	// get current user
 	var user = req.user;
@@ -83,9 +85,20 @@ exports.editStudentProfilePicture = function (req, res){
 exports.getTeacherDashboard = function (req, res){
 	// get current user
 	var user = req.user;
+	if (user !== undefined)
+		user = user.toJSON();
 
-	res.render('teacher/pages/dashboard-tea', {
-		user: user
+	// populate courses
+	Course.find({ 
+		'_id': { $in: user.courses }
+	}, function (err, courses){
+		if (err)
+			throw err;
+
+		res.render('teacher/pages/dashboard-tea', {
+			user: user,
+			courses: courses
+		});
 	});
 }
 

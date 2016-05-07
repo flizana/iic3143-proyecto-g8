@@ -4,6 +4,7 @@
 var indexController = require('../controllers/index');
 var loginController = require('../controllers/login');
 var dashboardController = require('../controllers/dashboard');
+var courseController = require('../controllers/courses');
 
 module.exports = function (app, passport){
 
@@ -80,6 +81,13 @@ module.exports = function (app, passport){
 
     app.post('/teacher/dashboard/edit-profile-picture', isLoggedInAsTeacher, function (req, res){
         dashboardController.editTeacherProfilePicture(req, res);
+    });
+
+    // =====================================
+    // TEA. COURSES  =======================
+    // =====================================
+    app.post('/teacher/add-new-course', isLoggedInAsTeacher, function (req, res){
+        courseController.addNewCourse(req, res);
     });
 
     // =====================================
