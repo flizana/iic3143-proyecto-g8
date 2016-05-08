@@ -84,6 +84,8 @@ exports.getCourse = function(req, res){
 		});
 
 		
+	}).sort({name: 1}).exec(function(err, docs){
+
 	});
 }
 

@@ -99,6 +99,8 @@ exports.getTeacherDashboard = function (req, res){
 			user: user,
 			courses: courses
 		});
+	}).sort({name: 1}).exec(function(err, docs){
+
 	});
 }
 
