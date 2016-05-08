@@ -56,7 +56,8 @@ exports.getCourse = function(req, res){
 				throw err;
 
 			Student.find({
-				'_id': { $in: course.students}
+				//DESCOMENTAR ESTO PARA MOSTRAR SOLO LOS ALUMNOS DEL CURSO
+				// '_id': { $in: course.students}
 			}, function(err, students){
 				if (err)
 					throw err;
@@ -78,7 +79,9 @@ exports.getCourse = function(req, res){
 				});
 
 
-			});
+			}).sort({firstName: 1}).exec(function(err, docs){
+
+			});;
 
 			
 		});

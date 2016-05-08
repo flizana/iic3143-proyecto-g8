@@ -50,10 +50,10 @@
 		            </div>
 		            <div class="panel-body">
 		            	<% for (var i = 0; i < students.length; i++){ %>
-		                    <% var student = student[i]; %>
+		                    <% var student = students[i]; %>
 
 		                    <div class="alert alert-info">
-		                        <a href="#" class="alert-link pull-left"><%= studentname %></a>
+		                        <a href="#" class="alert-link pull-left"><%= student.firstName %> <%= student.lastName %></a>
 		                        	<div class="pull-right"><strong>0/31</strong></div>
 		                        <div class="clearfix"></div>
 		                	</div>
