@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../../head %>
+        <title>FeedMe | Profesores</title>
+
+        <!-- Custom CSS Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="/stylesheets/login-register-tea.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+        <!-- script for local angular app -->
+        <script src="/js/angular/app.js"></script>
+        <!-- scripts for angular controllers -->
+        <script src="/js/angular/controllers/activity.js"></script>
+</head>
+
+<bod ng-app="myApp">
+    hola mundo!
+
+    <div ng-controller="activityCtrl">
+
+  First Name: <input type="text" ng-model="firstName"><br>
+  Last Name: <input type="text" ng-model="lastName"><br>
+  <br>
+  Full Name: {{firstName + " " + lastName | uppercase}}
+
+</div>
+</body>
+
+</html>

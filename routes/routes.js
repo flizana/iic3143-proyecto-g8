@@ -5,6 +5,7 @@ var indexController = require('../controllers/index');
 var loginController = require('../controllers/login');
 var dashboardController = require('../controllers/dashboard');
 var courseController = require('../controllers/courses');
+var activityController = require('../controllers/activities');
 
 module.exports = function (app, passport){
 
@@ -91,6 +92,14 @@ module.exports = function (app, passport){
     });
 
     // =====================================
+    // TEA. ACTIVITY  ======================
+    // =====================================
+
+    app.get('/teacher/courses/activity/new', isLoggedInAsTeacher, function (req, res){
+        activityController.createActivity(req, res);
+    });
+
+    // =====================================
     // LOGOUT  =============================
     // =====================================
     app.get('/logout', function (req, res){
@@ -102,7 +111,7 @@ module.exports = function (app, passport){
 // route middleware to make sure a user is logged in
 function isLoggedInAsStudent(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated()){
         if (req.user.isStudent){
             return next();
