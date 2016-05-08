@@ -95,14 +95,6 @@ module.exports = function (app, passport){
         courseController.getCourse(req,res);
     });
 
-    app.get('/teacher/courses/activities/:id', isLoggedInAsTeacher, function(req,res){
-        courseController.getCourseActivities(req,res);
-    });
-
-    app.get('/teacher/courses/students/:id', isLoggedInAsTeacher, function(req,res){
-        courseController.getCourseStudents(req,res);
-    });
-
     // =====================================
     // LOGOUT  =============================
     // =====================================
