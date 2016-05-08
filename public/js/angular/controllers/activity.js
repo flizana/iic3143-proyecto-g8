@@ -64,6 +64,7 @@ angular.module('app.controllers', [])
 })
 
 //Filter for displaying the alternatives, it basically transform numbers to letter in this way: 0 = A, 1 = B and so on
+//Code taken from http://stackoverflow.com/questions/22786483/angularjs-show-index-as-char answer from: Engineer
 .filter('character', function() {
     return function(input) {
         return String.fromCharCode(64 + parseInt(input, 10));
