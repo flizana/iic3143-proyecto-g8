@@ -11,70 +11,78 @@
 	<% include ../partials/navbar-tea %>
 
 	 <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"><%= course.name %></h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">24</div>
-                                    <div>Actividades</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver M&aacute;s</span>
-                                <span class="pull-right">
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-child fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">31</div>
-                                    <div>Alumnos</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver M&aacute;s</span>
-                                <span class="pull-right">
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.row -->
-           
+
+	 
+		 <% include ../partials/courses-partial-tea %>
+
+		 <div class="row" id ="students-section" style="display: none;">
+		    <div class="col-lg-8">
+		        <div class="panel panel-default">
+		            <div class="panel-heading">
+		                <h3 class="panel-title pull-left">Alumnos</h3>
+		                <div class="clearfix"></div>
+		            </div>
+		            <div class="panel-body">
+		            	<% for (var i = 0; i < students.length; i++){ %>
+		                    <% var student = student[i]; %>
+
+		                    <div class="alert alert-info">
+		                        <a href="#" class="alert-link pull-left"><%= studentname %></a>
+		                        	<div class="pull-right"><strong>0/31</strong></div>
+		                        <div class="clearfix"></div>
+		                	</div>
+		                <% } %>
+		            </div>
+		        </div>
+			</div>
+		</div>
+
+		<div class="row" id="activites-section" style="display:none">
+		    <div class="col-lg-8">
+		        <div class="panel panel-default">
+		            <div class="panel-heading">
+		                <h3 class="panel-title pull-left">Actividades</h3>
+		                <a href="crearCuestionario.ejs" class="btn btn-default pull-right">
+		                    <i class="fa fa-plus"></i>
+		                </a>
+		                <div class="clearfix"></div>
+		            </div>
+		            <div class="panel-body">
+		            	<% for (var i = 0; i < activities.length; i++){ %>
+		                    <% var activity = activities[i]; %>
+
+		                    <div class="alert alert-danger">
+		                        <a href="#" class="alert-link pull-left"><%= activity.name %></a>
+		                        	<div class="pull-right"><strong>0/31</strong></div>
+		                        <div class="clearfix"></div>
+		                	</div>
+		                <% } %>
+		            </div>
+		        </div>
+		    </div>
+
+		</div>
 
 
-        </div>
+    </div>
 
 	<% include ../../scripts %>
+
+	<script type="text/javascript">
+		$(document).ready(function (){
+			// activites section clicked
+			$('#activites-section-link').on('click', function (event){
+				$('#students-section').hide();
+				$('#activites-section').show();			
+			});
+
+			// students section clicked
+			$('#students-section-link').on('click', function (event){
+				$('#students-section').show();
+				$('#activites-section').hide();
+			});
+		});
+	</script>
 	
 	
 </body>
