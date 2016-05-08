@@ -91,6 +91,11 @@ module.exports = function (app, passport){
         courseController.addNewCourse(req, res);
     });
 
+
+    app.get('/teacher/courses/:id', isLoggedInAsTeacher, function(req,res){
+        courseController.getCourse(req,res);
+    });
+
     // =====================================
     // TEA. ACTIVITY  ======================
     // =====================================
