@@ -28,10 +28,16 @@ angular.module('app.controllers', [])
         }
     };
 
+    $scope.getIndex = function(question, choice){
+      var index = 1 + question.choices.indexOf(choice);
+      return index;
+    };
+
     //add a new choice to 'choice'
     $scope.addChoice = function(question) {
       // push the new choice
-      question.choices.push('opción ' + (question.choices.length + 1) );
+      question.choices.push({value: ""});
+      //questions[0].choices[0] = "ME";
     };
 
     //Remove the choice 'choice' from question
@@ -43,11 +49,17 @@ angular.module('app.controllers', [])
       question.choices.splice(i, 1);
     };
 
+
+
+    //########################################
+    // NOT SCOPE FUNCTIONS ###################
+    //########################################
+
     createMultipleChoiceQuestion = function() {
         question = {
-            questionName: 'Pregunta de alternativas',
+            questionName: "Pregunta de alternativas",
             type: $scope.MULTIPLE_CHOICE,
-            choices: ['opción A', 'opción B', 'opción C', 'opción D']
+            choices: [{value:""},{value: ""}, {value: ""}, {value: ""}]
         };
         return question;
     };
@@ -56,7 +68,7 @@ angular.module('app.controllers', [])
         question = {
             questionName: 'Pregunta de si o no',
             type: $scope.YES_NO,
-            choices: ['Si', 'No']
+            choices: [{value: "Si"}, {value: "No"}]
         };
         return question;
     };

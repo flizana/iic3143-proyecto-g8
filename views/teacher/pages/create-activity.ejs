@@ -6,7 +6,7 @@
         <title>FeedMe | Profesores</title>
 
         <!-- Custom CSS Stylesheet -->
-        <link rel="stylesheet" type="text/css" href="/stylesheets/login-register-tea.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/create-activity.css">
 
 </head>
 
@@ -52,9 +52,9 @@
                             </form>
 
                             <!-- show the 'no questions' whe there is no questions in the activity -->
-                            <h2 class= "empty-list" ng-if="questions.length == 0">
-                                No hay preguntas. Elija bajo en 'Agregar Pregunta' que tipo de pregunta desea agregar.
-                            </h2>
+                            <h6 class= "empty-list" ng-if="questions.length == 0">
+                                No hay preguntas. Elija bajo 'Agregar Pregunta' que tipo de pregunta desea agregar.
+                            </h6>
                             <div class="pull-right">
                                 <button class="btn btn-default">Guardar Planilla</button>
                                 <button class="btn btn-default">Enviar Cuestionario</button>
@@ -72,23 +72,23 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="list-group">
-                                <a  class="list-group-item" ng-click ="addQuestion(MULTIPLE_CHOICE)">
+                            <ul class="list-group">
+                                <li class="list-group-item pressable" ng-click ="addQuestion(MULTIPLE_CHOICE)">
                                     <i class="fa fa-asterisk fa-fw"></i> Pregunta de Alternativas
-                                </a>
-                                <a class="list-group-item" ng-click ="addQuestion(YES_NO)">
+                                </li>
+                                <li class="list-group-item pressable" ng-click ="addQuestion(YES_NO)">
                                     <i class="fa fa-asterisk fa-fw"></i> Si o No
-                                </a>
-                                <a href="#" class="list-group-item">
+                                </li>
+                                <li class="list-group-item pressable" ng-click="addQuestion(NUMERIC)">
                                     <i class="fa fa-asterisk fa-fw"></i> Numerica
-                                </a>
-                                <a href="#" class="list-group-item">
+                                </li>
+                                <li class="list-group-item pressable" ng-click ="addQuestion(SHORT_ANSWER)">
                                     <i class="fa fa-asterisk fa-fw"></i> Respuesta Corta
-                                </a>
-                                <a href="#" class="list-group-item">
+                                </li>
+                                <a href="#" class="list-group-item pressable" ng-click ="addQuestion(LONG_ANSWER)">
                                     <i class="fa fa-asterisk fa-fw"></i> Comentario
                                 </a>
-                            </div>
+                            </ul>
                         </div>
                         <!-- /.panel-body -->
 
@@ -103,13 +103,13 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item">
+                                <a href="#" class="list-group-item pressable">
                                     <i class="fa fa-asterisk fa-fw"></i> Planilla videos
                                 </a>
-                                <a href="#" class="list-group-item">
+                                <a href="#" class="list-group-item pressable">
                                     <i class="fa fa-asterisk fa-fw"></i> Planilla presentacion power point
                                 </a>
-                                <a href="#" class="list-group-item">
+                                <a href="#" class="list-group-item pressable">
                                     <i class="fa fa-asterisk fa-fw"></i> Planilla juegos grupales
                                 </a>
                             </div>
