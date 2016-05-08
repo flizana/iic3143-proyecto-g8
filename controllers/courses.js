@@ -37,3 +37,42 @@ exports.addNewCourse = function (req, res){
 		});
 	}
 }
+
+exports.getCourse = function(req, res){
+	// var user = req.user;
+	// res.render('teacher/pages/courses-tea',{
+	// 	user: user
+	// });
+
+	var user = req.user;
+	// populate courses
+	Course.find({ 
+		'_id': { $in: user.courses }
+	}, function (err, courses){
+		if (err)
+			throw err;
+
+		Course.findById(req.params.id, function(err, course){
+			if(err)
+				throw err;
+
+			res.render('teacher/pages/courses-tea', {
+				user: user,
+				courses: courses,
+				course: course
+			});
+		});
+
+		
+	});
+
+	
+
+	
+	// Course.findById(req.params.id, function (err, course){
+ //                res.render('teacher/pages/courses-tea',{
+ //                	user: user,
+ //                	course: course
+ //                });
+ //            });
+}
