@@ -44,12 +44,15 @@
                                 </div>
                                 <!-- display the posible answers -->
                                 <div class= "respuestas" ng-if="question.type == MULTIPLE_CHOICE">
-                                  <% include ../../question/multiple-choice %>
+                                  <% include ../../question/create-multiple-choice (question) %>
+                                </div>
+                                <div class= "respuestas" ng-if="question.type == YES_NO">
+                                  <% include ../../question/create-yes-no (question) %>
                                 </div>
                             </form>
 
                             <!-- show the 'no questions' whe there is no questions in the activity -->
-                            <h2 class= "no-questions" ng-if="questions.length == 0">
+                            <h2 class= "empty-list" ng-if="questions.length == 0">
                                 No hay preguntas. Elija bajo en 'Agregar Pregunta' que tipo de pregunta desea agregar.
                             </h2>
                             <div class="pull-right">
