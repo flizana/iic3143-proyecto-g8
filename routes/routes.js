@@ -100,7 +100,7 @@ module.exports = function (app, passport){
     // TEA. ACTIVITY  ======================
     // =====================================
 
-    app.get('/teacher/courses/activity/new', isLoggedInAsTeacher, function (req, res){
+    app.get('/teacher/courses/activity/new/:id', isLoggedInAsTeacher, function (req, res){
         activityController.createActivity(req, res);
     });
 

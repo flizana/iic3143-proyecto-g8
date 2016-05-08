@@ -16,7 +16,7 @@
         <div id="page-wrapper" ng-controller="activityCtrl">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Crear Cuestionario</h1>
+                    <h1 class="page-header"><%= course.name %> - Crear Actividad</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -25,12 +25,16 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading clearfix">
-                            <label for="titulo">Nombre Curso FIXXXXXXXXX (debesiese salir el nombre del curso y su actividad)</label>
-
-                            <input class="titulo-cuestionario" id="titulo" value="" placeholder="Ingrese título">
+                            <div class = "col-lg-6">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <input class="form-control" id="titulo" value="" placeholder="Ingrese el título de la actividad">
+                                    </div>
+                                </form>
+                            </div>
                             <div class="pull-right">
                                 <button class="btn btn-default">Guardar Planilla</button>
-                                <button class="btn btn-default ">Enviar Cuestionario</button>
+                                <button class="btn btn-default ">Enviar Actividad</button>
                             </div>
                         </div>
 
@@ -57,7 +61,7 @@
                             </h2>
                             <div class="pull-right">
                                 <button class="btn btn-default">Guardar Planilla</button>
-                                <button class="btn btn-default">Enviar Cuestionario</button>
+                                <button class="btn btn-default">Enviar Actividad</button>
                             </div>
                         </div>
                     </div>

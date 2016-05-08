@@ -16,9 +16,15 @@ exports.createActivity = function (req, res) {
 		if (err)
 			throw err;
 
-		res.render('teacher/pages/create-activity', {
-			user: user,
-			courses: courses
+		Course.findById(req.params.id, function(err, course){
+			if(err)
+				throw err;
+
+			res.render('teacher/pages/create-activity', {
+				user: user,
+				courses: courses,
+				course: course
+			});
 		});
 	});
 };
