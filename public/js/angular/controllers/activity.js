@@ -6,18 +6,19 @@ angular.module('app.controllers', [])
 .controller('activityCtrl', function($scope) {
     $scope.questions = [];
 
-    var MULTIPLE_CHOICE = 'multipleChoice';
-    var YES_NO = "yesNo";
+    $scope.MULTIPLE_CHOICE = 'multipleChoice';
+    $scope.YES_NO = "yesNo";
 
     $scope.addQuestion = function(myType){
+      console.log(myType);
       //The question to be added
       var question;
       //Create the question depending on what type of question is
       switch (myType) {
-        case MULTIPLE_CHOICE:
+        case $scope.MULTIPLE_CHOICE:
           question = createMultipleChoiceQuestion();
           break;
-        case YES_NO:
+        case $scope.YES_NO:
         question = createYesNoQuestion();
           break;
       }
@@ -31,7 +32,7 @@ angular.module('app.controllers', [])
     createMultipleChoiceQuestion = function() {
       question = {
         questionName: 'Pregunta de alternativas',
-        type: MULTIPLE_CHOICE,
+        type: $scope.MULTIPLE_CHOICE,
         choices: ['opción A', 'opción B', 'opción C', 'opción D']
       };
       return question;
@@ -40,7 +41,7 @@ angular.module('app.controllers', [])
     createYesNoQuestion = function() {
       question = {
         questionName: 'Pregunta de si o no',
-        type: YES_NO,
+        type: $scope.YES_NO,
         choices: ['Si', 'No']
       };
       return question;
