@@ -7,25 +7,133 @@
 
         <!-- Custom CSS Stylesheet -->
         <link rel="stylesheet" type="text/css" href="/stylesheets/login-register-tea.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
-        <!-- script for local angular app -->
-        <script src="/js/angular/app.js"></script>
-        <!-- scripts for angular controllers -->
-        <script src="/js/angular/controllers/activity.js"></script>
 </head>
 
-<bod ng-app="myApp">
-    hola mundo!
+<body ng-app="myApp">
 
-    <div ng-controller="activityCtrl">
+    <% include ../partials/navbar-tea %>
+        <div id="page-wrapper" ng-controller="activityCtrl">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Crear Cuestionario</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
 
-  First Name: <input type="text" ng-model="firstName"><br>
-  Last Name: <input type="text" ng-model="lastName"><br>
-  <br>
-  Full Name: {{firstName + " " + lastName | uppercase}}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading clearfix">
+                            <label for="titulo">8D Actividad 8</label>
 
-</div>
+                            <input class="titulo-cuestionario" id="titulo" value="" placeholder="Ingrese título">
+                            <div class="pull-right">
+                                <button class="btn btn-default">Guardar Planilla</button>
+                                <button class="btn btn-default ">Enviar Cuestionario</button>
+                            </div>
+                        </div>
+
+                        <div class="panel-body clearfix">
+                          <form role="form" ng-repeat= "question in questions">
+                                <div class="form-group">
+                                    <label>Pregunta {{questions.indexOf(question) + 1}}</label>
+                                    <input class="form-control" ng-model= 'question.questionName'>
+                                </div>
+                            </form>
+
+                            <!-- show the 'no questions' whe there is no questions in the activity -->
+                            <h2 class= "no-questions" ng-if="questions.length == 0">
+                                No hay preguntas. Elija bajo en 'Agregar Pregunta' que tipo de pregunta desea agregar.
+                            </h2>
+                            <div class="pull-right">
+                                <button class="btn btn-default">Guardar Planilla</button>
+                                <button class="btn btn-default">Enviar Cuestionario</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-question fa-fw"></i> Agregar Pregunta
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a  class="list-group-item" ng-click ="addQuestion('multipleChoice')">
+                                    <i class="fa fa-asterisk fa-fw"></i> Pregunta de Alternativas
+                                </a>
+                                <a class="list-group-item" ng-click ="addQuestion('yesNo')">
+                                    <i class="fa fa-asterisk fa-fw"></i> Si o No
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-asterisk fa-fw"></i> Numerica
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-asterisk fa-fw"></i> Respuesta Corta
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-asterisk fa-fw"></i> Comentario
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-table fa-fw"></i> Planillas
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-asterisk fa-fw"></i> Planilla videos
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-asterisk fa-fw"></i> Planilla presentacion power point
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-asterisk fa-fw"></i> Planilla juegos grupales
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+        <% include ../../scripts %>
+
+            <!-- script for angular to work  -->
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+            <!-- script for local angular app -->
+            <script src="/js/angular/app.js"></script>
+            <!-- scripts for angular controllers -->
+            <script src="/js/angular/controllers/activity.js"></script>
+
+            <!-- jQuery -->
+            <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+            <!-- Custom Theme JavaScript -->
+            <script src="../dist/js/sb-admin-2.js"></script>
 </body>
 
 </html>
