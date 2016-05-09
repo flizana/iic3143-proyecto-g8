@@ -38,14 +38,14 @@ exports.addNewCourse = function (req, res){
 			});
 		});
 	}
-}
+};
 
 
 
 exports.getCourse = function(req, res){
 	var user = req.user;
 	// populate courses
-	Course.find({ 
+	Course.find({
 		'_id': { $in: user.courses }
 	}, function (err, courses){
 		if (err)
@@ -81,14 +81,13 @@ exports.getCourse = function(req, res){
 
 			}).sort({firstName: 1}).exec(function(err, docs){
 
-			});;
+			});
 
-			
+
 		});
 
-		
+
 	}).sort({name: 1}).exec(function(err, docs){
 
 	});
-}
-
+};

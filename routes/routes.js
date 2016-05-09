@@ -9,6 +9,16 @@ var activityController = require('../controllers/activities');
 
 module.exports = function (app, passport){
 
+
+    // =====================================
+    // Issue with CORS =====================
+    // =====================================
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
+
 	// =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -102,6 +112,12 @@ module.exports = function (app, passport){
 
     app.get('/teacher/courses/activity/new/:id', isLoggedInAsTeacher, function (req, res){
         activityController.new(req, res);
+    });
+
+    app.post('/teacher/courses/activity/create', isLoggedInAsTeacher, function (req, res){
+        console.log("sending to create");
+        activityController.create(req, res);
+        return res.status(200).end();
     });
 
     // =====================================
