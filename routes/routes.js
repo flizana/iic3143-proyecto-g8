@@ -87,7 +87,7 @@ module.exports = function (app, passport){
     // =====================================
     // TEA. COURSES  =======================
     // =====================================
-    app.post('/teacher/add-new-course', isLoggedInAsTeacher, function (req, res){
+    app.post('/teacher/courses/new', isLoggedInAsTeacher, function (req, res){
         courseController.addNewCourse(req, res);
     });
 
@@ -100,7 +100,7 @@ module.exports = function (app, passport){
     // TEA. ACTIVITY  ======================
     // =====================================
 
-    app.get('/teacher/courses/activity/new/:id', isLoggedInAsTeacher, function (req, res){
+    app.get('/teacher/courses/:id/activity/new', isLoggedInAsTeacher, function (req, res){
         activityController.createActivity(req, res);
     });
 
