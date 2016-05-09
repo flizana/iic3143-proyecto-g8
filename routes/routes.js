@@ -115,9 +115,8 @@ module.exports = function (app, passport){
     });
 
     app.post('/teacher/courses/activity/create', isLoggedInAsTeacher, function (req, res){
-        console.log("sending to create");
         activityController.create(req, res);
-        return res.status(200).end();
+        
     });
 
     // =====================================

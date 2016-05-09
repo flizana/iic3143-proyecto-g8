@@ -127,6 +127,11 @@ angular.module('app.controllers', [])
             }
         }).then(function successCallback(response) {
           console.log("http ok");
+          console.log(response);
+          console.log(response.data);
+          console.log(response.data.message);
+          
+
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {

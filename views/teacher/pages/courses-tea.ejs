@@ -5,17 +5,17 @@
 	<title>FeedMe | Dashboard</title>
 
 	<!-- Custom CSS Stylesheet -->
-	
+
 </head>
 <body>
 	<% include ../partials/navbar-tea %>
 
 	 <div id="page-wrapper">
 
-	 
+
 		 <% include ../partials/courses-partial-tea %>
 
-		 <div class="row" id="activites-section" style="display:none">
+		 <div class="row" id="activites-section">
 		    <div class="col-lg-8">
 		        <div class="panel panel-default">
 		            <div class="panel-heading">
@@ -31,7 +31,7 @@
 
 		                    <div class="alert alert-danger">
 		                        <a href="#" class="alert-link pull-left"><%= activity.name %></a>
-		                        	<div class="pull-right"><strong>0/31</strong></div>
+		                        	<div class="pull-right"><strong> <%= activity.answers.length %> /<%=students.length%></strong></div>
 		                        <div class="clearfix"></div>
 		                	</div>
 		                <% } %>
@@ -63,7 +63,7 @@
 			</div>
 		</div>
 
-		
+
 
 
     </div>
@@ -75,7 +75,7 @@
 			// activites section clicked
 			$('#activites-section-link').on('click', function (event){
 				$('#students-section').hide();
-				$('#activites-section').show();			
+				$('#activites-section').show();
 			});
 
 			// students section clicked
@@ -85,7 +85,7 @@
 			});
 		});
 	</script>
-	
-	
+
+
 </body>
 </html>
