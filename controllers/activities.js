@@ -3,6 +3,7 @@
 
 var Activity = require('../models/activity');
 var Course = require('../models/course');
+var Question = require('../models/question');
 
 exports.new = function(req, res) {
     var user = req.user;
@@ -32,11 +33,6 @@ exports.new = function(req, res) {
 };
 
 exports.create = function(req, res) {
-    console.log("create");
-    console.log(req.body);
-    console.log(req.body.title);
-    console.log(req.body.questions);
-    console.log(req.body.course);
 
     //Create the activity
     var newActivity = new Activity();
@@ -50,41 +46,47 @@ exports.create = function(req, res) {
     // newActivity.createdAt =
 
     // save activity
-    newActivity.save(function(err) {
+    newActivity.save(function(err, activity) {
         if (err) {
             return res.status(406).send({
                 message: err
             });
         }
         //create questions
+        questions = [];
         for (i = 0; i < req.body.questions.length; i++) {
-            var newQuestion = new Activity();
+            var newQuestion = new Question();
             newQuestion.questionName = req.body.questions[i].questionName;
             newQuestion.type = req.body.questions[i].type;
             newQuestion.choices = req.body.questions[i].choices;
-            newQuestion.activity = newActivity._id;
+            newQuestion.activity = activity._id;
 
+            //add question
+            questions.push(newQuestion._id);
+            console.log(questions.length);
             //save the question
-            newQuestion.save(function(err) {
+            newQuestion.save(function(err, question) {
                 if (err) {
                     return res.status(406).send({
                         message: err
                     });
                 }
 
-                //add question to activity
-                newActivity.questions.push(newQuestion);
 
-                //save activity
-                newActivity.save(function(err) {
-                    if (err) {
-                        return res.status(406).send({
-                            message: err
-                        });
-                    }
-                });
             });
         }
+
+        //attach the questions to the activity
+        activity.questions = questions;
+        console.log("FIN " + questions.length);
+        //save activity
+        activity.save(function(err) {
+            if (err) {
+                return res.status(406).send({
+                    message: err
+                });
+            }
+        });
 
         // go fetch the course so the activity can be assign to the course
         Course.findById(req.body.course._id, function(err, course) {
