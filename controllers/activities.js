@@ -3,6 +3,7 @@
 
 var Activity = require('../models/activity');
 var Course = require('../models/course');
+var Question = require('../models/question')
 
 exports.new = function(req, res) {
     var user = req.user;
@@ -39,7 +40,7 @@ exports.create = function(req, res) {
     console.log(req.body.course);
 
     //Create the activity
-    var newActivity = new Activity();
+    var newActivity = new Question();
     newActivity.name = req.body.title;
     newActivity.description = req.body.description;
     newActivity.course = req.body.course._id;

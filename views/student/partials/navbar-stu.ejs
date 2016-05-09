@@ -128,12 +128,14 @@
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cursos<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li>
-                            <a href="#">Matematicas 8D</a>
-                        </li>
-                        <li>
-                            <a href="#">Castellano 7A</a>
-                        </li>
+
+                        <% for (var i = 0; i < courses.length; i++){ %>
+                            <% var course = courses[i]; %>
+                            <li>
+                                <a href="/student/courses/<%= course._id %>"><i class="fa fa-graduation-cap"></i> <%= course.name %></a>
+                            </li>
+                        <% } %>
+
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
