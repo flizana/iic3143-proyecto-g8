@@ -3,7 +3,7 @@
 //add controller activityCtrl to the module of controllers
 angular.module('app.controllers', [])
 
-.controller('activityCtrl', function($scope, $http) {
+.controller('activityCtrl', function($scope, $http, $window) {
 
      var course = null;
     $scope.questions = [];
@@ -17,6 +17,13 @@ angular.module('app.controllers', [])
     $scope.SHORT_ANSWER = "shortAnswer";
     $scope.LONG_ANSWER = "longAnswer";
 
+
+    //Recieves a strings that represents a JSON.
+    $scope.setCourse = function(c) {
+      course = JSON.parse(c);
+    };
+
+    //Add question to array. Recieves what type of question is
     $scope.addQuestion = function(myType) {
         console.log(myType);
         //The question to be added
@@ -45,9 +52,10 @@ angular.module('app.controllers', [])
         }
     };
 
-    $scope.getIndex = function(question, choice) {
-        var index = 1 + question.choices.indexOf(choice);
-        return index;
+    $scope.deleteQuestion =  function (question) {
+      var i = questions.indexOf(question);
+      //remove from i only 1
+      question.choices.splice(i, 1);
     };
 
     //add a new choice to 'choice'
@@ -63,7 +71,6 @@ angular.module('app.controllers', [])
     $scope.deleteChoice = function(question, choice) {
         //get the index to where to remove
         var i = question.choices.indexOf(choice);
-        console.log(i);
         //remove from i only 1
         question.choices.splice(i, 1);
     };
@@ -129,8 +136,9 @@ angular.module('app.controllers', [])
           console.log("http ok");
           console.log(response);
           console.log(response.data);
-          console.log(response.data.message);
-          
+          console.log(response.data.redirect);
+          $window.location.href = response.data.redirect;
+
 
             // this callback will be called asynchronously
             // when the response is available
@@ -141,12 +149,6 @@ angular.module('app.controllers', [])
             // or server returns response with an error status.
         });
 
-    };
-
-
-    //Recieves a strings that represents a JSON.
-    $scope.setCourse = function(c) {
-      course = JSON.parse(c);
     };
 
     //########################################

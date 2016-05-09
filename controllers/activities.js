@@ -105,7 +105,8 @@ exports.create = function(req, res) {
                 console.log("all good");
                 // send the 200 status. All Good.
                 return res.status(200).send({
-                    message: "all very good"
+                    success: "OK",
+                    redirect: ("/teacher/courses/" + course._id)
                 });
             });
         });
