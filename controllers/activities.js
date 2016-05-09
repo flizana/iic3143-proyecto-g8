@@ -5,6 +5,7 @@ var Activity = require('../models/activity');
 var Course = require('../models/course');
 var Question = require('../models/question');
 
+
 exports.new = function(req, res) {
     var user = req.user;
     if (user !== undefined)
@@ -35,7 +36,7 @@ exports.new = function(req, res) {
 exports.create = function(req, res) {
 
     //Create the activity
-    var newActivity = new Activity();
+    var newActivity = new Question();
     newActivity.name = req.body.title;
     newActivity.description = req.body.description;
     newActivity.course = req.body.course._id;
@@ -63,7 +64,6 @@ exports.create = function(req, res) {
 
             //add question
             questions.push(newQuestion._id);
-            console.log(questions.length);
             //save the question
             newQuestion.save(function(err, question) {
                 if (err) {
@@ -78,7 +78,6 @@ exports.create = function(req, res) {
 
         //attach the questions to the activity
         activity.questions = questions;
-        console.log("FIN " + questions.length);
         //save activity
         activity.save(function(err) {
             if (err) {
