@@ -42,7 +42,7 @@ exports.addNewCourse = function (req, res){
 
 
 
-exports.getCourse = function(req, res){
+exports.getTeacherCourse = function(req, res){
 	var user = req.user;
 	// populate courses
 	Course.find({ 
@@ -56,8 +56,7 @@ exports.getCourse = function(req, res){
 				throw err;
 
 			Student.find({
-				//DESCOMENTAR ESTO PARA MOSTRAR SOLO LOS ALUMNOS DEL CURSO
-				// '_id': { $in: course.students}
+				'_id': { $in: course.students}
 			}, function(err, students){
 				if (err)
 					throw err;
@@ -84,6 +83,42 @@ exports.getCourse = function(req, res){
 			});;
 
 			
+		});
+
+		
+	}).sort({name: 1}).exec(function(err, docs){
+
+	});
+}
+
+exports.getStudentCourse = function(req, res){
+	var user = req.user;
+	// populate courses
+	Course.find({ 
+		'_id': { $in: user.courses }
+	}, function (err, courses){
+		if (err)
+			throw err;
+
+		Course.findById(req.params.id, function(err, course){
+			if(err)
+				throw err;
+
+			Activity.find({
+			'_id': { $in: course.activities}
+			}, function(err, activities){
+				if (err)
+					throw err;
+
+				res.render('student/pages/courses-stu', {
+					user: user,
+					courses: courses,
+					course: course,
+					activities: activities
+				});
+
+			});
+
 		});
 
 		

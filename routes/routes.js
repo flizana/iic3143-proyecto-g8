@@ -51,6 +51,13 @@ module.exports = function (app, passport){
     });
 
     // =====================================
+    // STU. COURSES  =======================
+    // =====================================
+    app.get('/student/courses/:id', isLoggedInAsStudent, function(req, res){
+        courseController.getStudentCourse(req,res);
+    });
+
+    // =====================================
     // TEACHER  ============================
     // =====================================
     app.get('/teacher', function (req, res){
@@ -93,7 +100,7 @@ module.exports = function (app, passport){
 
 
     app.get('/teacher/courses/:id', isLoggedInAsTeacher, function(req,res){
-        courseController.getCourse(req,res);
+        courseController.getTeacherCourse(req,res);
     });
 
     // =====================================
