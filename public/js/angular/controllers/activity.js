@@ -8,6 +8,9 @@ angular.module('app.controllers', [])
 
     $scope.MULTIPLE_CHOICE = 'multipleChoice';
     $scope.YES_NO = "yesNo";
+    $scope.NUMERIC = "numeric";
+    $scope.SHORT_ANSWER = "shortAnswer";
+    $scope.LONG_ANSWER = "longAnswer";
 
     $scope.addQuestion = function(myType) {
         console.log(myType);
@@ -21,6 +24,15 @@ angular.module('app.controllers', [])
             case $scope.YES_NO:
                 question = createYesNoQuestion();
                 break;
+            case $scope.NUMERIC:
+                question = createNumericQuestion();
+                break;
+            case $scope.SHORT_ANSWER:
+                question = createShortAnswerQuestion();
+                break;
+            case $scope.LONG_ANSWER:
+                question = createLongAnswerQuestion();
+                break;
         }
         //If the question is not null add it to questions
         if (question) {
@@ -28,25 +40,27 @@ angular.module('app.controllers', [])
         }
     };
 
-    $scope.getIndex = function(question, choice){
-      var index = 1 + question.choices.indexOf(choice);
-      return index;
+    $scope.getIndex = function(question, choice) {
+        var index = 1 + question.choices.indexOf(choice);
+        return index;
     };
 
     //add a new choice to 'choice'
     $scope.addChoice = function(question) {
-      // push the new choice
-      question.choices.push({value: ""});
-      //questions[0].choices[0] = "ME";
+        // push the new choice
+        question.choices.push({
+            value: ""
+        });
+        //questions[0].choices[0] = "ME";
     };
 
     //Remove the choice 'choice' from question
-    $scope.deleteChoice = function(question, choice){
-      //get the index to where to remove
-      var  i = question.choices.indexOf(choice);
-      console.log(i);
-      //remove from i only 1
-      question.choices.splice(i, 1);
+    $scope.deleteChoice = function(question, choice) {
+        //get the index to where to remove
+        var i = question.choices.indexOf(choice);
+        console.log(i);
+        //remove from i only 1
+        question.choices.splice(i, 1);
     };
 
 
@@ -59,7 +73,15 @@ angular.module('app.controllers', [])
         question = {
             questionName: "Pregunta de alternativas",
             type: $scope.MULTIPLE_CHOICE,
-            choices: [{value:""},{value: ""}, {value: ""}, {value: ""}]
+            choices: [{
+                value: ""
+            }, {
+                value: ""
+            }, {
+                value: ""
+            }, {
+                value: ""
+            }]
         };
         return question;
     };
@@ -68,11 +90,41 @@ angular.module('app.controllers', [])
         question = {
             questionName: 'Pregunta de si o no',
             type: $scope.YES_NO,
-            choices: [{value: "Si"}, {value: "No"}]
+            choices: [{
+                value: "Si"
+            }, {
+                value: "No"
+            }]
         };
         return question;
     };
 
+    createShortAnswerQuestion = function() {
+        question = {
+            questionName: 'Pregunta de respuesta corta',
+            type: $scope.SHORT_ANSWER,
+            choices: []
+        };
+        return question;
+    };
+
+    createLongAnswerQuestion = function() {
+        question = {
+            questionName: 'Comentarios',
+            type: $scope.LONG_ANSWER,
+            choices: []
+        };
+        return question;
+    };
+
+    createNumericQuestion = function() {
+        question = {
+            questionName: 'Pregunta numérica',
+            type: $scope.NUMERIC,
+            choices: []
+        };
+        return question;
+    };
 })
 
 //Filter for displaying the alternatives, it basically transform numbers to letter in this way: 0 = A, 1 = B and so on
