@@ -36,7 +36,7 @@ exports.new = function(req, res) {
 exports.create = function(req, res) {
 
     //Create the activity
-    var newActivity = new Question();
+    var newActivity = new Activity();
     newActivity.name = req.body.title;
     newActivity.description = req.body.description;
     newActivity.course = req.body.course._id;
@@ -78,6 +78,7 @@ exports.create = function(req, res) {
 
         //attach the questions to the activity
         activity.questions = questions;
+        console.log(questions.length);
         //save activity
         activity.save(function(err) {
             if (err) {
