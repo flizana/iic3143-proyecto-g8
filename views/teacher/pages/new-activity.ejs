@@ -44,10 +44,10 @@
 
                         <div class="panel-body clearfix">
                             <div class="top-margin" ng-repeat="question in questions">
-                                <div class="form-group">
+                                <div class="form-group ">
                                     <!-- show the question number i.e. "Pregunta 1" -->
                                     <label>Pregunta {{questions.indexOf(question) + 1}}</label>
-                                    <!-- input to put the question -->
+                                    <i class="fa fa-times fa-fw pull-right" ng-click= "deleteQuestion(question)"></i>
 
                                 </div>
                                 <!-- display the question if it is multipleChoice -->

@@ -53,9 +53,9 @@ angular.module('app.controllers', [])
     };
 
     $scope.deleteQuestion =  function (question) {
-      var i = questions.indexOf(question);
+      var i = $scope.questions.indexOf(question);
       //remove from i only 1
-      question.choices.splice(i, 1);
+      $scope.questions.splice(i, 1);
     };
 
     //add a new choice to 'choice'
