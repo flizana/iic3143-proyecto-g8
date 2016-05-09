@@ -4,7 +4,9 @@
 angular.module('app.controllers', [])
 
 .controller('activityCtrl', function($scope) {
+
     $scope.questions = [];
+    $scope.titulo = "";
 
     $scope.MULTIPLE_CHOICE = 'multipleChoice';
     $scope.YES_NO = "yesNo";

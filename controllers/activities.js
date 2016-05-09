@@ -4,7 +4,7 @@
 var Activity = require('../models/activity');
 var Course = require('../models/course');
 
-exports.createActivity = function (req, res) {
+exports.new = function (req, res) {
   var user = req.user;
 	if (user !== undefined)
 		user = user.toJSON();
@@ -20,7 +20,7 @@ exports.createActivity = function (req, res) {
 			if(err)
 				throw err;
 
-			res.render('teacher/pages/create-activity', {
+			res.render('teacher/pages/new-activity', {
 				user: user,
 				courses: courses,
 				course: course
