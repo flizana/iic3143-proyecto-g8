@@ -6,7 +6,9 @@ angular.module('app.controllers', [])
 .controller('activityCtrl', function($scope) {
 
     $scope.questions = [];
-    $scope.titulo = "";
+    $scope.title = "";
+
+    $scope.error = null;
 
     $scope.MULTIPLE_CHOICE = 'multipleChoice';
     $scope.YES_NO = "yesNo";
@@ -66,6 +68,49 @@ angular.module('app.controllers', [])
     };
 
 
+    //Checks if the needed parameters are in the activity. After that it sends an http request to create the activity
+    $scope.createActivity = function(){
+      console.log($scope.title );
+      //if it has no title, send an error
+      if(!$scope.title) {
+       $scope.error = "Error: Debe agregar un título";
+       return;
+      }
+
+      //if it has no questions, send an error
+      if($scope.questions.length === 0) {
+       $scope.error = "Error: No tiene preguntas agregadas. Debe tener almenos una pregunta.";
+       return;
+     }
+
+      //check that all questions are well defined
+      for( i = 0; i < $scope.questions.length; i++){
+        question = $scope.questions[i];
+        //Check that the title is define for all questions
+        if(!question.questionName){
+          $scope.error = "Error: La pregunta " + (i + 1) + " no tiene título. Todas las preguntas deben tener un título.";
+          return;
+        }
+
+        //Check that all the choices are valid (not empty)
+        if(question.type == $scope.MULTIPLE_CHOICE  || question.type == $scope.YES_NO){
+          for(j =0; j <  question.choices.length; j++) {
+            if(!question.choices[j].value){
+              $scope.error = "Error: La pregunta " + (i + 1) + " tiene alternativas vacías.";
+              return;
+            }
+          }
+        }
+
+      }
+
+      //No error detected, so set the error to null
+      $scope.error = null;
+
+      //Send http request
+
+    };
+
 
     //########################################
     // NOT SCOPE FUNCTIONS ###################
@@ -73,7 +118,7 @@ angular.module('app.controllers', [])
 
     createMultipleChoiceQuestion = function() {
         question = {
-            questionName: "Pregunta de alternativas",
+            questionName: "",
             type: $scope.MULTIPLE_CHOICE,
             choices: [{
                 value: ""
@@ -90,7 +135,7 @@ angular.module('app.controllers', [])
 
     createYesNoQuestion = function() {
         question = {
-            questionName: 'Pregunta de si o no',
+            questionName: '',
             type: $scope.YES_NO,
             choices: [{
                 value: "Si"
@@ -103,7 +148,7 @@ angular.module('app.controllers', [])
 
     createShortAnswerQuestion = function() {
         question = {
-            questionName: 'Pregunta de respuesta corta',
+            questionName: '',
             type: $scope.SHORT_ANSWER,
             choices: []
         };
@@ -112,7 +157,7 @@ angular.module('app.controllers', [])
 
     createLongAnswerQuestion = function() {
         question = {
-            questionName: 'Comentarios',
+            questionName: '',
             type: $scope.LONG_ANSWER,
             choices: []
         };
@@ -121,7 +166,7 @@ angular.module('app.controllers', [])
 
     createNumericQuestion = function() {
         question = {
-            questionName: 'Pregunta numérica',
+            questionName: '',
             type: $scope.NUMERIC,
             choices: []
         };
