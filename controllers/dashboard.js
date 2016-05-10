@@ -9,8 +9,22 @@ exports.getStudentDashboard = function (req, res){
 	// get current user
 	var user = req.user;
 
-	res.render('student/pages/dashboard-stu', {
-		user: user
+	
+
+	// populate courses
+	Course.find({
+ 
+		'_id': { $in: user.courses }
+	}, function (err, courses){
+		if (err)
+			throw err;
+
+		res.render('student/pages/dashboard-stu', {
+			user: user,
+			courses: courses
+		});
+	}).sort({name: 1}).exec(function(err, docs){
+
 	});
 }
 

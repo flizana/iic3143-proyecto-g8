@@ -2,5 +2,13 @@
 
 .pressable:hover {
   background-color: #F5F5F5;
+}
 
+.top-margin {
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+  weight: 700;
 }

@@ -9,6 +9,16 @@ var activityController = require('../controllers/activities');
 
 module.exports = function (app, passport){
 
+
+    // =====================================
+    // Issue with CORS =====================
+    // =====================================
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
+
 	// =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -48,6 +58,13 @@ module.exports = function (app, passport){
 
     app.post('/student/dashboard/edit-profile-picture', isLoggedInAsStudent, function (req, res){
         dashboardController.editStudentProfilePicture(req, res);
+    });
+
+    // =====================================
+    // STU. COURSES  =======================
+    // =====================================
+    app.get('/student/courses/:id', isLoggedInAsStudent, function(req, res){
+        courseController.getStudentCourse(req,res);
     });
 
     // =====================================
@@ -93,7 +110,7 @@ module.exports = function (app, passport){
 
 
     app.get('/teacher/courses/:id', isLoggedInAsTeacher, function(req,res){
-        courseController.getCourse(req,res);
+        courseController.getTeacherCourse(req,res);
     });
 
     // =====================================
@@ -101,6 +118,10 @@ module.exports = function (app, passport){
     // =====================================
 
     app.get('/teacher/courses/:id/activity/new', isLoggedInAsTeacher, function (req, res){
+        activityController.getNewActivity(req, res);
+    });
+
+    app.post('/teacher/courses/activity/create', isLoggedInAsTeacher, function (req, res){
         activityController.createActivity(req, res);
     });
 
