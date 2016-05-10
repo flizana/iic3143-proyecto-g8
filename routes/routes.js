@@ -68,6 +68,13 @@ module.exports = function (app, passport){
     });
 
     // =====================================
+    // STU. ACTIVITY =======================
+    // =====================================
+    app.get('/student/courses/:course_id/activity/:activity_id', isLoggedInAsStudent, function(req,res){
+        activityController.getStudentActivity(req, res);
+    });
+
+    // =====================================
     // TEACHER  ============================
     // =====================================
     app.get('/teacher', function (req, res){

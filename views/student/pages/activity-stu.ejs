@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../../head %>
+	<title>FeedMe | Dashboard</title>
+
+	<!-- Custom CSS Stylesheet -->
+	
+</head>
+<body>
+	<% include ../partials/navbar-stu %>
+
+	 <div id="page-wrapper">
+
+	 	<div class="row">
+		    <div class="col-lg-12">
+		        <h1 class="page-header"><%= course.name %></h1>
+		    </div>
+		</div>
+
+		<div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left"><%= activity.name %></h3>
+                        <div class="pull-right">
+                            <button class="btn btn-default">Enviar Respuestas</button>
+                        </div>
+                        <!-- <h6 ng-if="error" class = "error">
+                          {{ error}}
+                        </h6> -->
+                    </div>
+
+					<div class="panel-body">
+			        	
+			        	<% for (var i = 0; i < questions.length; i++){ %>
+			                <% var question = questions[i]; %>
+			                <div class="form-group">
+			                	<label>Pregunta <%= i+1 %>: </label>
+			                	<label><%= question.questionName %></label>
+
+			                	<% if (question.type == "multipleChoice" || question.type == "yesNo"){ %>
+			                        <% for (var j = 0 ; j< question.choices.length; j++){ %>
+			                        	<% var choice = question.choices[j]; %>
+				                        <div class="radio">
+				                            <label>
+				                                <input type="radio" name="<%= question.questionName %>" id="optionsRadios1" value="option1" checked><%= choice.value %>
+				                            </label>
+				                        </div>
+			                        <% } %>
+				            	<% } %>
+
+				            	<% if (question.type == "shortAnswer" || question.type == "numeric"){ %>
+				                        <input class="form-control">
+				            	<% } %>
+
+				            	<% if (question.type == "longAnswer"){ %>
+				                        <textarea class="form-control" rows="5"></textarea>
+				            	<% } %>
+			            	</div>
+
+			                
+			            <% } %>
+
+			            <div class="pull-right">
+                            <button class="btn btn-default">Enviar Respuestas</button>
+                        </div>
+			        </div> <!-- panel body-->
+			    </div>
+		    </div>
+	    </div>
+
+
+		 
+
+		
+    </div>
+    <% include ../../scripts %>
+
+
+	
+</body>
+</html>

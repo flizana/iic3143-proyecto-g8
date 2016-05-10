@@ -101,3 +101,51 @@ exports.createActivity = function(req, res) {
         });
     });
 };
+
+exports.getStudentActivity = function(req,res){
+    var user = req.user;
+    if (user !== undefined)
+        user = user.toJSON();
+
+    // populate courses
+    Course.find({
+        '_id': {
+            $in: user.courses
+        }
+    }, function (err, courses) {
+        if (err)
+            throw err;
+
+        Course.findById(req.params.course_id, function (err, course) {
+            if (err)
+                throw err;
+
+            Activity.findById(req.params.activity_id, function(err, activity){
+                if (err)
+                    throw err;
+
+                Question.find({
+                    '_id': {
+                        $in: activity.questions
+                    }
+                }, function(err, questions){
+                    if (err)
+                        throw err;
+
+                    res.render('student/pages/activity-stu', {
+                        user: user,
+                        courses: courses,
+                        course: course,
+                        activity: activity,
+                        questions: questions
+                    });
+
+                });
+
+                
+            });
+
+            
+        });
+    });
+};
