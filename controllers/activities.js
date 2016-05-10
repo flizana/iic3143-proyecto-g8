@@ -186,6 +186,9 @@ exports.postStudentAnswer = function (req, res){
         if (err)
             throw err;
 
+        // push this student to students who have answered
+        activity.studentsWhoAnswered.push(user._id);
+
         // push answers to activity
         for (var i = 0; i < answers.length; i++){
             activity.answers.push(answers[i]);

@@ -3,6 +3,7 @@
 var Course = require('../models/course');
 var Activity = require('../models/activity');
 var Student = require('../models/student');
+var Answer = require('../models/answer');
 
 exports.addNewCourse = function (req, res){
 	// get current user
@@ -103,13 +104,13 @@ exports.getStudentCourse = function(req, res){
 		if (err)
 			throw err;
 
-		Course.findById(req.params.id, function(err, course){
+		Course.findById(req.params.id, function (err, course){
 			if(err)
 				throw err;
 
 			Activity.find({
 			'_id': { $in: course.activities}
-			}, function(err, activities){
+			}, function (err, activities){
 				if (err)
 					throw err;
 
@@ -125,9 +126,7 @@ exports.getStudentCourse = function(req, res){
 		});
 
 		
-	}).sort({name: 1}).exec(function(err, docs){
-
-	});
+	}).sort({name: 1});
 }
 
 

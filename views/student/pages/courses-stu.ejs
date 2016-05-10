@@ -34,12 +34,27 @@
 		            	<% } %>
 		            	<% for (var i = 0; i < activities.length; i++){ %>
 		                    <% var activity = activities[i]; %>
+		                    <% var isAnswered = false; %>
+		                    <% for (var j = 0; j < activity.studentsWhoAnswered.length; j++){ %>
+		                    	<% var studentWhoAnswered = JSON.stringify(activity.studentsWhoAnswered[j]); %>
+		                    	<% if (studentWhoAnswered == JSON.stringify(user._id)){ %>
+		                    		<% isAnswered = true; %>
+		                    		<% break; %>
+		                    	<% } %>
+		                    <% } %>
 
-		                    <div class="alert alert-danger">
-		                        <a href="<%= course._id %>/activity/<%= activity._id %>" class="alert-link pull-left"><%= activity.name %></a>
-		                        	<div class="pull-right"><strong>0/31</strong></div>
-		                        <div class="clearfix"></div>
-		                	</div>
+		                    <% if (isAnswered){ %>
+		                    	<div class="alert alert-success">
+		                    		<%= activity.name %>
+		                    		<div class="pull-right"><i class="fa fa-check"></i></div>
+		                    	</div>
+		                    <% } else { %>
+		                    	<div class="alert alert-danger">
+		                        	<a href="<%= course._id %>/activity/<%= activity._id %>" class="alert-link pull-left"><%= activity.name %></a>
+		                        		<div class="pull-right"><i class="fa fa-close"></i></div>
+		                        	<div class="clearfix"></div>
+		                		</div>
+		                    <% } %>
 		                <% } %>
 		            </div>
 		        </div>
