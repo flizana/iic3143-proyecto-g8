@@ -4,6 +4,7 @@
 var Activity = require('../models/activity');
 var Course = require('../models/course');
 var Question = require('../models/question');
+var Answer = require('../models/answer');
 
 
 exports.getNewActivity = function(req, res) {
@@ -78,7 +79,7 @@ exports.createActivity = function(req, res) {
                 throw err;
 
             // go fetch the course so the activity can be assign to the course
-            Course.findById(req.body.course._id, function(err, course) {
+            Course.findById(req.body.course._id, function (err, course) {
                 if (err)
                     throw err;
 
@@ -120,7 +121,7 @@ exports.getStudentActivity = function(req,res){
             if (err)
                 throw err;
 
-            Activity.findById(req.params.activity_id, function(err, activity){
+            Activity.findById(req.params.activity_id, function (err, activity){
                 if (err)
                     throw err;
 
@@ -128,7 +129,7 @@ exports.getStudentActivity = function(req,res){
                     '_id': {
                         $in: activity.questions
                     }
-                }, function(err, questions){
+                }, function (err, questions){
                     if (err)
                         throw err;
 
@@ -149,3 +150,53 @@ exports.getStudentActivity = function(req,res){
         });
     });
 };
+
+exports.postStudentAnswer = function (req, res){
+    // get current user
+    var user = req.user;
+    if (user !== undefined)
+        user = user.toJSON();
+
+    // get number of answers
+    var numAnswers = Object.keys(req.body).length / 2;
+
+    // create answers
+    var answers = [];
+    for (var i = 0; i < numAnswers; i++){
+        var questionId = req.body[i + "question"];
+        var answer = req.body[i + "answer"];
+
+        var newAnswer = new Answer();
+        newAnswer.createdAt = Date.now();
+        newAnswer.student = user._id;
+        newAnswer.question = questionId;
+        newAnswer.answer = answer;
+
+        answers.push(newAnswer._id);
+
+        // save answer
+        newAnswer.save(function (err){
+            if (err)
+                throw err;
+        });
+    }
+
+    // get activity
+    Activity.findById(req.params.activity_id, function (err, activity){
+        if (err)
+            throw err;
+
+        // push answers to activity
+        for (var i = 0; i < answers.length; i++){
+            activity.answers.push(answers[i]);
+        }
+
+        // save activity
+        activity.save(function (err){
+            if (err)
+                throw err;
+
+            res.redirect('/student/courses/' + req.params.course_id);
+        });
+    });
+}

@@ -24,7 +24,7 @@
                     <div class="panel-heading clearfix">
                         <h3 class="panel-title pull-left"><%= activity.name %></h3>
                         <div class="pull-right">
-                            <button class="btn btn-default">Enviar Respuestas</button>
+                            <button type="submit" id="top-form-submit-btn" form="answer-form" class="btn btn-default">Enviar Respuestas</button>
                         </div>
                         <!-- <h6 ng-if="error" class = "error">
                           {{ error}}
@@ -32,51 +32,66 @@
                     </div>
 
 					<div class="panel-body">
-			        	
-			        	<% for (var i = 0; i < questions.length; i++){ %>
-			                <% var question = questions[i]; %>
-			                <div class="form-group">
-			                	<label>Pregunta <%= i+1 %>: </label>
-			                	<label><%= question.questionName %></label>
+			        	<form id="answer-form" method="post" action="/student/courses/<%= course._id %>/activity/<%= activity._id %>/answer">
+			        		<% for (var i = 0; i < questions.length; i++){ %>
+			                	<% var question = questions[i]; %>
+			                	<input type="hidden" name="<%= i %>question" value="<%= question._id %>">
+			                	<div class="form-group">
+			                		<label>Pregunta <%= i+1 %>: </label>
+			                		<label><%= question.questionName %></label>
 
-			                	<% if (question.type == "multipleChoice" || question.type == "yesNo"){ %>
-			                        <% for (var j = 0 ; j< question.choices.length; j++){ %>
-			                        	<% var choice = question.choices[j]; %>
-				                        <div class="radio">
-				                            <label>
-				                                <input type="radio" name="<%= question.questionName %>" id="optionsRadios1" value="option1" checked><%= choice.value %>
-				                            </label>
-				                        </div>
-			                        <% } %>
-				            	<% } %>
+			                		<% if (question.type == "multipleChoice"){ %>
+			                        	<% for (var j = 0 ; j < question.choices.length; j++){ %>
+			                        		<% var choice = question.choices[j]; %>
+				                        	<div class="radio">
+				                            	<label>
+				                                	<input type="radio" name="<%= i %>answer" value="<%= choice.value %>"><%= choice.value %>
+				                            	</label>
+				                        	</div>
+			                        	<% } %>
+				            		<% } %>
 
-				            	<% if (question.type == "shortAnswer" || question.type == "numeric"){ %>
-				                        <input class="form-control">
-				            	<% } %>
+				            		<% if (question.type == "yesNo"){ %>
+				            			<% for (var j = 0; j < question.choices.length; j++){ %>
+				            				<% var choice = question.choices[j]; %>
+				            				<div class="radio">
+				            					<label>
+				            						<input type="radio" name="<%= i %>answer" value="<%= choice.value %>"><%= choice.value %>
+				            					</label>
+				            				</div>
+				            			<% } %>
+				            		<% } %>
 
-				            	<% if (question.type == "longAnswer"){ %>
-				                        <textarea class="form-control" rows="5"></textarea>
-				            	<% } %>
-			            	</div>
+				            		<% if (question.type == "shortAnswer"){ %>
+				                        <input class="form-control" type="text" name="<%= i %>answer">
+				            		<% } %>
 
-			                
-			            <% } %>
+				            		<% if (question.type == "numeric"){ %>
+				            			<input class="form-control" type="number" name="<%= i %>answer">
+				            		<% } %>
 
-			            <div class="pull-right">
-                            <button class="btn btn-default">Enviar Respuestas</button>
-                        </div>
+				            		<% if (question.type == "longAnswer"){ %>
+				                        <textarea class="form-control" rows="5" name="<%= i %>answer"></textarea>
+				            		<% } %>
+			            		</div>
+			            	<% } %>
+
+			            	<div class="pull-right">
+                            	<input id="bottom-form-submit-btn" type="submit" class="btn btn-default" value="Enviar Respuestas">
+                        	</div>
+                    	</div>
 			        </div> <!-- panel body-->
 			    </div>
 		    </div>
 	    </div>
-
-
-		 
-
-		
     </div>
     <% include ../../scripts %>
 
+    <script type="text/javascript">
+    	$(document).ready(function (){
+
+    	});	
+    </script>
 
 	
 </body>
