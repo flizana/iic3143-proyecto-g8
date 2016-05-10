@@ -132,6 +132,10 @@ module.exports = function (app, passport){
         activityController.createActivity(req, res);
     });
 
+    app.get('/teacher/courses/:course_id/activity/:activity_id', isLoggedInAsTeacher, function(req,res){
+        activityController.getTeacherActivity(req, res);
+    });
+
     // =====================================
     // LOGOUT  =============================
     // =====================================

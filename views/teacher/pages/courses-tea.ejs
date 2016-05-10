@@ -96,7 +96,7 @@
 		                    <% var activity = activities[i]; %>
 
 		                    <div class="alert alert-danger">
-		                        <a href="#" class="alert-link pull-left"><%= activity.name %></a>
+		                        <a href="/teacher/courses/<%= course._id %>/activity/<%= activity.id %>" class="alert-link pull-left"><%= activity.name %></a>
 		                        	<div class="pull-right"><strong> <%= activity.answers.length %>/<%=students.length%></strong></div>
 		                        <div class="clearfix"></div>
 		                	</div>

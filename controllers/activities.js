@@ -4,6 +4,8 @@
 var Activity = require('../models/activity');
 var Course = require('../models/course');
 var Question = require('../models/question');
+var Student = require('../models/student');
+var Answer = require('../models/answer');
 
 
 exports.getNewActivity = function(req, res) {
@@ -139,6 +141,76 @@ exports.getStudentActivity = function(req,res){
                         activity: activity,
                         questions: questions
                     });
+
+                });
+
+                
+            });
+
+            
+        });
+    });
+};
+
+exports.getTeacherActivity = function(req,res){
+    var user = req.user;
+    if (user !== undefined)
+        user = user.toJSON();
+
+    // populate courses
+    Course.find({
+        '_id': {
+            $in: user.courses
+        }
+    }, function (err, courses) {
+        if (err)
+            throw err;
+
+        Course.findById(req.params.course_id, function (err, course) {
+            if (err)
+                throw err;
+
+            Activity.findById(req.params.activity_id, function(err, activity){
+                if (err)
+                    throw err;
+
+                Question.find({
+                    '_id': {
+                        $in: activity.questions
+                    }
+                }, function(err, questions){
+                    if (err)
+                        throw err;
+
+                    Student.find({
+                        '_id':{
+                            $in: course.students
+                        }
+                    }, function(err, students){
+                        if (err)
+                        throw err;
+
+                        Answer.find({
+                            '_id':{
+                                $in: activity.answers
+                            }
+                        }, function(err, answers){
+                            res.render('teacher/pages/activity-tea', {
+                                user: user,
+                                courses: courses,
+                                course: course,
+                                activity: activity,
+                                questions: questions,
+                                students: students,
+                                answers: answers
+                            });
+
+                        });
+
+                        
+                    });
+
+                    
 
                 });
 
