@@ -6,6 +6,7 @@ var Course = require('../models/course');
 var Question = require('../models/question');
 var Student = require('../models/student');
 var Answer = require('../models/answer');
+var StudentAnswer = require('../models/studentAnswer');
 
 
 exports.getNewActivity = function(req, res) {
@@ -32,7 +33,7 @@ exports.getNewActivity = function(req, res) {
                 course: course
             });
         });
-    });
+    }).sort({name: 1});;
 };
 
 exports.createActivity = function(req, res) {
@@ -80,7 +81,7 @@ exports.createActivity = function(req, res) {
                 throw err;
 
             // go fetch the course so the activity can be assign to the course
-            Course.findById(req.body.course._id, function(err, course) {
+            Course.findById(req.body.course._id, function (err, course) {
                 if (err)
                     throw err;
 
@@ -122,7 +123,7 @@ exports.getStudentActivity = function(req,res){
             if (err)
                 throw err;
 
-            Activity.findById(req.params.activity_id, function(err, activity){
+            Activity.findById(req.params.activity_id, function (err, activity){
                 if (err)
                     throw err;
 
@@ -130,7 +131,7 @@ exports.getStudentActivity = function(req,res){
                     '_id': {
                         $in: activity.questions
                     }
-                }, function(err, questions){
+                }, function (err, questions){
                     if (err)
                         throw err;
 
@@ -149,10 +150,12 @@ exports.getStudentActivity = function(req,res){
 
             
         });
-    });
+    }).sort({name: 1});
 };
 
+
 exports.getTeacherActivity = function(req,res){
+    // get current user
     var user = req.user;
     if (user !== undefined)
         user = user.toJSON();
@@ -195,16 +198,74 @@ exports.getTeacherActivity = function(req,res){
                                 $in: activity.answers
                             }
                         }, function(err, answers){
-                            res.render('teacher/pages/activity-tea', {
-                                user: user,
-                                courses: courses,
-                                course: course,
-                                activity: activity,
-                                questions: questions,
-                                students: students,
-                                answers: answers
-                            });
 
+                            if (req.query.student){
+                                var student = req.query.student;
+                                // find student answers
+                                StudentAnswer.findOne({
+                                    'student': student,
+                                    'activity': activity
+                                }, function (err, studentAnswer){
+                                    if (err)
+                                        throw err;
+
+                                    // find student
+                                    Student.findById(student, function (err, selectedStudent){
+                                        if (err)
+                                            throw err;
+
+                                        // find answers
+                                        if (studentAnswer){
+                                            Answer.find({
+                                                '_id': { $in: studentAnswer.answers }
+                                            }, function (err, selectedStudentAnswers){
+                                                if (err)
+                                                    throw err;
+
+                                                res.render('teacher/pages/activity-tea', {
+                                                    user: user,
+                                                    courses: courses,
+                                                    course: course,
+                                                    activity: activity,
+                                                    questions: questions,
+                                                    students: students,
+                                                    answers: answers,
+                                                    studentAnswer: studentAnswer,
+                                                    selectedStudent: selectedStudent,
+                                                    selectedStudentAnswers: selectedStudentAnswers
+                                                });
+                                            });
+                                        } else {
+                                            res.render('teacher/pages/activity-tea', {
+                                                user: user,
+                                                courses: courses,
+                                                course: course,
+                                                activity: activity,
+                                                questions: questions,
+                                                students: students,
+                                                answers: answers,
+                                                studentAnswer: studentAnswer,
+                                                selectedStudent: selectedStudent,
+                                                selectedStudentAnswers: null
+                                            });
+                                        }  
+                                    });
+                                });
+                            } else {
+
+                                res.render('teacher/pages/activity-tea', {
+                                    user: user,
+                                    courses: courses,
+                                    course: course,
+                                    activity: activity,
+                                    questions: questions,
+                                    students: students,
+                                    answers: answers,
+                                    studentAnswer: null,
+                                    selectedStudent: null,
+                                    selectedStudentAnswers: null
+                                });
+                            }
                         });
 
                         
@@ -219,5 +280,69 @@ exports.getTeacherActivity = function(req,res){
 
             
         });
-    });
+    }).sort({name: 1});
 };
+
+exports.postStudentAnswer = function (req, res){
+    var user = req.user;
+    if (user !== undefined)
+        user = user.toJSON();
+    // get number of answers
+    var numAnswers = Object.keys(req.body).length / 2;
+
+    // get activity
+    Activity.findById(req.params.activity_id, function (err, activity){
+        if (err)
+            throw err;
+
+        // create answers
+        var answers = [];
+        for (var i = 0; i < numAnswers; i++){
+            var questionId = req.body[i + "question"];
+            var answer = req.body[i + "answer"];
+
+            var newAnswer = new Answer();
+            newAnswer.createdAt = Date.now();
+            newAnswer.student = user._id;
+            newAnswer.question = questionId;
+            newAnswer.answer = answer;
+
+            answers.push(newAnswer._id);
+
+            // save answer
+            newAnswer.save(function (err){
+                if (err)
+                    throw err;
+            });
+        }
+
+        // push this student to students who have answered
+        activity.studentsWhoAnswered.push(user._id);
+
+        // push answers to activity and to student answers
+        var studentAnswer = new StudentAnswer();
+        studentAnswer.student = user._id;
+        studentAnswer.activity = activity._id;
+        for (var i = 0; i < answers.length; i++){
+            studentAnswer.answers.push(answers[i]);
+            activity.answers.push(answers[i]);
+        }
+
+        // save student answer
+        studentAnswer.save(function (err){
+            if (err)
+                throw err;
+
+            activity.studentAnswers.push(studentAnswer._id);
+
+            // save activity
+            activity.save(function (err){
+                if (err)
+                    throw err;
+
+                res.redirect('/student/courses/' + req.params.course_id);
+            });
+        });
+    });
+}
+

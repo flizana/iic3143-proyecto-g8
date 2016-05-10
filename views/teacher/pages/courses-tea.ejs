@@ -2,7 +2,7 @@
 <html>
 <head>
 	<% include ../../head %>
-	<title>FeedMe | Dashboard</title>
+	<title>FeedMe | <%= course.name %></title>
 
 	<!-- Custom CSS Stylesheet -->
 
@@ -95,11 +95,17 @@
 		            	<% for (var i = 0; i < activities.length; i++){ %>
 		                    <% var activity = activities[i]; %>
 
-		                    <div class="alert alert-danger">
-		                        <a href="/teacher/courses/<%= course._id %>/activity/<%= activity.id %>" class="alert-link pull-left"><%= activity.name %></a>
-		                        	<div class="pull-right"><strong> <%= activity.answers.length %>/<%=students.length%></strong></div>
-		                        <div class="clearfix"></div>
-		                	</div>
+		                    <% if(activity.studentsWhoAnswered.length==students.length){ %>
+		                    	<div class="alert alert-success">
+		                    <% } else if (activity.studentsWhoAnswered.length==0) { %>
+		                    	<div class="alert alert-danger">
+		                    <% } else{ %>
+			                    <div class="alert alert-warning">
+			                <% } %>
+			                        <a href="/teacher/courses/<%= course._id %>/activity/<%= activity.id %>" class="alert-link pull-left"><%= activity.name %></a>
+			                        	<div class="pull-right"><strong> <%= activity.studentsWhoAnswered.length %>/<%=students.length%></strong></div>
+			                        <div class="clearfix"></div>
+			                	</div>
 		                <% } %>
 		            </div>
 		        </div>
@@ -128,7 +134,7 @@
 
 		                    <div class="alert alert-info">
 		                        <a href="#" class="alert-link pull-left"><%= student.firstName %> <%= student.lastName %></a>
-		                        	<div class="pull-right"><strong>0/31</strong></div>
+		                        	<div class="pull-right"><strong></strong></div>
 		                        <div class="clearfix"></div>
 		                	</div>
 		                <% } %>

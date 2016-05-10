@@ -8,6 +8,8 @@ var activitySchema = mongoose.Schema({
 	course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
 	questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
 	answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+	studentAnswers: [{type: mongoose.Schema.Types.ObjectId, ref: "studentAnswer"}],
+	studentsWhoAnswered: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
 	startDate: Date,
 	endDate: Date,
 	createdAt: Date

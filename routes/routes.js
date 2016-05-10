@@ -70,8 +70,12 @@ module.exports = function (app, passport){
     // =====================================
     // STU. ACTIVITY =======================
     // =====================================
-    app.get('/student/courses/:course_id/activity/:activity_id', isLoggedInAsStudent, function(req,res){
+    app.get('/student/courses/:course_id/activity/:activity_id', isLoggedInAsStudent, function (req,res){
         activityController.getStudentActivity(req, res);
+    });
+
+    app.post('/student/courses/:course_id/activity/:activity_id/answer', isLoggedInAsStudent, function (req, res){
+        activityController.postStudentAnswer(req, res);
     });
 
     // =====================================

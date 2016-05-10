@@ -2,10 +2,10 @@
 <html>
 <head>
 	<% include ../../head %>
-	<title>FeedMe | Dashboard</title>
+	<title>FeedMe | <%= activity.name %></title>
 
 	<!-- Custom CSS Stylesheet -->
-
+    <link rel="stylesheet" type="text/css" href="/stylesheets/activity-tea.css">
 </head>
 <body>
 	<% include ../partials/navbar-tea %>
@@ -22,7 +22,10 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading clearfix"><label for="titulo"><%= activity.name %></label>
+					<div class="panel-heading clearfix">
+                        <label for="titulo">
+                            <%= activity.name %><% if (selectedStudent){ %> - <%= selectedStudent.firstName %> <%= selectedStudent.lastName %><% } %>
+                        </label>
                 	</div>
 
                 	<div class="panel-body clearfix">
@@ -38,7 +41,7 @@
                                         </a>
                                         <% for (var i = 0; i < students.length; i++){ %>
 						                    <% var student = students[i]; %>
-						                    <a href="#" id="student <%= i %>" class="list-group-item">
+						                    <a href="/teacher/courses/<%= course._id %>/activity/<%= activity._id %>?student=<%= student._id %>" id="student <%= i %>" class="list-group-item">
                                             	<i class="fa fa-user fa-fw"></i><%= student.firstName %> <%= student.lastName %>
                                         	</a>
 						                    
@@ -51,84 +54,66 @@
 
 
                     	<!-- Informe General -->
-                    	<div id="activity-summary" class="pull-left informe">
-                                 
+                        <% if (!selectedStudent){ %>
+                        	<div id="activity-summary" class="pull-left informe">
+                            <% for (var i = 0; i< questions.length; i++){ %>
+                                <% var question = questions[i]; %>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>Pregunta <%= i+1 %>: <%= question.name %></strong>
+                                    </div>
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-body">
+                                        
+                                        Resumen pregunta <%= i+1 %>
+                                    </div>
+                                    <!-- /.panel-body -->
+                                </div>
+                            <% } %>
+                             
+                        	</div>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Pregunta 1: Esta es una pregunta de alternativas</strong>
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                    
-                                    <div id="legendPlaceholder"></div>
-                                    <div class="pregunta" id="pregunta1"></div>
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                         
-                         
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Pregunta 2: Esta es una pregunta de si o no</strong>
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                    
-                                    <div id="legendPlaceholder"></div>
-                                    <div class="pregunta" id="pregunta2"></div>
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                         
-                         
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Pregunta 3: Esta es una pregunta numerica</strong>
-                                </div> 
-                                <div class="panel-body">
-                                    <div>Promedio: <span> 18.3</span></div>
-                                    <div>Maximo: <span> 34</span></div>
-                                    <div>Minimo: <span> 6</span></div>
-                                    <div>Moda: <span> 16</span></div>
-                                    <div>Desviacion Estandar: <span> 3.2</span></div>
-                                </div>                    
-                            </div>
-                         
-                         
-                            <div class="panel panel-default">
-                                <div class="panel-heading clearfix">
-                                    <strong>Pregunta 4: Esta es una pregunta de respuesta corta</strong>
-                                    <a class="pull-right"><i class="fa fa-plus"></i></a>
-                                </div>                   
-                            </div>
-                         
-                         
-                            <div class="panel panel-default">
-                                <div class="panel-heading clearfix">
-                                    <strong>Pregunta 5: Esta es una pregunta para comentario</strong>
-                                    <a class="pull-right"><i class="fa fa-plus"></i></a>
-                                </div>                   
-                            </div>
-                         
-                    	</div>
+                    	<% } else { %>
+                            <% if (selectedStudentAnswers){ %>
+                                <% for (var i=0; i< selectedStudentAnswers.length; i++){ %>
+                                    <% var question = questions[i]; %>
+                                    <% var answer = selectedStudentAnswers[i]; %>
+                                    <label>Pregunta <%= i+1 %>: </label>
+                                    <label><%= question.questionName %></label>
 
-                    	<!-- Specific Student Answers -->
-                    	
-		                    <div id="activity-summary" class="pull-left informe">
-	                            <div class="panel panel-default">
-	                                <div class="panel-heading">
-	                                    <strong>Agustin Gomez</strong>
-	                                </div>
-	                                <!-- /.panel-heading -->
-	                                <div class="panel-body">
+                                    <!-- multiple choice -->
+                                    <% if (question.type == "multipleChoice" || question.type == "yesNo"){ %>
+                                        <% for (var j = 0 ; j < question.choices.length; j++){ %>
+                                            <% var choice = question.choices[j]; %>
+                                            <div class="radio">
+                                                <label>
+                                                    <% if (answer.answer == choice.value){ %>
+                                                        <input type="radio" checked="checked" disabled><%= choice.value %>
+                                                    <% } else { %>
+                                                        <input type="radio" disabled><%= choice.value %>
+                                                    <% } %>
+                                                </label>
+                                            </div>
+                                        <% } %>
+                                    <% } %>
 
-	                                </div>
-	                                <!-- /.panel-body -->
-	                            </div>
-	                        </div>
-		                    
-		                
+                                    <% if (question.type == "shortAnswer" || question.type == "longAnswer" || question.type == "numeric"){ %>
+                                        <div class="text-answer">
+                                            <%= answer.answer %>
+                                        </div>
+                                    <% } %>
+
+
+
+
+                                <% } %>
+                            <% } else { %>
+                                <div class="alert alert-warning alert-dismissable informe">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    Este alumno a&uacute;n no ha respondido.
+                                </div>
+                            <% } %>
+                        <% } %>
                     	
                 	</div> 
 				</div>
