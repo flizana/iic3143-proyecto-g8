@@ -16,11 +16,11 @@ exports.getNewActivity = function(req, res) {
         '_id': {
             $in: user.courses
         }
-    }, function(err, courses) {
+    }, function (err, courses) {
         if (err)
             throw err;
 
-        Course.findById(req.params.id, function(err, course) {
+        Course.findById(req.params.id, function (err, course) {
             if (err)
                 throw err;
 
@@ -47,12 +47,10 @@ exports.createActivity = function(req, res) {
     // newActivity.createdAt =
 
     // save activity
-    newActivity.save(function(err, activity) {
-        if (err) {
-            return res.status(406).send({
-                message: err
-            });
-        }
+    newActivity.save(function (err, activity) {
+        if (err)
+            throw err;
+
         //create questions
         questions = [];
         for (i = 0; i < req.body.questions.length; i++) {
@@ -66,52 +64,40 @@ exports.createActivity = function(req, res) {
             questions.push(newQuestion._id);
             //save the question
             newQuestion.save(function(err, question) {
-                if (err) {
-                    return res.status(406).send({
-                        message: err
-                    });
-                }
-
-
+                if (err)
+                    throw err;
             });
         }
 
         //attach the questions to the activity
         activity.questions = questions;
-        console.log(questions.length);
+        //console.log(questions.length);
         //save activity
         activity.save(function(err) {
-            if (err) {
-                return res.status(406).send({
-                    message: err
-                });
-            }
-        });
+            if (err)
+                throw err;
 
-        // go fetch the course so the activity can be assign to the course
-        Course.findById(req.body.course._id, function(err, course) {
-            if (err) {
-                return res.status(406).send({
-                    message: err
-                });
-            }
-            course.activities.push(newActivity);
+            // go fetch the course so the activity can be assign to the course
+            Course.findById(req.body.course._id, function(err, course) {
+                if (err)
+                    throw err;
 
-            // save user
-            course.save(function(err) {
-                if (err) {
-                    return res.status(406).send({
-                        message: err
+
+                course.activities.push(newActivity);
+
+                // save user
+                course.save(function(err) {
+                    if (err)
+                        throw err;
+
+                    console.log("all good");
+                    // send the 200 status. All Good.
+                    return res.status(200).send({
+                        success: "OK",
+                        redirect: ("/teacher/courses/" + course._id)
                     });
-                }
-                console.log("all good");
-                // send the 200 status. All Good.
-                return res.status(200).send({
-                    success: "OK",
-                    redirect: ("/teacher/courses/" + course._id)
                 });
             });
         });
-
     });
 };
