@@ -16,14 +16,14 @@
     <% include ../partials/navbar-stu %>
 
         <div id="page-wrapper" ng-controller="searchResultCtrl">
-            <div class="row" ng-init="initialize('<%= JSON.stringify(courses) %>')">
+            <div class="row" ng-init="initialize('<%= JSON.stringify(courses_searched) %>')">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Resultados de busqueda: <%= searchFor %></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <div class="row" ng-if="courses.length === 0">
+                <div class="row" ng-if="courses_searched.length === 0">
                     <div class="col-lg-12">
                         <p> No se encontraron cursos para la busqueda
                             <%= searchFor %>
@@ -31,17 +31,17 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <div class="row" ng-repeat="course in courses">
+                <div class="row" ng-repeat="course in courses_searched">
                     <div class="col-lg-9">
                         <div class="panel panel-primary">
-                            <div class="panel-heading">
+                            <div class="panel-heading" ng-init="isPendingRequest('<%= JSON.stringify(user) %>', course)">
                                 {{course.name}}
-                                <button class="boton-inscribir-curso" ng-if="!isSignedUp('<%= JSON.stringify(user) %>', course)"
+                                <button class="boton-inscribir-curso" ng-if="!isSignedUp('<%= JSON.stringify(user) %>', course) && !course.pendingRequest"
                                   ng-click="sendRequest('<%= JSON.stringify(user) %>',course)"> Inscribirse</button>
                                 <div class="pull-right boton-inscribir-curso inscrito" ng-if="isSignedUp('<%= JSON.stringify(user) %>', course)">
                                     <i class="fa fa-check"> </i> Inscrito
                                 </div>
-                                <div class="pull-right boton-inscribir-curso esperando" ng-if="isPendingRequest('<%= JSON.stringify(user) %>', course)">
+                                <div class="pull-right boton-inscribir-curso esperando" ng-if="course.pendingRequest">
                                     <i class="fa fa-history"> </i> Solicitado
                                 </div>
                             </div>

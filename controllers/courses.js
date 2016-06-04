@@ -110,16 +110,26 @@ exports.searchCourse = function(req, res) {
             $regex: ".*" + searchFor + "*."
         }
     }).populate('teacher').
-    exec(function(err, courses) {
+    exec(function(err, courses_searched) {
         if (err)
             throw err;
 
+        Course.find({
+            '_id': {
+                $in: user.courses
+            }
+        }, function(err, courses) {
+            if (err)
+                throw err;
 
-        res.render("student/pages/search-stu", {
-            searchFor: searchFor,
-            user: user,
-            courses: courses
+            res.render("student/pages/search-stu", {
+                searchFor: searchFor,
+                user: user,
+                courses_searched: courses_searched,
+                courses: courses
+            });
         });
+
     });
 };
 

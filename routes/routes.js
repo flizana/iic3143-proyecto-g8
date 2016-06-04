@@ -75,8 +75,12 @@ module.exports = function(app, passport) {
     });
 
     app.post('/student/courses/:id/request/create', isLoggedInAsStudent, function(req, res) {
-      console.log("------------------------------------------------llego a routes");
       requestController.createRequest(req,res);
+    });
+
+    app.get('/student/courses/:id/request/find', isLoggedInAsStudent, function(req, res) {
+      console.log("------------------------------------------------llego a routes ahora a buscar");
+      requestController.findRequest(req,res);
     });
 
     // =====================================

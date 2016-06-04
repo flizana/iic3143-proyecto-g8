@@ -15,8 +15,6 @@ exports.createRequest = function(req, res) {
 
     var user = req.user;
     var course = req.body.course;
-    console.log(user);
-    console.log(course);
 
     var newRequest = new CourseRequest();
     newRequest.student = user._id;
@@ -26,10 +24,34 @@ exports.createRequest = function(req, res) {
 
 
     // save course
-    newRequest.save(function(err) {
+    newRequest.save(function(err, request) {
         if (err)
             throw err;
 
+        return res.status(200).send({
+            success: "OK",
+            request: request
+        });
+    });
+
+};
+
+
+exports.findRequest = function(req, res) {
+    var user_id = req.user._id;
+    var course_id = req.params.id;
+    CourseRequest.find({
+        student: user_id,
+        course: course_id
+    }, function(err, request) {
+        if (err)
+            throw err;
+       console.log(request);
+
+       return res.status(200).send({
+           success: "OK",
+           request: request
+       });
     });
 
 };
