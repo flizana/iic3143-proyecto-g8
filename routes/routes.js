@@ -6,6 +6,7 @@ var loginController = require('../controllers/login');
 var dashboardController = require('../controllers/dashboard');
 var courseController = require('../controllers/courses');
 var activityController = require('../controllers/activities');
+var requestController = require('../controllers/requests');
 
 module.exports = function(app, passport) {
 
@@ -73,9 +74,9 @@ module.exports = function(app, passport) {
         courseController.searchCourse(req, res);
     });
 
-    app.post('/student/courses/:id/request/create', isLoggedInAsStudent, function functionName() {
+    app.post('/student/courses/:id/request/create', isLoggedInAsStudent, function(req, res) {
       console.log("------------------------------------------------llego a routes");
-      console.log(req);
+      requestController.createRequest(req,res);
     });
 
     // =====================================

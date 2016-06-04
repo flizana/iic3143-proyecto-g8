@@ -74,7 +74,6 @@ exports.createActivity = function(req, res) {
 
         //attach the questions to the activity
         activity.questions = questions;
-        //console.log(questions.length);
         //save activity
         activity.save(function(err) {
             if (err)
@@ -93,7 +92,6 @@ exports.createActivity = function(req, res) {
                     if (err)
                         throw err;
 
-                    console.log("all good");
                     // send the 200 status. All Good.
                     return res.status(200).send({
                         success: "OK",
@@ -145,10 +143,10 @@ exports.getStudentActivity = function(req,res){
 
                 });
 
-                
+
             });
 
-            
+
         });
     }).sort({name: 1});
 };
@@ -248,7 +246,7 @@ exports.getTeacherActivity = function(req,res){
                                                 selectedStudent: selectedStudent,
                                                 selectedStudentAnswers: null
                                             });
-                                        }  
+                                        }
                                     });
                                 });
                             } else {
@@ -268,17 +266,17 @@ exports.getTeacherActivity = function(req,res){
                             }
                         });
 
-                        
+
                     });
 
-                    
+
 
                 });
 
-                
+
             });
 
-            
+
         });
     }).sort({name: 1});
 };
@@ -345,4 +343,3 @@ exports.postStudentAnswer = function (req, res){
         });
     });
 }
-

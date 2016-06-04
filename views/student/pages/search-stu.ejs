@@ -36,11 +36,12 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 {{course.name}}
-                                <button class="boton-inscribir-curso" ng-if="!isSignedUp('<%= JSON.stringify(user) %>', course)"> Inscribirse</button>
+                                <button class="boton-inscribir-curso" ng-if="!isSignedUp('<%= JSON.stringify(user) %>', course)"
+                                  ng-click="sendRequest('<%= JSON.stringify(user) %>',course)"> Inscribirse</button>
                                 <div class="pull-right boton-inscribir-curso inscrito" ng-if="isSignedUp('<%= JSON.stringify(user) %>', course)">
                                     <i class="fa fa-check"> </i> Inscrito
                                 </div>
-                                <div class="pull-right boton-inscribir-curso esperando" ng-if"isPendingRequest('<%= JSON.stringify(user) %>', course)">
+                                <div class="pull-right boton-inscribir-curso esperando" ng-if="isPendingRequest('<%= JSON.stringify(user) %>', course)">
                                     <i class="fa fa-history"> </i> Solicitado
                                 </div>
                             </div>

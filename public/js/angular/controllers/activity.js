@@ -25,7 +25,7 @@ angular.module('app.controllers')
 
     //Add question to array. Recieves what type of question is
     $scope.addQuestion = function(myType) {
-        console.log(myType);
+
         //The question to be added
         var question;
         //Create the question depending on what type of question is
@@ -122,7 +122,6 @@ angular.module('app.controllers')
         // for(i = 0; i < $scope.questions.length; i++)
         //   questions[i] = $scope.questions[i].value;
         //Send http request
-        console.log("sending http");
         $http({
             method: 'POST',
             url: '/teacher/courses/activity/create',
@@ -133,10 +132,6 @@ angular.module('app.controllers')
               course: course
             }
         }).then(function successCallback(response) {
-          console.log("http ok");
-          console.log(response);
-          console.log(response.data);
-          console.log(response.data.redirect);
           $window.location.href = response.data.redirect;
 
 
@@ -144,7 +139,6 @@ angular.module('app.controllers')
             // when the response is available
         }, function errorCallback(response) {
             $scope.error = "Error: Hubo un problema conectándose con el servidor. Intente denuevo";
-            console.log("http not ok");
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });

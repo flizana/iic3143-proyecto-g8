@@ -105,8 +105,6 @@ exports.getTeacherCourse = function(req, res) {
 exports.searchCourse = function(req, res) {
     var user = req.user;
     var searchFor = req.params.searchFor;
-		console.log("---dadfsdfgsdfkjvnsdfjvnsdfkvnsdkfjvnsdkfjvnsdkfjvnsdkfjnvsdkfjnvsdkfnvskdfjnvskdfjnvsdkfjnvskdjfnvskdfnvksdjfnvksdjfnvskdjfnv");
-		console.log(user);
     Course.find({
         'name': {
             $regex: ".*" + searchFor + "*."
@@ -117,7 +115,6 @@ exports.searchCourse = function(req, res) {
             throw err;
 
 
-        console.log(courses);
         res.render("student/pages/search-stu", {
             searchFor: searchFor,
             user: user,

@@ -75,8 +75,7 @@ exports.editStudentProfilePicture = function (req, res){
 			var filePath = '/images/student-profile-pictures/' + newFilename + extension;
 			var fullFilePath = 'public' + filePath;
 
-			console.log(filePath);
-			console.log(fullFilePath);
+
 			images.changeFileLocation(resizedPath, fullFilePath, function (err){
 				if (err)
 					throw err;
