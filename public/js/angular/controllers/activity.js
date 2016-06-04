@@ -1,7 +1,7 @@
 // public/js/angular/controllers/activity.js
 
 //add controller activityCtrl to the module of controllers
-angular.module('app.controllers', [])
+angular.module('app.controllers')
 
 .controller('activityCtrl', function($scope, $http, $window) {
 
@@ -87,7 +87,7 @@ angular.module('app.controllers', [])
 
         //if it has no questions, send an error
         if ($scope.questions.length === 0) {
-            $scope.error = "Error: No tiene preguntas agregadas. Debe tener almenos una pregunta.";
+            $scope.error = "Error: No tiene preguntas agregadas. Debe tener al menos una pregunta.";
             return;
         }
 

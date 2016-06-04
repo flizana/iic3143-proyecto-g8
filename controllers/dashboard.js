@@ -9,11 +9,11 @@ exports.getStudentDashboard = function (req, res){
 	// get current user
 	var user = req.user;
 
-	
+
 
 	// populate courses
 	Course.find({
- 
+
 		'_id': { $in: user.courses }
 	}, function (err, courses){
 		if (err)
@@ -26,7 +26,7 @@ exports.getStudentDashboard = function (req, res){
 	}).sort({name: 1}).exec(function(err, docs){
 
 	});
-}
+};
 
 exports.editStudentProfile = function (req, res){
 	// get current user
@@ -44,7 +44,7 @@ exports.editStudentProfile = function (req, res){
 
 		res.redirect('/student/dashboard');
 	});
-}
+};
 
 exports.editStudentProfilePicture = function (req, res){
 	// get current user
@@ -60,7 +60,7 @@ exports.editStudentProfilePicture = function (req, res){
 	// set all file paths
 	var tmpPath = req.file.path;
 	var resizedPath = tmpPath + '_150x150';
-	
+
 	// resize image
 	images.resizeImage(tmpPath, resizedPath, 150, 150, function (err){
 		if (err)
@@ -94,7 +94,7 @@ exports.editStudentProfilePicture = function (req, res){
 			});
 		});
 	});
-}
+};
 
 exports.getTeacherDashboard = function (req, res){
 	// get current user
@@ -103,7 +103,7 @@ exports.getTeacherDashboard = function (req, res){
 		user = user.toJSON();
 
 	// populate courses
-	Course.find({ 
+	Course.find({
 		'_id': { $in: user.courses }
 	}, function (err, courses){
 		if (err)
@@ -116,7 +116,7 @@ exports.getTeacherDashboard = function (req, res){
 	}).sort({name: 1}).exec(function(err, docs){
 
 	});
-}
+};
 
 exports.editTeacherProfile = function (req, res){
 	// get current user
@@ -134,7 +134,7 @@ exports.editTeacherProfile = function (req, res){
 
 		res.redirect('/teacher/dashboard');
 	});
-}
+};
 
 exports.editTeacherProfilePicture = function (req, res){
 	// get current user
@@ -150,7 +150,7 @@ exports.editTeacherProfilePicture = function (req, res){
 	// set all file paths
 	var tmpPath = req.file.path;
 	var resizedPath = tmpPath + '_150x150';
-	
+
 	// resize image
 	images.resizeImage(tmpPath, resizedPath, 150, 150, function (err){
 		if (err)
@@ -182,4 +182,4 @@ exports.editTeacherProfilePicture = function (req, res){
 			});
 		});
 	});
-}
+};

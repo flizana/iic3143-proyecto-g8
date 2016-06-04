@@ -7,29 +7,29 @@ var dashboardController = require('../controllers/dashboard');
 var courseController = require('../controllers/courses');
 var activityController = require('../controllers/activities');
 
-module.exports = function (app, passport){
+module.exports = function(app, passport) {
 
 
     // =====================================
     // Issue with CORS =====================
     // =====================================
     app.use(function(req, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      next();
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
     });
 
-	// =====================================
+    // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
-    app.get('/', function (req, res){
-    	indexController.getIndex(req, res);
+    app.get('/', function(req, res) {
+        indexController.getIndex(req, res);
     });
 
     // =====================================
     // STUDENT  ============================
     // =====================================
-    app.get('/student', function (req, res){
+    app.get('/student', function(req, res) {
         indexController.getStudentLogin(req, res);
     });
 
@@ -48,40 +48,51 @@ module.exports = function (app, passport){
     // =====================================
     // STU. DASHBOARD  =====================
     // =====================================
-    app.get('/student/dashboard', isLoggedInAsStudent, function (req, res){
+    app.get('/student/dashboard', isLoggedInAsStudent, function(req, res) {
         dashboardController.getStudentDashboard(req, res);
     });
 
-    app.post('/student/dashboard/edit-profile', isLoggedInAsStudent, function (req, res){
+    app.post('/student/dashboard/edit-profile', isLoggedInAsStudent, function(req, res) {
         dashboardController.editStudentProfile(req, res);
     });
 
-    app.post('/student/dashboard/edit-profile-picture', isLoggedInAsStudent, function (req, res){
+    app.post('/student/dashboard/edit-profile-picture', isLoggedInAsStudent, function(req, res) {
         dashboardController.editStudentProfilePicture(req, res);
     });
 
     // =====================================
     // STU. COURSES  =======================
     // =====================================
-    app.get('/student/courses/:id', isLoggedInAsStudent, function(req, res){
-        courseController.getStudentCourse(req,res);
+    app.get('/student/courses/:id', isLoggedInAsStudent, function(req, res) {
+        courseController.getStudentCourse(req, res);
+    });
+
+
+    app.get('/student/search/course/:searchFor', isLoggedInAsStudent, function(req, res) {
+
+        courseController.searchCourse(req, res);
+    });
+
+    app.post('/student/courses/:id/request/create', isLoggedInAsStudent, function functionName() {
+      console.log("------------------------------------------------llego a routes");
+      console.log(req);
     });
 
     // =====================================
     // STU. ACTIVITY =======================
     // =====================================
-    app.get('/student/courses/:course_id/activity/:activity_id', isLoggedInAsStudent, function (req,res){
+    app.get('/student/courses/:course_id/activity/:activity_id', isLoggedInAsStudent, function(req, res) {
         activityController.getStudentActivity(req, res);
     });
 
-    app.post('/student/courses/:course_id/activity/:activity_id/answer', isLoggedInAsStudent, function (req, res){
+    app.post('/student/courses/:course_id/activity/:activity_id/answer', isLoggedInAsStudent, function(req, res) {
         activityController.postStudentAnswer(req, res);
     });
 
     // =====================================
     // TEACHER  ============================
     // =====================================
-    app.get('/teacher', function (req, res){
+    app.get('/teacher', function(req, res) {
         indexController.getTeacherLogin(req, res);
     });
 
@@ -100,50 +111,51 @@ module.exports = function (app, passport){
     // =====================================
     // TEA. DASHBOARD  =====================
     // =====================================
-    app.get('/teacher/dashboard', isLoggedInAsTeacher, function (req, res){
+    app.get('/teacher/dashboard', isLoggedInAsTeacher, function(req, res) {
         dashboardController.getTeacherDashboard(req, res);
     });
 
-    app.post('/teacher/dashboard/edit-profile', isLoggedInAsTeacher, function (req, res){
+    app.post('/teacher/dashboard/edit-profile', isLoggedInAsTeacher, function(req, res) {
         dashboardController.editTeacherProfile(req, res);
     });
 
-    app.post('/teacher/dashboard/edit-profile-picture', isLoggedInAsTeacher, function (req, res){
+    app.post('/teacher/dashboard/edit-profile-picture', isLoggedInAsTeacher, function(req, res) {
         dashboardController.editTeacherProfilePicture(req, res);
     });
 
     // =====================================
     // TEA. COURSES  =======================
     // =====================================
-    app.post('/teacher/courses/new', isLoggedInAsTeacher, function (req, res){
+    app.post('/teacher/courses/new', isLoggedInAsTeacher, function(req, res) {
         courseController.addNewCourse(req, res);
     });
 
 
-    app.get('/teacher/courses/:id', isLoggedInAsTeacher, function(req,res){
-        courseController.getTeacherCourse(req,res);
+    app.get('/teacher/courses/:id', isLoggedInAsTeacher, function(req, res) {
+        courseController.getTeacherCourse(req, res);
     });
 
     // =====================================
     // TEA. ACTIVITY  ======================
     // =====================================
 
-    app.get('/teacher/courses/:id/activity/new', isLoggedInAsTeacher, function (req, res){
+    app.get('/teacher/courses/:id/activity/new', isLoggedInAsTeacher, function(req, res) {
+
         activityController.getNewActivity(req, res);
     });
 
-    app.post('/teacher/courses/activity/create', isLoggedInAsTeacher, function (req, res){
+    app.post('/teacher/courses/activity/create', isLoggedInAsTeacher, function(req, res) {
         activityController.createActivity(req, res);
     });
 
-    app.get('/teacher/courses/:course_id/activity/:activity_id', isLoggedInAsTeacher, function(req,res){
+    app.get('/teacher/courses/:course_id/activity/:activity_id', isLoggedInAsTeacher, function(req, res) {
         activityController.getTeacherActivity(req, res);
     });
 
     // =====================================
     // LOGOUT  =============================
     // =====================================
-    app.get('/logout', function (req, res){
+    app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
@@ -153,8 +165,8 @@ module.exports = function (app, passport){
 function isLoggedInAsStudent(req, res, next) {
 
     // if user is authenticated in the session, carry on
-    if (req.isAuthenticated()){
-        if (req.user.isStudent){
+    if (req.isAuthenticated()) {
+        if (req.user.isStudent) {
             return next();
         }
     }
@@ -163,9 +175,9 @@ function isLoggedInAsStudent(req, res, next) {
     res.redirect('/');
 }
 
-function isLoggedInAsTeacher(req, res, next){
-    if (req.isAuthenticated()){
-        if (!req.user.isStudent){
+function isLoggedInAsTeacher(req, res, next) {
+    if (req.isAuthenticated()) {
+        if (!req.user.isStudent) {
             return next();
         }
     }
