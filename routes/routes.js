@@ -135,6 +135,10 @@ module.exports = function(app, passport) {
         courseController.addNewCourse(req, res);
     });
 
+    app.get('/teacher/requests', isLoggedInAsTeacher, function (req, res) {
+      requestController.requestsOfTeacher(req, res);
+    });
+
 
     app.get('/teacher/courses/:id', isLoggedInAsTeacher, function(req, res) {
         courseController.getTeacherCourse(req, res);

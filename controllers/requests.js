@@ -7,7 +7,7 @@ var Question = require('../models/question');
 var Student = require('../models/student');
 var Answer = require('../models/answer');
 var StudentAnswer = require('../models/studentAnswer');
-var CourseRequest = require('../models/courseRequest.js');
+var CourseRequest = require('../models/courseRequest');
 
 
 
@@ -46,12 +46,36 @@ exports.findRequest = function(req, res) {
     }, function(err, request) {
         if (err)
             throw err;
-       console.log(request);
+        console.log(request);
 
-       return res.status(200).send({
-           success: "OK",
-           request: request
-       });
+        return res.status(200).send({
+            success: "OK",
+            request: request
+        });
     });
 
+};
+
+exports.requestsOfTeacher = function(req, res) {
+    user = req.user;
+
+    // populate courses
+    Course.find({
+
+        '_id': {
+            $in: user.courses
+        }
+    }, function(err, courses) {
+        if (err)
+            throw err;
+
+        res.render('teacher/pages/requests-tea', {
+            user: user,
+            courses: courses
+        });
+    }).sort({
+        name: 1
+    }).exec(function(err, docs) {
+
+    });
 };
