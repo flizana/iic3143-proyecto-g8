@@ -38,12 +38,14 @@ exports.createRequest = function(req, res) {
 };
 
 
+//Finds request of a student to be part of a course
 exports.findRequest = function(req, res) {
     var user_id = req.user._id;
     var course_id = req.params.id;
     CourseRequest.find({
         student: user_id,
-        course: course_id
+        course: course_id,
+        answered: false
     }, function(err, request) {
         if (err)
             throw err;
@@ -91,6 +93,36 @@ exports.requestsOfTeacher = function(req, res) {
     });
 };
 
+//get all the requests made by an student
+exports.requestsOfStudent = function(req, res) {
+    var user = req.user;
+    Course.find({
+        '_id': {
+            $in: user.courses
+        }
+    }, function(err, courses) {
+
+        if (err)
+            throw err;
+
+        CourseRequest.find({
+            student: user
+        }).populate('course').exec(function(err, requests) {
+            if (err)
+                throw err;
+
+
+
+            res.render('student/pages/requests-stu', {
+                user: user,
+                courses: courses,
+                requests: requests
+            });
+        });
+    });
+
+};
+
 
 exports.acceptRequest = function(req, res) {
 
@@ -135,7 +167,7 @@ exports.acceptRequest = function(req, res) {
 };
 
 exports.rejectRequest = function(req, res) {
-  console.log("MENEHEEHEHEH");
+    console.log("MENEHEEHEHEH");
     CourseRequest.findById(req.body.request._id, function(err, request) {
         if (err)
             throw err;
