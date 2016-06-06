@@ -162,6 +162,17 @@ module.exports = function(app, passport) {
     });
 
     // =====================================
+    // TEA. REQUESTS  ======================
+    // =====================================
+
+    app.put('/requests/accept/:id', isLoggedInAsTeacher, function(req, res) {
+      requestController.acceptRequest(req,res);
+    });
+
+    app.put('/requests/reject/:id', isLoggedInAsTeacher, function(req, res) {
+      requestController.rejectRequest(req,res);
+    });
+    // =====================================
     // LOGOUT  =============================
     // =====================================
     app.get('/logout', function(req, res) {

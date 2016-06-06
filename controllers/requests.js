@@ -20,6 +20,7 @@ exports.createRequest = function(req, res) {
     newRequest.student = user._id;
     newRequest.course = course._id;
     newRequest.accepted = false;
+    newRequest.answered = false;
 
 
 
@@ -59,23 +60,98 @@ exports.findRequest = function(req, res) {
 exports.requestsOfTeacher = function(req, res) {
     user = req.user;
 
-    // populate courses
     Course.find({
-
         '_id': {
             $in: user.courses
         }
     }, function(err, courses) {
+
         if (err)
             throw err;
 
-        res.render('teacher/pages/requests-tea', {
-            user: user,
-            courses: courses
+
+        CourseRequest.find({
+
+            'course': {
+                $in: user.courses
+            },
+            answered: false
+        }).populate('course student').exec(function(err, requests) {
+            if (err)
+                throw err;
+
+            res.render('teacher/pages/requests-tea', {
+                user: user,
+                courses: courses,
+                requests: requests
+            });
         });
     }).sort({
         name: 1
-    }).exec(function(err, docs) {
-
     });
+};
+
+
+exports.acceptRequest = function(req, res) {
+
+    //Update request
+    CourseRequest.findById(req.body.request._id, function(err, request) {
+        if (err)
+            throw err;
+
+
+        request.answered = true;
+        request.accepted = true;
+        request.save(function(err) {
+            if (err)
+                throw err;
+            Course.findById(request.course, function(err, course) {
+                if (err)
+                    throw err;
+                course.students.push(request.student);
+                course.save(function(err) {
+                    if (err)
+                        throw err;
+
+                    Student.findById(request.student, function(err, student) {
+                        if (err)
+                            throw err;
+                        student.courses.push(request.course);
+                        student.save(function(err) {
+                            if (err)
+                                throw err;
+
+                            return res.status(200).send({
+                                success: "OK"
+                            });
+
+                        });
+                    });
+
+                });
+            });
+        });
+    });
+};
+
+exports.rejectRequest = function(req, res) {
+  console.log("MENEHEEHEHEH");
+    CourseRequest.findById(req.body.request._id, function(err, request) {
+        if (err)
+            throw err;
+
+
+        request.answered = true;
+        request.accepted = false;
+        request.save(function(err) {
+            if (err)
+                throw err;
+
+            return res.status(200).send({
+                success: "OK"
+            });
+
+        });
+    });
+
 };

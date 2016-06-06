@@ -33,7 +33,7 @@ exports.getNewActivity = function(req, res) {
                 course: course
             });
         });
-    }).sort({name: 1});;
+    }).sort({name: 1});
 };
 
 exports.createActivity = function(req, res) {
