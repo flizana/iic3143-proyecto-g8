@@ -60,12 +60,15 @@
                                 <% var question = questions[i]; %>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <strong>Pregunta <%= i+1 %>: <%= question.name %></strong>
+                                        <strong>Pregunta <%= i+1 %>: <%= question.questionName %></strong>
                                     </div>
                                     <!-- /.panel-heading -->
                                     <div class="panel-body">
                                         <% if (question.type == "multipleChoice"){ %>
-                                            <h1>Multiple choice</h1>
+                                            <div class="flot-chart">
+                                                <div class="flot-chart-content" id="flot-pie-chart-<%= question._id %>">
+                                                </div>
+                                            </div>
                                         <% } else if (question.type == "yesNo"){ %>
                                             <h1>yes no</h1>
                                         <% } else if (question.type == "shortAnswer"){ %>
@@ -75,7 +78,6 @@
                                         <% } else if (question.type == "numeric"){ %>
                                             <h1>Numeric</h1>
                                         <% } %>
-                                        Resumen pregunta <%= i+1 %>
                                     </div>
                                     <!-- /.panel-body -->
                                 </div>
@@ -133,6 +135,68 @@
 
     </div>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var answers = <%- JSON.stringify(answers) %>
+            var questions = <%- JSON.stringify(questions) %>
+
+            for (var i = 0; i < questions.length; i++){
+                var question = questions[i];
+                if (question.type == "multipleChoice"){
+                    var numAnswersPerChoice = [];
+                    for (var j = 0; j < question.choices.length; j++){
+                        numAnswersPerChoice[j] = 0;
+                        var choice = question.choices[j];
+                        //console.log(choice.value);
+                        var numAnswers = 0;
+                        for (var k = 0; k < answers.length; k++){
+                            var answer = answers[k];
+                            if (answer.question == question._id && answer.answer == choice.value){
+                               numAnswersPerChoice[j]++;
+                            }
+                        }
+                    }
+                    var data = [];
+                    for (var j = 0; j < question.choices.length; j++){
+                        var choice = question.choices[j];
+                        data[j] = {
+                            label: choice.value,
+                            data: numAnswersPerChoice[j]
+                        };
+                    }
+
+                    var chartId = '#flot-pie-chart-' + question._id;
+                    var plotObj = $.plot($(chartId), data, {
+                        series: {
+                            pie: {
+                                show: true
+                            }
+                        },
+                        grid: {
+                            hoverable: false
+                        },
+                        tooltip: true,
+                        tooltipOpts: {
+                            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                            shifts: {
+                                x: 20,
+                                y: 0
+                            },
+                            defaultTheme: false
+                        }
+                    });
+                } else if (question.type == "yesNo"){
+
+                } else if (question.type == "numeric"){
+
+                } else if (question.type == "shortAnswer"){
+
+                } else if (question.type == "longAnswer"){
+
+                }
+            }
+        });
+    </script>
 	<% include ../../scripts %>
 
 

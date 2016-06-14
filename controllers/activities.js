@@ -171,7 +171,7 @@ exports.getTeacherActivity = function(req,res){
             if (err)
                 throw err;
 
-            Activity.findById(req.params.activity_id, function(err, activity){
+            Activity.findById(req.params.activity_id, function (err, activity){
                 if (err)
                     throw err;
 
@@ -179,7 +179,7 @@ exports.getTeacherActivity = function(req,res){
                     '_id': {
                         $in: activity.questions
                     }
-                }, function(err, questions){
+                }, function (err, questions){
                     if (err)
                         throw err;
 
@@ -187,7 +187,7 @@ exports.getTeacherActivity = function(req,res){
                         '_id':{
                             $in: course.students
                         }
-                    }, function(err, students){
+                    }, function (err, students){
                         if (err)
                         throw err;
 
@@ -195,7 +195,7 @@ exports.getTeacherActivity = function(req,res){
                             '_id':{
                                 $in: activity.answers
                             }
-                        }, function(err, answers){
+                        }, function (err, answers){
 
                             if (req.query.student){
                                 var student = req.query.student;
