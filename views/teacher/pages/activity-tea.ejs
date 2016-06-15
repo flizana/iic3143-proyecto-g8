@@ -24,7 +24,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading clearfix">
                         <label for="titulo">
-                            <%= activity.name %><% if (selectedStudent){ %> - <%= selectedStudent.firstName %> <%= selectedStudent.lastName %><% } %>
+                            <%= activity.name %> - <% if (selectedStudent){ %><%= selectedStudent.firstName %> <%= selectedStudent.lastName %><% } else { %> Informe <% } %>
                         </label>
                 	</div>
 
@@ -61,22 +61,58 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <strong>Pregunta <%= i+1 %>: <%= question.questionName %></strong>
+                                        <div class="btn btn-default pull-right" id="show-report-<%= question._id %>">
+                                            <i class="fa fa-plus" id="icon-<%= question._id %>"></i>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
                                     <!-- /.panel-heading -->
-                                    <div class="panel-body">
-                                        <% if (question.type == "multipleChoice"){ %>
+                                    <div class="panel-body hide" id="question-summary-<%= question._id %>">
+                                        <% if (question.type == "multipleChoice" || question.type == "yesNo"){ %>
                                             <div class="flot-chart">
                                                 <div class="flot-chart-content" id="flot-pie-chart-<%= question._id %>">
                                                 </div>
                                             </div>
-                                        <% } else if (question.type == "yesNo"){ %>
-                                            <h1>yes no</h1>
                                         <% } else if (question.type == "shortAnswer"){ %>
-                                            <h1>Short answer</h1>
+                                            <div class="form-group">
+                                                <% for (var j = 0; j< answers.length; j++){ %>
+                                                    <% var answer = answers[j]; %>
+                                                    <% if (answer.question.equals(question._id)) { %> 
+                                                        <p class="form-control-static"><%= answer.answer %></p>
+                                                    <% } %>
+                                                <% } %>
+                                            </div>
                                         <% } else if (question.type == "longAnswer"){ %>
-                                            <h1>Long answer</h1>
+                                            <ul class="timeline">
+                                            <% var cont = 0 %>
+                                                <% for (var j = 0; j< answers.length; j++){ %>
+                                                    <% var answer = answers[j]; %>
+                                                    <% if (answer.question.equals(question._id)) { %> 
+                                                        
+                                                        <% if (cont%2== 0 ) { %>
+                                                            <li>
+                                                        <% } else {%>
+                                                            <li class="timeline-inverted">
+                                                        <% } %>
+                                                                <div class="timeline-badge success"><i class="fa fa-check"></i>
+                                                                </div>
+                                                                <div class="timeline-panel">
+                                                                    <div class="timeline-body"><%= answer.answer %></p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        <% cont++ %>
+                                                    <% } %>
+                                                <% } %>
+                                                
+                                            </ul>
+
+
                                         <% } else if (question.type == "numeric"){ %>
-                                            <h1>Numeric</h1>
+                                            <div class="flot-chart">
+                                                <div class="flot-chart-content" id="flot-bar-chart-<%= question._id %>">
+                                                </div>
+                                            </div>
                                         <% } %>
                                     </div>
                                     <!-- /.panel-body -->
@@ -139,10 +175,66 @@
         $(document).ready(function(){
             var answers = <%- JSON.stringify(answers) %>
             var questions = <%- JSON.stringify(questions) %>
+            var questionData = [];
+            var questionSteps = [];
+
+            var plotPieGraph = function(questionID, cont){
+                $.plot($('#flot-pie-chart-'+questionID), questionData[cont],{
+                    series: {
+                        pie: {
+                            show: true
+                        }
+                    },
+                    grid: {
+                        hoverable: true
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                        shifts: {
+                            x: 20,
+                            y: 0
+                        },
+                        defaultTheme: true
+                    }
+                });
+            }
+
+            var plotBarGraph = function(questionID, cont){
+                var step = questionSteps[cont];
+                var barOptions = {
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: step
+                            }
+                        },
+                        grid: {
+                            hoverable: true
+                        },
+                        legend: {
+                            show: false
+                        },
+                        tooltip: true,
+                        tooltipOpts: {
+                            content: 
+                                function(label, xval, yval, flotItem){
+                                    if (step == 1) return "x: "+(xval + step/2) +", y: "+yval;
+                                    return "x: "+xval +" - " + (xval + step) +", y: "+yval;
+                               }
+                        }
+                    };
+                    var barData = {
+                        label: "bar",
+                        data: questionData[cont]
+                    };
+                    $.plot($("#flot-bar-chart-"+questionID), [barData], barOptions);
+            }
+
 
             for (var i = 0; i < questions.length; i++){
                 var question = questions[i];
-                if (question.type == "multipleChoice"){
+                if (question.type == "multipleChoice" || question.type == "yesNo"){
                     var numAnswersPerChoice = [];
                     for (var j = 0; j < question.choices.length; j++){
                         numAnswersPerChoice[j] = 0;
@@ -164,41 +256,108 @@
                             data: numAnswersPerChoice[j]
                         };
                     }
-
-                    var chartId = '#flot-pie-chart-' + question._id;
-                    var plotObj = $.plot($(chartId), data, {
-                        series: {
-                            pie: {
-                                show: true
-                            }
-                        },
-                        grid: {
-                            hoverable: true
-                        },
-                        tooltip: true,
-                        tooltipOpts: {
-                            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
-                            shifts: {
-                                x: 20,
-                                y: 0
-                            },
-                            defaultTheme: true
-                        }
-                    });
-                } else if (question.type == "yesNo"){
+                    questionData[i] = data;
 
                 } else if (question.type == "numeric"){
+                    var numericAnswers = [];
+                    var cont = 0;
+                    var maxNumberOfLines = 8;
+                    // add answers to numeric answers array
+                    for (var j=0; j < answers.length; j++){
+                        var answer = answers[j];
+                        if (answer.question == question._id){
+                            numericAnswers[cont] = answer.answer;
+                            cont++;
+                        }
+                    }
+                    //calculate the min, max, number of lines, and step
+                    var min = Math.min.apply(Math, numericAnswers);
+                    var max = Math.max.apply(Math, numericAnswers);
+                    var numberOfLines = max - min + 1;
+                    var step = 1;
+                    if (numberOfLines > maxNumberOfLines){
+                        numberOfLines = maxNumberOfLines;
+                        step = Math.ceil((max-min + 1)/maxNumberOfLines);
+                    }
 
-                } else if (question.type == "shortAnswer"){
 
-                } else if (question.type == "longAnswer"){
+                    var data = [numberOfLines];
+                    if (step == 1){
+                        for (var k = 0; k<numberOfLines ; k++){
+                            data[k] = [min+k*step - step/2,0];
+                        }
+                        for (var k=0; k< numericAnswers.length; k++){
+                            for (var l =1; l <= numberOfLines ; l++){
+                                if (numericAnswers[k] < min + l*step - step/2){
+                                    data[l-1][1]++;
+                                    break;
+                                }
+                            }
+
+                        }
+                    } else{
+                        for (var k = 0; k<numberOfLines ; k++){
+                            data[k] = [min+k*step,0];
+                        }
+                        for (var k=0; k< numericAnswers.length; k++){
+                            for (var l =1; l <= numberOfLines ; l++){
+                                if (numericAnswers[k] < min + l*step){
+                                    data[l-1][1]++;
+                                    break;
+                                }
+                            }
+
+                        }
+                    }
+                    
+                    questionData[i] = data;
+                    questionSteps[i] = step;
+
 
                 }
             }
+
+            
+
+            for (var i=0; i<questions.length ; i++){
+                var question = questions[i];
+                
+                $('#show-report-'+question._id).on('click',{id: question._id} , function (event){
+                    var data = event.data;
+                    var body = $('#question-summary-'+data.id);
+                    if (body.hasClass('hide')){
+                        $('#icon-'+data.id).attr('class', 'fa fa-minus');
+                        body.removeClass('hide');
+                    } else {
+                        $('#icon-'+data.id).attr('class', 'fa fa-plus');
+                        body.addClass('hide');
+                    }
+                    
+                });
+                if (question.type == "multipleChoice" || question.type == "yesNo"){
+                    $('#show-report-'+question._id).on('click',{id: question._id, cont: i} , function (event){
+                        var data = event.data;
+                        
+                        plotPieGraph(data.id, data.cont);
+                        
+                    });
+                }
+                if (question.type == "numeric"){
+                    $('#show-report-'+question._id).on('click',{id: question._id, cont: i} , function (event){
+                        var data = event.data;
+                        
+                        plotBarGraph(data.id, data.cont);
+                        
+                    });
+                }
+
+            }
+
+
+
         });
     </script>
 	<% include ../../scripts %>
-
 
 
 </body>
