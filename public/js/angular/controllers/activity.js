@@ -11,6 +11,7 @@ angular.module('app.controllers')
     $scope.id;
 
     $scope.error = null;
+    $scope.success = null;
 
     $scope.MULTIPLE_CHOICE = 'multipleChoice';
     $scope.YES_NO = "yesNo";
@@ -23,8 +24,6 @@ angular.module('app.controllers')
         var question;
         obj = JSON.parse(q);
         for(var i = 0; i < obj.length; ++i){
-           //do something with obj[i]
-           console.log(obj[i]._id);
            question = createExistingQuestion(obj[i].questionName, obj[i].type, obj[i].choices);
            if(question){
             $scope.questions.push(question);
@@ -32,11 +31,38 @@ angular.module('app.controllers')
         }
     };
 
-    $scope.setID = function(template){
-        obj = JSON.parse(template);
-        console.log(obj._id);
-        $scope.id = obj._id;
-        console.log($scope.id);
+    $scope.addTemplate = function(t){
+        template = JSON.parse(t);
+        //get questions from template
+        $http({
+            method: 'GET',
+            url: '/teacher/templates/'+template._id+'/questions',
+            data: {
+            }
+        }).then(function successCallback(response) {
+            obj = response.data;
+            // obj = JSON.parse(response.data);
+            // console.log(obj);
+            for(var i = 0; i < obj.length; ++i){
+               question = createExistingQuestion(obj[i].questionName, obj[i].type, obj[i].choices);
+               if(question){
+                $scope.questions.push(question);
+               }
+            }
+
+
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            $scope.error = "Error: Hubo un problema conectándose con el servidor. Intente denuevo";
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+    };
+
+    $scope.setID = function(t){
+        template = JSON.parse(t);
+        $scope.id = template._id;
     }
 
     //Recieves a strings that represents a JSON.
@@ -220,6 +246,7 @@ angular.module('app.controllers')
             }
         }).then(function successCallback(response) {
           // $window.location.href = response.data.redirect;
+          $scope.success = "Se ha guardado la planilla";
 
 
             // this callback will be called asynchronously
@@ -285,6 +312,7 @@ angular.module('app.controllers')
             }
         }).then(function successCallback(response) {
           // $window.location.href = response.data.redirect;
+            $scope.success = "Se ha guardado la planilla";
 
 
             // this callback will be called asynchronously

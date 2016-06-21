@@ -39,7 +39,7 @@
                 <div class="list-group">
                     <% for (var k=0; k< templates.length; k++) { %> 
                         <% var template = templates[k]; %>
-                        <li class="list-group-item pressable">
+                        <li class="list-group-item pressable" ng-click="addTemplate('<%= JSON.stringify(template) %>')">
                             <i class="fa fa-asterisk fa-fw"></i> <%= template.name %>
                         </li>
                     <% } %>

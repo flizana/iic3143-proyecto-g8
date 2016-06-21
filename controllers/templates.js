@@ -222,4 +222,26 @@ exports.createTemplate = function(req, res) {
 
         });
     });
+
+
+};
+
+exports.getTemplateQuestions = function(req, res){
+    var user = req.user;
+
+
+    Template.findById(req.params.template_id, function(err, template){
+        if (err)
+            throw err;
+
+        Question.find({
+            '_id': {
+                $in: template.questions
+            }
+        }, function(err, questions){
+
+            res.send(JSON.stringify(questions));
+        });
+    });
+
 };
