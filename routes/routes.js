@@ -197,6 +197,10 @@ module.exports = function(app, passport) {
         templateController.getTemplate(req, res);
     });
 
+    app.delete('/teacher/templates/:template_id', isLoggedInAsTeacher, function(req, res) {
+        templateController.deleteTemplate(req, res);
+    });
+
     app.get('/teacher/templates/:template_id/questions', isLoggedInAsTeacher, function(req, res) {
         templateController.getTemplateQuestions(req, res);
     });

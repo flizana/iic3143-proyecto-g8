@@ -3,6 +3,8 @@
 var Question = require('../models/question');
 var Template = require('../models/template');
 var Course = require('../models/course');
+var ObjectId = require('mongoose').Types.ObjectId;
+var Teacher = require('../models/teacher');
 
 exports.getAllTemplates = function(req, res){
 	var user = req.user;
@@ -146,9 +148,6 @@ exports.editTemplate = function(req, res) {
                 if (err)
                     throw err;
 
-                // assign template to teacher
-                user.templates.push(template);
-
                 // save user
                 user.save(function(err) {
                     if (err)
@@ -224,6 +223,22 @@ exports.createTemplate = function(req, res) {
     });
 
 
+};
+
+exports.deleteTemplate = function(req, res){
+    var user = req.user;
+    Teacher.findOneAndUpdate({ _id: user._id}, {$pull: {templates: req.params.template_id}}, function(err, data){
+        if(err) {
+          return res.status(500).json({'error' : 'error eliminando planilla'});
+        }
+
+        return res.status(200).send({
+            success: "OK",
+            redirect: ("/teacher/templates")
+        });
+
+    });
+    // user.update({$pull : {"templates": new ObjectId(req.params.template_id) }},false,true);
 };
 
 exports.getTemplateQuestions = function(req, res){

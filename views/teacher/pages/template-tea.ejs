@@ -41,7 +41,10 @@
                                 </form>
                             </div>
                             <div class="pull-right">
-                                <button class="btn btn-default" ng-click = "editTemplate()">Guardar Planilla</button>
+                                <button class="btn btn-success" ng-click = "editTemplate()">Guardar Planilla</button>
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn btn-danger" ng-click = "deleteTemplate()">Eliminar Planilla</button>
                             </div>
                             <h6 ng-if="error" class = "error">
                               {{ error}}
@@ -87,7 +90,11 @@
                                 No hay preguntas. Elija bajo 'Agregar Pregunta' que tipo de pregunta desea agregar.
                             </h6>
                             <div class="pull-right">
-                                <button class="btn btn-default" ng-click = "editTemplate()">Guardar Planilla</button>                            </div>
+                                <button class="btn btn-success" ng-click = "editTemplate()">Guardar Planilla</button>
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn btn-danger" ng-click = "deleteTemplate()">Eliminar Planilla</button>
+                            </div>
                             <h6 ng-if="error" class = "error">
                               {{ error}}
                             </h6>

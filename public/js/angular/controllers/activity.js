@@ -324,6 +324,28 @@ angular.module('app.controllers')
         });
     };
 
+    $scope.deleteTemplate = function(){
+
+        $http({
+            method: 'DELETE',
+            url: '/teacher/templates/'+$scope.id,
+            data: {
+            }
+        }).then(function successCallback(response) {
+          // $window.location.href = response.data.redirect;
+            $window.location.href = response.data.redirect;
+
+
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            $scope.error = "Error: Hubo un problema conectándose con el servidor. Intente denuevo";
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+
+    };
+
     //########################################
     // NOT SCOPE FUNCTIONS ###################
     //########################################
