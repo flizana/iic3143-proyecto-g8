@@ -12,7 +12,8 @@ var teacherSchema = mongoose.Schema({
 	school: String,
 	profilePicturePath: String,
 	isStudent: Boolean,
-	courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
+	courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+	templates: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Template' }]
 });
 
 // methods ======================

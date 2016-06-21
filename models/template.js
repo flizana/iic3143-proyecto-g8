@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var templateSchema = mongoose.Schema({
 	name: String,
-	description: String,
+	teacher: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' },
 	questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
 	createdAt: Date
 });

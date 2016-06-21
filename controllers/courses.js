@@ -95,9 +95,7 @@ exports.getTeacherCourse = function(req, res) {
         });
 
 
-    }).sort({
-        name: 1
-    });
+    }).sort({name: 1});
 
 };
 
@@ -128,7 +126,7 @@ exports.searchCourse = function(req, res) {
                 courses_searched: courses_searched,
                 courses: courses
             });
-        });
+        }).sort({ name: 1 });
 
     });
 };

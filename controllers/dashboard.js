@@ -13,7 +13,6 @@ exports.getStudentDashboard = function (req, res){
 
 	// populate courses
 	Course.find({
-
 		'_id': { $in: user.courses }
 	}, function (err, courses){
 		if (err)
@@ -23,9 +22,7 @@ exports.getStudentDashboard = function (req, res){
 			user: user,
 			courses: courses
 		});
-	}).sort({name: 1}).exec(function(err, docs){
-
-	});
+	}).sort({name: 1});
 };
 
 exports.editStudentProfile = function (req, res){
@@ -112,9 +109,7 @@ exports.getTeacherDashboard = function (req, res){
 			user: user,
 			courses: courses
 		});
-	}).sort({name: 1}).exec(function(err, docs){
-
-	});
+	}).sort({name: 1});
 };
 
 exports.editTeacherProfile = function (req, res){

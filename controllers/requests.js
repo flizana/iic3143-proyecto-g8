@@ -119,6 +119,8 @@ exports.requestsOfStudent = function(req, res) {
                 requests: requests
             });
         });
+    }).sort({
+        name: 1
     });
 
 };

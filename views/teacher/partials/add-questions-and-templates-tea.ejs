@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-question fa-fw"></i> Agregar Pregunta
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item pressable" ng-click="addQuestion(MULTIPLE_CHOICE)">
+                        <i class="fa fa-asterisk fa-fw"></i> Pregunta de Alternativas
+                    </li>
+                    <li class="list-group-item pressable" ng-click="addQuestion(YES_NO)">
+                        <i class="fa fa-asterisk fa-fw"></i> Si o No
+                    </li>
+                    <li class="list-group-item pressable" ng-click="addQuestion(NUMERIC)">
+                        <i class="fa fa-asterisk fa-fw"></i> Numerica
+                    </li>
+                    <li class="list-group-item pressable" ng-click="addQuestion(SHORT_ANSWER)">
+                        <i class="fa fa-asterisk fa-fw"></i> Respuesta Corta
+                    </li>
+                    <li class="list-group-item pressable" ng-click="addQuestion(LONG_ANSWER)">
+                        <i class="fa fa-asterisk fa-fw"></i> Comentario
+                    </li>
+                </ul>
+            </div>
+            <!-- /.panel-body -->
+
+        </div>
+
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-table fa-fw"></i> Planillas
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <% for (var k=0; k< templates.length; k++) { %> 
+                        <% var template = templates[k]; %>
+                        <li class="list-group-item pressable">
+                            <i class="fa fa-asterisk fa-fw"></i> <%= template.name %>
+                        </li>
+                    <% } %>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+</div>

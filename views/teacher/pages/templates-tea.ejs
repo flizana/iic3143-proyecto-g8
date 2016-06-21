@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../../head %>
+	<title>FeedMe | Planillas</title>
+
+	<!-- Custom CSS Stylesheet -->
+
+</head>
+<body>
+	<% include ../partials/navbar-tea %>
+
+	 <div id="page-wrapper">
+
+
+	 
+		 <div class="row">
+		    <div class="col-lg-12">
+		        <h1 class="page-header">Planillas</h1>
+		    </div>
+		                <!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		
+
+		 <div class="row">
+		    <div class="col-lg-8">
+		        <div class="panel panel-default">
+		            <div class="panel-heading">
+		                <h3 class="panel-title pull-left">Planillas</h3>
+		                <a href="/teacher/templates/new" class="btn btn-default pull-right">
+		                    <i class="fa fa-plus"></i>
+		                </a>
+		                <div class="clearfix"></div>
+		            </div>
+		            <div class="panel-body">
+		            	<% if (templates.length == 0){ %>
+		            		<div class="alert alert-warning alert-dismissible">
+		            			<button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+		            				<span aria-hidden="true">&times;</span>
+		            			</button>
+		            			Usted todavía no tiene planillas.
+		            		</div>
+		            	<% } %>
+		            	<% for (var i = 0; i < templates.length; i++){ %>
+		                    <% var template = templates[i]; %>
+			                    <div class="alert alert-info">
+			                        <a href="/teacher/templates/<%= template._id %>" class="alert-link pull-left"><%= template.name %></a>
+			                        <div class="clearfix"></div>
+			                	</div>
+		                <% } %>
+		            </div>
+		        </div>
+		    </div>
+
+		</div>
+
+
+
+    </div>
+
+	<% include ../../scripts %>
+
+
+
+</body>
+</html>

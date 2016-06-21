@@ -7,6 +7,7 @@ var Question = require('../models/question');
 var Student = require('../models/student');
 var Answer = require('../models/answer');
 var StudentAnswer = require('../models/studentAnswer');
+var Template = require('../models/template');
 
 
 exports.getNewActivity = function(req, res) {
@@ -27,11 +28,21 @@ exports.getNewActivity = function(req, res) {
             if (err)
                 throw err;
 
-            res.render('teacher/pages/new-activity', {
-                user: user,
-                courses: courses,
-                course: course
-            });
+            Template.find({
+                '_id':{
+                    $in: user.templates
+                }
+            }, function (err, templates) {
+                if (err)
+                    throw err;
+
+                res.render('teacher/pages/new-activity', {
+                    user: user,
+                    courses: courses,
+                    course: course,
+                    templates: templates
+                });
+            }).sort({name: 1});
         });
     }).sort({name: 1});
 };
@@ -102,6 +113,8 @@ exports.createActivity = function(req, res) {
         });
     });
 };
+
+
 
 exports.getStudentActivity = function(req,res){
     var user = req.user;

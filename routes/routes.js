@@ -7,6 +7,7 @@ var dashboardController = require('../controllers/dashboard');
 var courseController = require('../controllers/courses');
 var activityController = require('../controllers/activities');
 var requestController = require('../controllers/requests');
+var templateController = require('../controllers/templates');
 
 module.exports = function(app, passport) {
 
@@ -179,6 +180,31 @@ module.exports = function(app, passport) {
     app.put('/requests/reject/:id', isLoggedInAsTeacher, function(req, res) {
       requestController.rejectRequest(req,res);
     });
+
+    // =====================================
+    // TEA. TEMPLATES  =====================
+    // =====================================
+
+    app.get('/teacher/templates', isLoggedInAsTeacher, function(req, res) {
+        templateController.getAllTemplates(req, res);
+    });
+
+    app.get('/teacher/templates/new', isLoggedInAsTeacher, function(req, res) {
+        templateController.getNewTemplate(req, res);
+    });
+
+    app.get('/teacher/templates/:template_id', isLoggedInAsTeacher, function(req, res) {
+        templateController.getTemplate(req, res);
+    });
+
+    app.put('/teacher/templates/:template_id', isLoggedInAsTeacher, function(req, res) {
+        templateController.editTemplate(req, res);
+    });
+
+    app.post('/teacher/templates/create', isLoggedInAsTeacher, function(req, res) {
+        templateController.createTemplate(req, res);
+    });
+
     // =====================================
     // LOGOUT  =============================
     // =====================================
