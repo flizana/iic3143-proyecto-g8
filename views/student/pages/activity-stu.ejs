@@ -1,98 +1,115 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<% include ../../head %>
-	<title>FeedMe | <%= activity.name %></title>
+		<title>FeedMe |
+			<%= activity.name %>
+		</title>
 
-	<!-- Custom CSS Stylesheet -->
-	
+		<!-- Custom CSS Stylesheet -->
+
 </head>
+
 <body>
 	<% include ../partials/navbar-stu %>
 
-	 <div id="page-wrapper">
+		<div id="page-wrapper">
 
-	 	<div class="row">
-		    <div class="col-lg-12">
-		        <h1 class="page-header"><%= course.name %></h1>
-		    </div>
-		</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header"><%= course.name %></h1>
+				</div>
+			</div>
 
-		<div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <h3 class="panel-title pull-left"><%= activity.name %></h3>
-                        <div class="pull-right">
-                            <button type="submit" id="top-form-submit-btn" form="answer-form" class="btn btn-default">Enviar Respuestas</button>
-                        </div>
-                        <!-- <h6 ng-if="error" class = "error">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading clearfix">
+							<h3 class="panel-title pull-left"><%= activity.name %></h3>
+							<div class="pull-right">
+								<button type="submit" id="top-form-submit-btn" form="answer-form" class="btn btn-default">Enviar Respuestas</button>
+							</div>
+							<!-- <h6 ng-if="error" class = "error">
                           {{ error}}
                         </h6> -->
-                    </div>
+						</div>
 
-					<div class="panel-body">
-			        	<form id="answer-form" method="post" action="/student/courses/<%= course._id %>/activity/<%= activity._id %>/answer">
-			        		<% for (var i = 0; i < questions.length; i++){ %>
-			                	<% var question = questions[i]; %>
-			                	<input type="hidden" name="<%= i %>question" value="<%= question._id %>">
-			                	<div class="form-group">
-			                		<label>Pregunta <%= i+1 %>: </label>
-			                		<label><%= question.questionName %></label>
+						<div class="panel-body">
+							<form id="answer-form" method="post" action="/student/courses/<%= course._id %>/activity/<%= activity._id %>/answer">
+								<% for (var i = 0; i < questions.length; i++){ %>
+									<% var question = questions[i]; %>
+										<input type="hidden" name="<%= i %>question" value="<%= question._id %>">
+										<div class="form-group">
+											<label>Pregunta
+												<%= i+1 %>: </label>
+											<label>
+												<%= question.questionName %>
+											</label>
 
-			                		<% if (question.type == "multipleChoice"){ %>
-			                        	<% for (var j = 0 ; j < question.choices.length; j++){ %>
-			                        		<% var choice = question.choices[j]; %>
-				                        	<div class="radio">
-				                            	<label>
-				                                	<input type="radio" name="<%= i %>answer" value="<%= choice.value %>"><%= choice.value %>
-				                            	</label>
-				                        	</div>
-			                        	<% } %>
-				            		<% } %>
+											<% if (question.type == "multipleChoice"){ %>
+												<div class= "answer">
+												<% for (var j = 0 ; j < question.choices.length; j++){ %>
+													<% var choice = question.choices[j]; %>
+														<div class="radio">
+															<label>
+																<input type="radio" name="<%= i %>answer" value="<%= choice.value %>">
+																<%= choice.value %>
+															</label>
+														</div>
+													<% } %>
+												</div>
+										<% } %>
 
-				            		<% if (question.type == "yesNo"){ %>
-				            			<% for (var j = 0; j < question.choices.length; j++){ %>
-				            				<% var choice = question.choices[j]; %>
-				            				<div class="radio">
-				            					<label>
-				            						<input type="radio" name="<%= i %>answer" value="<%= choice.value %>"><%= choice.value %>
-				            					</label>
-				            				</div>
-				            			<% } %>
-				            		<% } %>
+																<% if (question.type == "yesNo"){ %>
+																	<div class= "answer">
+																	<% for (var j = 0; j < question.choices.length; j++){ %>
+																		<% var choice = question.choices[j]; %>
+																			<div class="radio">
+																				<label>
+																					<input type="radio" name="<%=i%>answer" value="<%= choice.value %>">
+																					<%= choice.value %>
+																				</label>
+																			</div>
+																			<% } %>
+																		</div>
+																		<% } %>
 
-				            		<% if (question.type == "shortAnswer"){ %>
-				                        <input class="form-control" type="text" name="<%= i %>answer">
-				            		<% } %>
+																					<% if (question.type == "shortAnswer"){ %>
+																						<input class="answer form-control" type="text" name="<%= i %>answer">
+																						<% } %>
 
-				            		<% if (question.type == "numeric"){ %>
-				            			<input class="form-control" type="number" name="<%= i %>answer">
-				            		<% } %>
+																							<% if (question.type == "numeric"){ %>
+																								<input class="answer form-control" type="number" name="<%= i %>answer">
+																								<% } %>
 
-				            		<% if (question.type == "longAnswer"){ %>
-				                        <textarea class="form-control" rows="5" name="<%= i %>answer"></textarea>
-				            		<% } %>
-			            		</div>
-			            	<% } %>
+																									<% if (question.type == "longAnswer"){ %>
+																										<textarea class="answer form-control" rows="5" name="<%= i %>answer"></textarea>
+																										<% } %>
 
-			            	<div class="pull-right">
-                            	<input id="bottom-form-submit-btn" type="submit" class="btn btn-default" value="Enviar Respuestas">
-                        	</div>
-                    	</div>
-			        </div> <!-- panel body-->
-			    </div>
-		    </div>
-	    </div>
-    </div>
-    <% include ../../scripts %>
+										</div>
+										<% } %>
 
-    <script type="text/javascript">
-    	$(document).ready(function (){
+											<div class="pull-right">
+												<input id="bottom-form-submit-btn" type="submit" class="btn btn-default" value="Enviar Respuestas">
+											</div>
+						</div>
+					</div>
+					<!-- panel body-->
+				</div>
+			</div>
+		</div>
+		</div>
+		<% include ../../scripts %>
 
-    	});	
-    </script>
+			<script type="text/javascript">
+				$(document).ready(function() {});
+			</script>
 
-	
+			<script src="/js/respondActivity.js">
+			</script>
+
+
 </body>
+
 </html>
