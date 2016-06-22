@@ -62,6 +62,9 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// set environment
+app.set('env', 'production');
+
 // error handlers
 
 // development error handler
@@ -81,7 +84,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
-    message: err.message,
+    message: err.status,
     error: {}
   });
 });
