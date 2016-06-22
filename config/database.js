@@ -9,5 +9,5 @@ module.exports = {
 
 // Production
 module.exports = {
-	'url' : 'mongodb://dsw8.ing.puc.cl:27017/feedme'
+	'url' : 'mongodb://dsw8.ing.puc.cl:27017/test'
 };
