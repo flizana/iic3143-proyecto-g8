@@ -1,16 +1,16 @@
 // config/images.js
 
-var sharp = require('sharp');
+// var sharp = require('sharp');
 var fs = require('fs');
 
-exports.resizeImage = function (path, outputPath, dimX, dimY, callback){
-	sharp(path).resize(dimX, dimY).toFile(outputPath, function (err){
-		if (err)
-			callback(err);
+// exports.resizeImage = function (path, outputPath, dimX, dimY, callback){
+// 	sharp(path).resize(dimX, dimY).toFile(outputPath, function (err){
+// 		if (err)
+// 			callback(err);
 
-		callback(null);
-	});
-};
+// 		callback(null);
+// 	});
+// };
 
 exports.changeFileLocation = function (path, outputPath, callback){
 	fs.rename(path, outputPath, function (err){

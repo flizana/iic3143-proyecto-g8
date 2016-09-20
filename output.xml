@@ -1,0 +1,2324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20160920 18:38:20.457" generator="Robot 3.0 (Python 2.7.11 on win32)">
+<suite source="C:\Users\Agustin\Desktop\universidad\10\Testing\Tarea\iic3143-proyecto-g8\Tests.rst" id="s1" name="Tests">
+<test id="s1-t1" name="Teacher can create an account and will be automatically logged in">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:20.576" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:38:20.655" starttime="20160920 18:38:20.574"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:20.655" starttime="20160920 18:38:20.574"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:38:20.656" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:38:26.608" starttime="20160920 18:38:20.655"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:26.625" starttime="20160920 18:38:26.609"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:26.625" starttime="20160920 18:38:20.655"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:26.625" starttime="20160920 18:38:20.574"></status>
+</kw>
+<kw name="Create Valid Teacher">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:26.632" starttime="20160920 18:38:26.626"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:26.632" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:38:26.665" starttime="20160920 18:38:26.632"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:26.999" starttime="20160920 18:38:26.666"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:27.000" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:38:27.066" starttime="20160920 18:38:27.000"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:27.067" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:38:27.143" starttime="20160920 18:38:27.067"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:27.144" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:38:27.222" starttime="20160920 18:38:27.144"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:27.223" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:38:27.298" starttime="20160920 18:38:27.222"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:27.298" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:38:27.374" starttime="20160920 18:38:27.298"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:27.375" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:38:27.458" starttime="20160920 18:38:27.374"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:27.459" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:38:27.500" starttime="20160920 18:38:27.459"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:27.500" starttime="20160920 18:38:26.665"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:27.501" starttime="20160920 18:38:26.625"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>${TEACHER-FIRSTNAME} ${TEACHER-LASTNAME}</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:28.049" starttime="20160920 18:38:27.501"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:38:31.163" starttime="20160920 18:38:28.050"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:31.164" critical="yes" starttime="20160920 18:38:20.572"></status>
+</test>
+<test id="s1-t2" name="Student can create an account and will be automatically logged in">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:31.177" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:38:31.248" starttime="20160920 18:38:31.173"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:31.248" starttime="20160920 18:38:31.173"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:38:31.249" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:38:36.690" starttime="20160920 18:38:31.248"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:36.720" starttime="20160920 18:38:36.691"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:36.720" starttime="20160920 18:38:31.248"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:36.720" starttime="20160920 18:38:31.172"></status>
+</kw>
+<kw name="Create Valid Student">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:36.735" starttime="20160920 18:38:36.721"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:36.735" level="INFO">Clicking element 'xpath=//a[@href='/student']'.</msg>
+<status status="PASS" endtime="20160920 18:38:36.770" starttime="20160920 18:38:36.735"></status>
+</kw>
+<kw name="Create Student">
+<arguments>
+<arg>${STUDENT-FIRSTNAME}</arg>
+<arg>${STUDENT-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${STUDENT-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:37.106" starttime="20160920 18:38:36.771"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:37.106" level="INFO">Typing text 'Francisco' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:38:37.172" starttime="20160920 18:38:37.106"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:37.172" level="INFO">Typing text 'Saldias' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:38:37.249" starttime="20160920 18:38:37.172"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:37.249" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:38:37.327" starttime="20160920 18:38:37.249"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:37.327" level="INFO">Typing text 'baboon@babs.bab' into text field 'xpath=//form[@action='/student/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:38:37.407" starttime="20160920 18:38:37.327"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:37.408" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/student/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:38:37.482" starttime="20160920 18:38:37.407"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:37.483" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:38:37.569" starttime="20160920 18:38:37.483"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:37.570" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:38:37.610" starttime="20160920 18:38:37.570"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:37.610" starttime="20160920 18:38:36.770"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:37.610" starttime="20160920 18:38:36.721"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>${STUDENT-FIRSTNAME} ${STUDENT-LASTNAME}</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:38.210" starttime="20160920 18:38:37.611"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:38:41.281" starttime="20160920 18:38:38.210"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:41.282" critical="yes" starttime="20160920 18:38:31.169"></status>
+</test>
+<test id="s1-t3" name="Can't create user with used email">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:41.296" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:38:41.409" starttime="20160920 18:38:41.291"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:41.409" starttime="20160920 18:38:41.291"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:38:41.410" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:38:47.548" starttime="20160920 18:38:41.410"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:47.564" starttime="20160920 18:38:47.548"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:47.564" starttime="20160920 18:38:41.410"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:47.565" starttime="20160920 18:38:41.290"></status>
+</kw>
+<kw name="Create Valid Teacher">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:47.571" starttime="20160920 18:38:47.566"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:47.572" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:38:47.607" starttime="20160920 18:38:47.572"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:47.962" starttime="20160920 18:38:47.608"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:47.963" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:38:48.037" starttime="20160920 18:38:47.962"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:48.038" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:38:48.113" starttime="20160920 18:38:48.037"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:48.114" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:38:48.191" starttime="20160920 18:38:48.113"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:48.192" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:38:48.272" starttime="20160920 18:38:48.191"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:48.273" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:38:48.353" starttime="20160920 18:38:48.272"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:48.354" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:38:48.441" starttime="20160920 18:38:48.353"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:48.441" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:38:48.484" starttime="20160920 18:38:48.441"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:48.484" starttime="20160920 18:38:47.607"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:48.485" starttime="20160920 18:38:47.565"></status>
+</kw>
+<kw name="Logout">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:49.005" starttime="20160920 18:38:48.485"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:49.005" level="INFO">Clicking element 'xpath=//a[@class='dropdown-toggle']'.</msg>
+<status status="PASS" endtime="20160920 18:38:49.040" starttime="20160920 18:38:49.005"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/logout']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:49.041" level="INFO">Clicking element 'xpath=//a[@href='/logout']'.</msg>
+<status status="PASS" endtime="20160920 18:38:49.084" starttime="20160920 18:38:49.040"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:49.085" starttime="20160920 18:38:48.485"></status>
+</kw>
+<kw name="Create Valid Teacher">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:49.374" starttime="20160920 18:38:49.086"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:49.375" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:38:49.409" starttime="20160920 18:38:49.375"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:49.692" starttime="20160920 18:38:49.410"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:49.694" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:38:49.785" starttime="20160920 18:38:49.693"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:49.786" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:38:49.853" starttime="20160920 18:38:49.786"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:49.853" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:38:49.923" starttime="20160920 18:38:49.853"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:49.923" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:38:50.019" starttime="20160920 18:38:49.923"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:50.019" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:38:50.105" starttime="20160920 18:38:50.019"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:50.105" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:38:50.178" starttime="20160920 18:38:50.105"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:50.179" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:38:50.214" starttime="20160920 18:38:50.178"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:50.214" starttime="20160920 18:38:49.409"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:50.214" starttime="20160920 18:38:49.085"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Email ya está en uso. Por favor intente con otro email.</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:50.515" starttime="20160920 18:38:50.215"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:38:53.605" starttime="20160920 18:38:50.515"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:53.606" critical="yes" starttime="20160920 18:38:41.288"></status>
+</test>
+<test id="s1-t4" name="Can't create user if password doesn't match confirmation">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:38:53.613" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:38:53.689" starttime="20160920 18:38:53.611"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:53.689" starttime="20160920 18:38:53.610"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:38:53.690" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:38:59.629" starttime="20160920 18:38:53.690"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:38:59.645" starttime="20160920 18:38:59.629"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:59.645" starttime="20160920 18:38:53.690"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:38:59.646" starttime="20160920 18:38:53.610"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:38:59.646" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:38:59.682" starttime="20160920 18:38:59.646"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>differentPassword</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:00.042" starttime="20160920 18:38:59.683"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:00.042" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:39:00.105" starttime="20160920 18:39:00.042"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:00.106" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:39:00.184" starttime="20160920 18:39:00.106"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:00.185" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:39:00.267" starttime="20160920 18:39:00.185"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:00.268" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:00.346" starttime="20160920 18:39:00.268"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:00.346" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:00.419" starttime="20160920 18:39:00.346"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:00.420" level="INFO">Typing text 'differentPassword' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:39:00.508" starttime="20160920 18:39:00.419"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:00.508" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:39:00.549" starttime="20160920 18:39:00.508"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:00.549" starttime="20160920 18:38:59.682"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Contraseñas no coinciden. Por favor intente nuevamente.</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:00.857" starttime="20160920 18:39:00.550"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:03.948" starttime="20160920 18:39:00.858"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:03.948" critical="yes" starttime="20160920 18:38:53.609"></status>
+</test>
+<test id="s1-t5" name="Can't create user if all fields are not filled in">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:03.963" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:39:04.066" starttime="20160920 18:39:03.959"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:04.066" starttime="20160920 18:39:03.959"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:39:04.067" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:39:09.765" starttime="20160920 18:39:04.066"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:09.792" starttime="20160920 18:39:09.765"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:09.792" starttime="20160920 18:39:04.066"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:09.792" starttime="20160920 18:39:03.958"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:09.793" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:39:09.830" starttime="20160920 18:39:09.793"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${BLANK}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:10.166" starttime="20160920 18:39:09.831"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:10.167" level="INFO">Typing text '' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:39:10.227" starttime="20160920 18:39:10.167"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:10.227" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:39:10.300" starttime="20160920 18:39:10.227"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:10.301" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:39:10.382" starttime="20160920 18:39:10.300"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:10.383" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:10.459" starttime="20160920 18:39:10.383"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:10.460" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:10.532" starttime="20160920 18:39:10.459"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:10.532" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:39:10.614" starttime="20160920 18:39:10.532"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:10.615" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:39:10.656" starttime="20160920 18:39:10.614"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:10.656" starttime="20160920 18:39:09.830"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Por favor rellene todos los campos.</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:10.948" starttime="20160920 18:39:10.657"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:14.015" starttime="20160920 18:39:10.949"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:39:14.017" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:39:19.808" starttime="20160920 18:39:14.017"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:19.834" starttime="20160920 18:39:19.808"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:19.834" starttime="20160920 18:39:14.016"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:19.835" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:39:19.873" starttime="20160920 18:39:19.835"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${BLANK}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:20.214" starttime="20160920 18:39:19.875"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:20.215" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:39:20.299" starttime="20160920 18:39:20.214"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:20.299" level="INFO">Typing text '' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:39:20.370" starttime="20160920 18:39:20.299"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:20.371" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:39:20.447" starttime="20160920 18:39:20.370"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:20.448" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:20.522" starttime="20160920 18:39:20.448"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:20.523" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:20.596" starttime="20160920 18:39:20.522"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:20.596" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:39:20.679" starttime="20160920 18:39:20.596"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:20.680" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:39:20.721" starttime="20160920 18:39:20.680"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:20.721" starttime="20160920 18:39:19.874"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Por favor rellene todos los campos.</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:21.021" starttime="20160920 18:39:20.722"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:24.146" starttime="20160920 18:39:21.025"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:39:24.147" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:39:29.581" starttime="20160920 18:39:24.147"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:29.601" starttime="20160920 18:39:29.582"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:29.601" starttime="20160920 18:39:24.147"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:29.602" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:39:29.637" starttime="20160920 18:39:29.602"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${BLANK}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:30.002" starttime="20160920 18:39:29.638"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:30.003" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:39:30.106" starttime="20160920 18:39:30.003"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:30.107" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:39:30.178" starttime="20160920 18:39:30.106"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:30.179" level="INFO">Typing text '' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:39:30.245" starttime="20160920 18:39:30.179"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:30.246" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:30.319" starttime="20160920 18:39:30.245"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:30.319" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:30.392" starttime="20160920 18:39:30.319"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:30.393" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:39:30.466" starttime="20160920 18:39:30.392"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:30.466" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:39:30.518" starttime="20160920 18:39:30.466"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:30.518" starttime="20160920 18:39:29.638"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Por favor rellene todos los campos.</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:30.813" starttime="20160920 18:39:30.519"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:33.902" starttime="20160920 18:39:30.813"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:33.902" critical="yes" starttime="20160920 18:39:03.956"></status>
+</test>
+<test id="s1-t6" name="Teacher can login with correct credentials">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:33.908" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:39:33.970" starttime="20160920 18:39:33.906"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:33.970" starttime="20160920 18:39:33.906"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:39:33.971" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:39:39.630" starttime="20160920 18:39:33.970"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:39.645" starttime="20160920 18:39:39.630"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:39.645" starttime="20160920 18:39:33.970"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:39.645" starttime="20160920 18:39:33.906"></status>
+</kw>
+<kw name="Create Valid Teacher">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:39.652" starttime="20160920 18:39:39.646"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:39.653" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:39:39.686" starttime="20160920 18:39:39.652"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:40.086" starttime="20160920 18:39:39.687"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:40.086" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:39:40.151" starttime="20160920 18:39:40.086"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:40.152" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:39:40.225" starttime="20160920 18:39:40.151"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:40.226" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:39:40.306" starttime="20160920 18:39:40.225"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:40.306" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:40.383" starttime="20160920 18:39:40.306"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:40.383" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:40.460" starttime="20160920 18:39:40.383"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:40.460" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:39:40.546" starttime="20160920 18:39:40.460"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:40.546" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:39:40.586" starttime="20160920 18:39:40.546"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:40.586" starttime="20160920 18:39:39.686"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:40.586" starttime="20160920 18:39:39.646"></status>
+</kw>
+<kw name="Logout">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:41.131" starttime="20160920 18:39:40.587"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:41.132" level="INFO">Clicking element 'xpath=//a[@class='dropdown-toggle']'.</msg>
+<status status="PASS" endtime="20160920 18:39:41.164" starttime="20160920 18:39:41.131"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/logout']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:41.164" level="INFO">Clicking element 'xpath=//a[@href='/logout']'.</msg>
+<status status="PASS" endtime="20160920 18:39:41.208" starttime="20160920 18:39:41.164"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:41.208" starttime="20160920 18:39:40.586"></status>
+</kw>
+<kw name="Teacher Login">
+<arguments>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:41.494" starttime="20160920 18:39:41.209"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:41.494" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:39:41.527" starttime="20160920 18:39:41.494"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:41.811" starttime="20160920 18:39:41.527"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:41.812" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:41.877" starttime="20160920 18:39:41.811"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:41.878" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:41.964" starttime="20160920 18:39:41.877"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Iniciar Sesión']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:41.964" level="INFO">Clicking element 'xpath=//input[@value='Iniciar Sesión']'.</msg>
+<status status="PASS" endtime="20160920 18:39:42.006" starttime="20160920 18:39:41.964"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:42.006" starttime="20160920 18:39:41.209"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>${TEACHER-FIRSTNAME} ${TEACHER-LASTNAME}</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:42.372" starttime="20160920 18:39:42.007"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:45.462" starttime="20160920 18:39:42.373"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:45.464" starttime="20160920 18:39:45.463"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:45.464" critical="yes" starttime="20160920 18:39:33.905"></status>
+</test>
+<test id="s1-t7" name="Student can login with correct credentials">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:45.470" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:39:45.532" starttime="20160920 18:39:45.468"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:45.532" starttime="20160920 18:39:45.468"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:39:45.533" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:39:50.960" starttime="20160920 18:39:45.533"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:50.976" starttime="20160920 18:39:50.960"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:50.976" starttime="20160920 18:39:45.533"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:50.976" starttime="20160920 18:39:45.468"></status>
+</kw>
+<kw name="Create Valid Student">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:50.990" starttime="20160920 18:39:50.977"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:50.990" level="INFO">Clicking element 'xpath=//a[@href='/student']'.</msg>
+<status status="PASS" endtime="20160920 18:39:51.025" starttime="20160920 18:39:50.990"></status>
+</kw>
+<kw name="Create Student">
+<arguments>
+<arg>${STUDENT-FIRSTNAME}</arg>
+<arg>${STUDENT-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${STUDENT-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:51.374" starttime="20160920 18:39:51.026"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:51.376" level="INFO">Typing text 'Francisco' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:39:51.466" starttime="20160920 18:39:51.375"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:51.467" level="INFO">Typing text 'Saldias' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:39:51.543" starttime="20160920 18:39:51.466"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:51.543" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:39:51.620" starttime="20160920 18:39:51.543"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:51.620" level="INFO">Typing text 'baboon@babs.bab' into text field 'xpath=//form[@action='/student/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:51.696" starttime="20160920 18:39:51.620"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:51.697" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/student/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:51.771" starttime="20160920 18:39:51.696"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:51.772" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:39:51.853" starttime="20160920 18:39:51.772"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:51.854" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:39:51.895" starttime="20160920 18:39:51.853"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:51.896" starttime="20160920 18:39:51.025"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:51.896" starttime="20160920 18:39:50.977"></status>
+</kw>
+<kw name="Logout">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:52.563" starttime="20160920 18:39:51.896"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:52.563" level="INFO">Clicking element 'xpath=//a[@class='dropdown-toggle']'.</msg>
+<status status="PASS" endtime="20160920 18:39:52.595" starttime="20160920 18:39:52.563"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/logout']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:52.596" level="INFO">Clicking element 'xpath=//a[@href='/logout']'.</msg>
+<status status="PASS" endtime="20160920 18:39:52.637" starttime="20160920 18:39:52.595"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:52.637" starttime="20160920 18:39:51.896"></status>
+</kw>
+<kw name="Student Login">
+<arguments>
+<arg>${STUDENT-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:52.935" starttime="20160920 18:39:52.638"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:52.936" level="INFO">Clicking element 'xpath=//a[@href='/student']'.</msg>
+<status status="PASS" endtime="20160920 18:39:52.989" starttime="20160920 18:39:52.935"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/login']/fieldset/div/input[@name='email']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:53.277" starttime="20160920 18:39:52.989"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/login']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:53.278" level="INFO">Typing text 'baboon@babs.bab' into text field 'xpath=//form[@action='/student/login']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:39:53.344" starttime="20160920 18:39:53.277"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/login']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:53.344" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/student/login']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:39:53.427" starttime="20160920 18:39:53.344"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Iniciar Sesión']</arg>
+</arguments>
+<msg timestamp="20160920 18:39:53.428" level="INFO">Clicking element 'xpath=//input[@value='Iniciar Sesión']'.</msg>
+<status status="PASS" endtime="20160920 18:39:53.469" starttime="20160920 18:39:53.428"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:53.469" starttime="20160920 18:39:52.637"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>${STUDENT-FIRSTNAME} ${STUDENT-LASTNAME}</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:39:53.853" starttime="20160920 18:39:53.470"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:56.953" starttime="20160920 18:39:53.854"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:39:56.955" starttime="20160920 18:39:56.955"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:56.956" critical="yes" starttime="20160920 18:39:45.467"></status>
+</test>
+<test id="s1-t8" name="User can't login if it doesn't exist">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:39:56.969" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:39:57.077" starttime="20160920 18:39:56.964"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:39:57.077" starttime="20160920 18:39:56.964"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:39:57.078" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:40:02.944" starttime="20160920 18:39:57.078"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:02.967" starttime="20160920 18:40:02.944"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:02.967" starttime="20160920 18:39:57.078"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:02.967" starttime="20160920 18:39:56.963"></status>
+</kw>
+<kw name="Teacher Login">
+<arguments>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:02.976" starttime="20160920 18:40:02.969"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:02.977" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:40:03.016" starttime="20160920 18:40:02.976"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:03.401" starttime="20160920 18:40:03.016"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:03.402" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:40:03.516" starttime="20160920 18:40:03.401"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:03.517" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:40:03.609" starttime="20160920 18:40:03.516"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Iniciar Sesión']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:03.609" level="INFO">Clicking element 'xpath=//input[@value='Iniciar Sesión']'.</msg>
+<status status="PASS" endtime="20160920 18:40:03.651" starttime="20160920 18:40:03.609"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:03.651" starttime="20160920 18:40:02.968"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Credenciales inválidas</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:04.076" starttime="20160920 18:40:03.652"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:40:07.274" starttime="20160920 18:40:04.077"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:07.275" critical="yes" starttime="20160920 18:39:56.961"></status>
+</test>
+<test id="s1-t9" name="User can't login with wrong credentials">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:07.292" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:40:07.385" starttime="20160920 18:40:07.286"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:07.385" starttime="20160920 18:40:07.285"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:40:07.386" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:40:13.324" starttime="20160920 18:40:07.385"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:13.352" starttime="20160920 18:40:13.325"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:13.352" starttime="20160920 18:40:07.385"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:13.352" starttime="20160920 18:40:07.284"></status>
+</kw>
+<kw name="Create Valid Teacher">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:13.359" starttime="20160920 18:40:13.353"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:13.360" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:40:13.392" starttime="20160920 18:40:13.359"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:13.746" starttime="20160920 18:40:13.393"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:13.747" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:40:13.839" starttime="20160920 18:40:13.746"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:13.839" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:40:13.913" starttime="20160920 18:40:13.839"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:13.914" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:40:13.991" starttime="20160920 18:40:13.913"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:13.992" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:40:14.065" starttime="20160920 18:40:13.991"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:14.066" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:40:14.139" starttime="20160920 18:40:14.065"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:14.140" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:40:14.222" starttime="20160920 18:40:14.139"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:14.222" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:40:14.262" starttime="20160920 18:40:14.222"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:14.262" starttime="20160920 18:40:13.392"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:14.262" starttime="20160920 18:40:13.353"></status>
+</kw>
+<kw name="Logout">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:14.933" starttime="20160920 18:40:14.263"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:14.933" level="INFO">Clicking element 'xpath=//a[@class='dropdown-toggle']'.</msg>
+<status status="PASS" endtime="20160920 18:40:14.967" starttime="20160920 18:40:14.933"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/logout']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:14.968" level="INFO">Clicking element 'xpath=//a[@href='/logout']'.</msg>
+<status status="PASS" endtime="20160920 18:40:15.011" starttime="20160920 18:40:14.967"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:15.011" starttime="20160920 18:40:14.262"></status>
+</kw>
+<kw name="Teacher Login">
+<arguments>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>wrongPassword</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:15.299" starttime="20160920 18:40:15.012"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:15.300" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:40:15.332" starttime="20160920 18:40:15.299"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:15.620" starttime="20160920 18:40:15.332"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:15.621" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:40:15.687" starttime="20160920 18:40:15.620"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:15.688" level="INFO">Typing text 'wrongPassword' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:40:15.777" starttime="20160920 18:40:15.687"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Iniciar Sesión']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:15.777" level="INFO">Clicking element 'xpath=//input[@value='Iniciar Sesión']'.</msg>
+<status status="PASS" endtime="20160920 18:40:15.817" starttime="20160920 18:40:15.777"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:15.818" starttime="20160920 18:40:15.012"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Credenciales inválidas</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:16.156" starttime="20160920 18:40:15.818"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:40:19.233" starttime="20160920 18:40:16.157"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:19.234" critical="yes" starttime="20160920 18:40:07.281"></status>
+</test>
+<test id="s1-t10" name="Teacher can't login as student">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:19.254" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:40:19.362" starttime="20160920 18:40:19.247"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:19.363" starttime="20160920 18:40:19.247"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:40:19.363" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:40:25.083" starttime="20160920 18:40:19.363"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:25.107" starttime="20160920 18:40:25.084"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:25.108" starttime="20160920 18:40:19.363"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:25.108" starttime="20160920 18:40:19.246"></status>
+</kw>
+<kw name="Create Valid Teacher">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:25.116" starttime="20160920 18:40:25.109"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:25.117" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:40:25.158" starttime="20160920 18:40:25.116"></status>
+</kw>
+<kw name="Create Teacher">
+<arguments>
+<arg>${TEACHER-FIRSTNAME}</arg>
+<arg>${TEACHER-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:25.545" starttime="20160920 18:40:25.159"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:25.547" level="INFO">Typing text 'Patricio' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:40:25.661" starttime="20160920 18:40:25.546"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:25.662" level="INFO">Typing text 'Ortiz' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:40:25.758" starttime="20160920 18:40:25.661"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:25.760" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:40:25.847" starttime="20160920 18:40:25.758"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:25.848" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:40:25.923" starttime="20160920 18:40:25.847"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:25.924" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:40:25.998" starttime="20160920 18:40:25.923"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:25.999" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:40:26.083" starttime="20160920 18:40:25.998"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:26.083" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:40:26.127" starttime="20160920 18:40:26.083"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:26.127" starttime="20160920 18:40:25.158"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:26.127" starttime="20160920 18:40:25.109"></status>
+</kw>
+<kw name="Logout">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:26.656" starttime="20160920 18:40:26.128"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:26.658" level="INFO">Clicking element 'xpath=//a[@class='dropdown-toggle']'.</msg>
+<status status="PASS" endtime="20160920 18:40:26.696" starttime="20160920 18:40:26.657"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/logout']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:26.697" level="INFO">Clicking element 'xpath=//a[@href='/logout']'.</msg>
+<status status="PASS" endtime="20160920 18:40:26.741" starttime="20160920 18:40:26.696"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:26.741" starttime="20160920 18:40:26.128"></status>
+</kw>
+<kw name="Student Login">
+<arguments>
+<arg>${TEACHER-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:27.042" starttime="20160920 18:40:26.742"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:27.043" level="INFO">Clicking element 'xpath=//a[@href='/student']'.</msg>
+<status status="PASS" endtime="20160920 18:40:27.099" starttime="20160920 18:40:27.042"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/login']/fieldset/div/input[@name='email']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:27.413" starttime="20160920 18:40:27.099"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/login']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:27.414" level="INFO">Typing text 'apo@apo.apo' into text field 'xpath=//form[@action='/student/login']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:40:27.479" starttime="20160920 18:40:27.413"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/login']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:27.480" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/student/login']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:40:27.570" starttime="20160920 18:40:27.480"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Iniciar Sesión']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:27.571" level="INFO">Clicking element 'xpath=//input[@value='Iniciar Sesión']'.</msg>
+<status status="PASS" endtime="20160920 18:40:27.610" starttime="20160920 18:40:27.570"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:27.610" starttime="20160920 18:40:26.741"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Credenciales inválidas</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:27.912" starttime="20160920 18:40:27.611"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:40:31.011" starttime="20160920 18:40:27.913"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:31.012" critical="yes" starttime="20160920 18:40:19.242"></status>
+</test>
+<test id="s1-t11" name="Student can't login as teacher">
+<kw type="setup" name="Setup For Tests">
+<kw name="Clear Database">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>${DELETE DATABASE COMMAND}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:31.023" level="INFO">Running command 'mongo test --eval "db.dropDatabase();" 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20160920 18:40:31.125" starttime="20160920 18:40:31.019"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:31.125" starttime="20160920 18:40:31.019"></status>
+</kw>
+<kw name="Start FeedMe">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:3000/</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20160920 18:40:31.125" level="INFO">Opening browser 'gc' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20160920 18:40:36.866" starttime="20160920 18:40:31.125"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:36.888" starttime="20160920 18:40:36.867"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:36.888" starttime="20160920 18:40:31.125"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:36.888" starttime="20160920 18:40:31.018"></status>
+</kw>
+<kw name="Create Valid Student">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:36.906" starttime="20160920 18:40:36.889"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/student']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:36.907" level="INFO">Clicking element 'xpath=//a[@href='/student']'.</msg>
+<status status="PASS" endtime="20160920 18:40:36.942" starttime="20160920 18:40:36.906"></status>
+</kw>
+<kw name="Create Student">
+<arguments>
+<arg>${STUDENT-FIRSTNAME}</arg>
+<arg>${STUDENT-LASTNAME}</arg>
+<arg>${SCHOOL}</arg>
+<arg>${STUDENT-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>name=firstName</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:37.276" starttime="20160920 18:40:36.943"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=firstName</arg>
+<arg>${firstname}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:37.277" level="INFO">Typing text 'Francisco' into text field 'name=firstName'</msg>
+<status status="PASS" endtime="20160920 18:40:37.342" starttime="20160920 18:40:37.276"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=lastName</arg>
+<arg>${lastname}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:37.343" level="INFO">Typing text 'Saldias' into text field 'name=lastName'</msg>
+<status status="PASS" endtime="20160920 18:40:37.417" starttime="20160920 18:40:37.342"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=school</arg>
+<arg>${school}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:37.417" level="INFO">Typing text 'The Grange School' into text field 'name=school'</msg>
+<status status="PASS" endtime="20160920 18:40:37.495" starttime="20160920 18:40:37.417"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/register']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:37.496" level="INFO">Typing text 'baboon@babs.bab' into text field 'xpath=//form[@action='/student/register']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:40:37.573" starttime="20160920 18:40:37.495"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/student/register']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:37.573" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/student/register']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:40:37.649" starttime="20160920 18:40:37.573"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>name=confirmPassword</arg>
+<arg>${passwordConfirmation}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:37.650" level="INFO">Typing text 'p4SSw0rd.' into text field 'name=confirmPassword'</msg>
+<status status="PASS" endtime="20160920 18:40:37.736" starttime="20160920 18:40:37.649"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Registrarse']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:37.737" level="INFO">Clicking element 'xpath=//input[@value='Registrarse']'.</msg>
+<status status="PASS" endtime="20160920 18:40:37.776" starttime="20160920 18:40:37.737"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:37.776" starttime="20160920 18:40:36.942"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:37.777" starttime="20160920 18:40:36.889"></status>
+</kw>
+<kw name="Logout">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:38.346" starttime="20160920 18:40:37.777"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@class='dropdown-toggle']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:38.346" level="INFO">Clicking element 'xpath=//a[@class='dropdown-toggle']'.</msg>
+<status status="PASS" endtime="20160920 18:40:38.380" starttime="20160920 18:40:38.346"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/logout']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:38.381" level="INFO">Clicking element 'xpath=//a[@href='/logout']'.</msg>
+<status status="PASS" endtime="20160920 18:40:38.430" starttime="20160920 18:40:38.381"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:38.430" starttime="20160920 18:40:37.777"></status>
+</kw>
+<kw name="Teacher Login">
+<arguments>
+<arg>${STUDENT-EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:38.746" starttime="20160920 18:40:38.431"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//a[@href='/teacher']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:38.747" level="INFO">Clicking element 'xpath=//a[@href='/teacher']'.</msg>
+<status status="PASS" endtime="20160920 18:40:38.778" starttime="20160920 18:40:38.746"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:39.066" starttime="20160920 18:40:38.778"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:39.067" level="INFO">Typing text 'baboon@babs.bab' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='email']'</msg>
+<status status="PASS" endtime="20160920 18:40:39.132" starttime="20160920 18:40:39.066"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20160920 18:40:39.133" level="INFO">Typing text 'p4SSw0rd.' into text field 'xpath=//form[@action='/teacher/login']/fieldset/div/input[@name='password']'</msg>
+<status status="PASS" endtime="20160920 18:40:39.223" starttime="20160920 18:40:39.132"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@value='Iniciar Sesión']</arg>
+</arguments>
+<msg timestamp="20160920 18:40:39.223" level="INFO">Clicking element 'xpath=//input[@value='Iniciar Sesión']'.</msg>
+<status status="PASS" endtime="20160920 18:40:39.265" starttime="20160920 18:40:39.223"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:39.265" starttime="20160920 18:40:38.430"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Credenciales inválidas</arg>
+</arguments>
+<status status="PASS" endtime="20160920 18:40:39.592" starttime="20160920 18:40:39.266"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20160920 18:40:42.670" starttime="20160920 18:40:39.593"></status>
+</kw>
+<status status="PASS" endtime="20160920 18:40:42.672" critical="yes" starttime="20160920 18:40:31.016"></status>
+</test>
+<status status="PASS" endtime="20160920 18:40:42.679" starttime="20160920 18:38:20.459"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="11">Critical Tests</stat>
+<stat fail="0" pass="11">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="Tests" pass="11">Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
