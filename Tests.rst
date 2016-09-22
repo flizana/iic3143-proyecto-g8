@@ -99,6 +99,7 @@
         Wait Until Page Contains  Credenciales inválidas
 
     Create new form with all type of questions
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
@@ -110,6 +111,7 @@
         Wait Until Page Contains  Se ha guardado la planilla
 
     Allow form to have more than one of each type of question
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         :FOR  ${INDEX}  IN RANGE  1  3
@@ -122,6 +124,7 @@
         Wait Until Page Contains  Se ha guardado la planilla
 
     Multiplechoice question can't be created if not all fields are filled
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Multiplechoice Question  ${BLANK}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
@@ -138,6 +141,7 @@
         Submit Then Close Answer
 
     True or false question can't be created with empty fields
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         True Or False Question  ${BLANK}  ${OPTIONC}  1
@@ -146,30 +150,35 @@
         Submit Then Close Answer
 
     Numeric questions can't be created with empty fields
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Numeric Question  ${BLANK}  1
         Submit Then Close Answer
 
     Short answer questions can't be created with empty fields
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Short Answer Question  ${BLANK}  1
         Submit Then Close Answer
 
     Long answer questions can't be created with empty fields
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Long Answer Question  ${BLANK}  1
         Submit Then Close Answer
 
     Can't create new form with empty title
+        [Tags]  Forms
         Forms
         Short Answer Question  ${TITLE}  1
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
         Wait Until Page Contains  Error
 
     Edit form correctly
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Numeric Question  ${TITLE}  1
@@ -183,6 +192,7 @@
         Wait Until Page Contains  Se ha guardado la planilla
 
     Delete form correctly
+        [Tags]  Forms
         Forms
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Numeric Question  ${TITLE}  1
