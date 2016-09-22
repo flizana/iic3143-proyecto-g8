@@ -16,25 +16,30 @@
     #Creating Users
 
     Teacher can create an account and will be automatically logged in
+        [Tags]  Creating Users
         Create Valid Teacher
         Wait Until Page Contains  ${TEACHER-FIRSTNAME} ${TEACHER-LASTNAME}
 
     Student can create an account and will be automatically logged in
+        [Tags]  Creating Users
         Create Valid Student
         Wait Until Page Contains  ${STUDENT-FIRSTNAME} ${STUDENT-LASTNAME}
 
     Can't create user with used email
+        [Tags]  Creating Users
         Create Valid Teacher
         Logout
         Create Valid Teacher
         Wait Until Page Contains  Email ya está en uso. Por favor intente con otro email.
 
     Can't create user if password doesn't match confirmation
+        [Tags]  Creating Users
         Click Element  xpath=//a[@href='/teacher']
         Create Teacher  ${TEACHER-FIRSTNAME}  ${TEACHER-LASTNAME}  ${SCHOOL}  ${TEACHER-EMAIL}  ${PASSWORD}  differentPassword
         Wait Until Page Contains  Contraseñas no coinciden. Por favor intente nuevamente.
 
     Can't create user if all fields are not filled in
+        [Tags]  Creating Users
         Click Element  xpath=//a[@href='/teacher']
         Create Teacher  ${BLANK}  ${TEACHER-LASTNAME}  ${SCHOOL}  ${TEACHER-EMAIL}  ${PASSWORD}  ${PASSWORD}
         Wait Until Page Contains  Por favor rellene todos los campos.
@@ -52,6 +57,7 @@
     #Logging in
 
     Teacher can login with correct credentials
+        [Tags]  Logging In
         Create Valid Teacher
         Logout
         Teacher Login  ${TEACHER-EMAIL}  ${PASSWORD}
@@ -59,6 +65,7 @@
         Close Browser
 
     Student can login with correct credentials
+        [Tags]  Logging In
         Create Valid Student
         Logout
         Student Login  ${STUDENT-EMAIL}  ${PASSWORD}
@@ -66,22 +73,26 @@
         Close Browser
 
     User can't login if it doesn't exist
+        [Tags]  Logging In
         Teacher Login  ${TEACHER-EMAIL}  ${PASSWORD}
         Wait Until Page Contains  Credenciales inválidas
 
     User can't login with wrong credentials
+        [Tags]  Logging In
         Create Valid Teacher
         Logout
         Teacher Login  ${TEACHER-EMAIL}  wrongPassword
         Wait Until Page Contains  Credenciales inválidas
 
     Teacher can't login as student
+        [Tags]  Logging In
         Create Valid Teacher
         Logout
         Student Login  ${TEACHER-EMAIL}  ${PASSWORD}
         Wait Until Page Contains  Credenciales inválidas
 
     Student can't login as teacher
+        [Tags]  Logging In
         Create Valid Student
         Logout
         Teacher Login  ${STUDENT-EMAIL}  ${PASSWORD}
