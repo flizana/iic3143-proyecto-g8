@@ -98,9 +98,12 @@
         Teacher Login  ${STUDENT-EMAIL}  ${PASSWORD}
         Wait Until Page Contains  Credenciales inválidas
 
+    #Forms
+
     Create new form with all type of questions
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
         True Or False Question  ${TITLE}  ${OPTIONC}  2
@@ -113,6 +116,7 @@
     Allow form to have more than one of each type of question
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         :FOR  ${INDEX}  IN RANGE  1  3
             \  Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  5*(${INDEX}-1) + 1
@@ -126,6 +130,7 @@
     Multiplechoice question can't be created if not all fields are filled
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Multiplechoice Question  ${BLANK}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
         Submit Then Close Answer
@@ -143,6 +148,7 @@
     True or false question can't be created with empty fields
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         True Or False Question  ${BLANK}  ${OPTIONC}  1
         Submit Then Close Answer
@@ -152,6 +158,7 @@
     Numeric questions can't be created with empty fields
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Numeric Question  ${BLANK}  1
         Submit Then Close Answer
@@ -159,6 +166,7 @@
     Short answer questions can't be created with empty fields
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Short Answer Question  ${BLANK}  1
         Submit Then Close Answer
@@ -166,6 +174,7 @@
     Long answer questions can't be created with empty fields
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Long Answer Question  ${BLANK}  1
         Submit Then Close Answer
@@ -180,13 +189,16 @@
     Edit form correctly
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Numeric Question  ${TITLE}  1
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
         Wait Until Page Contains  Se ha guardado la planilla
         Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
-        Click Element  //*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[1]/div[1]/i
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[1]/div[1]/i
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[1]/div[1]/i
         Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
         Wait Until Page Contains  Se ha guardado la planilla
@@ -194,14 +206,18 @@
     Delete form correctly
         [Tags]  Forms
         Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
         Input Text  xpath=//*[@id="titulo"]  Nueva planilla
         Numeric Question  ${TITLE}  1
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
         Wait Until Page Contains  Se ha guardado la planilla
         Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[3]/button
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[3]/button
         Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/a
+
     *** Keywords ***
     Clear Database
         Run  ${DELETE DATABASE COMMAND}
@@ -272,11 +288,14 @@
 
     Forms
         Create Valid Teacher
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[4]/a
         Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/a
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/a
 
     Multiplechoice Question
         [Arguments]  ${title}  ${optionA}  ${optionB}  ${optionC}  ${optionD}  ${optionE}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[1]
         Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[1]
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[1]/div/input  ${optionA}
@@ -288,6 +307,7 @@
 
     True Or False Question
         [Arguments]  ${title}  ${optionC}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[2]
         Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[2]
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/button
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
@@ -295,16 +315,19 @@
 
     Numeric Question
         [Arguments]  ${title}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[3]
         Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[3]
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
 
     Short Answer Question
         [Arguments]  ${title}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[4]
         Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[4]
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
 
     Long Answer Question
         [Arguments]  ${title}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[5]
         Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[5]
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
 
