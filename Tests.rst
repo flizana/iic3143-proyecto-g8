@@ -246,6 +246,7 @@
         Numeric Question  ${TITLE}  3
         Short Answer Question  ${TITLE}  4
         Long Answer Question  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
         Click Element  xpath=//button[@class="btn btn-primary"]
         Wait Until Page Contains  ${ACTIVITYNAME}
 
@@ -262,6 +263,7 @@
         Numeric Question  ${TITLE}  3
         Short Answer Question  ${TITLE}  4
         Long Answer Question  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
         Click Element  xpath=//button[@class="btn btn-primary"]
         Wait Until Page Contains  Error
 
@@ -273,6 +275,7 @@
         Wait Until Page Contains  ${COURSENAME}
         Click Element  link=${COURSENAME}
         Add Course Activity  ${ACTIVITYNAME}
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
         Click Element  xpath=//button[@class="btn btn-primary"]
         Wait Until Page Contains  Error
 
@@ -289,6 +292,7 @@
         Numeric Question  ${TITLE}  3
         Short Answer Question  ${TITLE}  4
         Long Answer Question  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-success"]
         Click Element  xpath=//button[@class="btn btn-success"]
         Wait Until Page Contains  Se ha guardado la planilla
         Click Element  xpath=//*[@id="side-menu"]/li[4]/a
@@ -307,10 +311,12 @@
         Numeric Question  ${TITLE}  3
         Short Answer Question  ${TITLE}  4
         Long Answer Question  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-success"]
         Click Element  xpath=//button[@class="btn btn-success"]
         Wait Until Page Contains  Se ha guardado la planilla
         Click Element  link=${COURSENAME}
         Add Course Activity  ${ACTIVITYNAME}
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
         Click Element  xpath=//button[@class="btn btn-primary"]
         Wait Until Page Contains  Error
         Wait Until Page Contains Element  xpath=//div[@class="col-lg-4"]//li
@@ -389,9 +395,9 @@
     #Suscribe
 
     Student can suscribe to course
-        [Tags] Suscribe
-        Suscribe ${COURSENAME}
-        Wait Until Page Contains Element xpath=//div[@class="pull-right boton-inscribir-curso esperando ng-scope"]
+        [Tags]  Suscribe
+        Suscribe  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//div[@class="pull-right boton-inscribir-curso esperando ng-scope"]
 
     *** Keywords ***
     Clear Database
@@ -548,14 +554,15 @@
         Input Text  id=titulo  ${activityname}
 
     Suscribe
-        [Arguments] ${coursename}
-        Create Course ${coursename}
+        [Arguments]  ${coursename}
+        Create Course  ${coursename}
+        Logout
         Create Valid Student
-        Wait Until Page Contains Element xpath=//*[@id="side-menu"]/li[0]/div/input
-        Input Text ng-model=searchFor ${coursename}
-        Click Element xpath=//button[@ng-click="search()"]
-        Wait Until Page Contains Element xpath=//button[@class="boton-inscribir-curso ng-scope"]
-        Click Element xpath=//button[@class="boton-inscribir-curso ng-scope"]
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[1]/div/input
+        Input Text  xpath=//input[@class="form-control ng-pristine ng-untouched ng-valid"]  ${coursename}
+        Click Element  xpath=//button[@ng-click="search()"]
+        Wait Until Page Contains Element  xpath=//button[@class="boton-inscribir-curso ng-scope"]
+        Click Element  xpath=//button[@class="boton-inscribir-curso ng-scope"]
 
     *** Variables ***
     ${TEACHER-FIRSTNAME}  Patricio
