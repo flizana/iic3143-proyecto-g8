@@ -218,6 +218,168 @@
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[3]/button
         Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/a
 
+    #Courses
+
+    Teacher can create course
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+
+    Teacher can add activity to course
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question  ${TITLE}  ${OPTIONC}  2
+        Numeric Question  ${TITLE}  3
+        Short Answer Question  ${TITLE}  4
+        Long Answer Question  ${TITLE}  5
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can't add activity with no title
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${BLANK}
+        Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question  ${TITLE}  ${OPTIONC}  2
+        Numeric Question  ${TITLE}  3
+        Short Answer Question  ${TITLE}  4
+        Long Answer Question  ${TITLE}  5
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  Error
+
+    Teacher can't add activity with no questions
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  Error
+
+    Teacher can create form through activity
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question  ${TITLE}  ${OPTIONC}  2
+        Numeric Question  ${TITLE}  3
+        Short Answer Question  ${TITLE}  4
+        Long Answer Question  ${TITLE}  5
+        Click Element  xpath=//button[@class="btn btn-success"]
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can create activity with form
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question  ${TITLE}  ${OPTIONC}  2
+        Numeric Question  ${TITLE}  3
+        Short Answer Question  ${TITLE}  4
+        Long Answer Question  ${TITLE}  5
+        Click Element  xpath=//button[@class="btn btn-success"]
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  Error
+        Wait Until Page Contains Element  xpath=//div[@class="col-lg-4"]//li
+        Click Element  xpath=//div[@class="col-lg-4"]//li
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Does Not Contain  Error
+
+    #Teacher Profile
+
+    Teacher can edit profile info
+        [Tags]  Teacher Profile
+        Teacher Profile
+        Edit Info  ${STUDENT-FIRSTNAME}  ${STUDENT-LASTNAME}  ${NEW-SCHOOL}  ${STUDENT-EMAIL}
+        Click Element  xpath=//*[@id="edit-profile-submit-btn"]
+        Wait Until Page Contains  ${STUDENT-FIRSTNAME} ${STUDENT-LASTNAME}
+        Wait Until Page Contains  ${NEW-SCHOOL}
+        Wait Until Page Contains  ${STUDENT-EMAIL}
+
+    Teacher can cancel profile info edit
+        [Tags]  Teacher Profile
+        Teacher Profile
+        Edit Info  ${STUDENT-FIRSTNAME}  ${STUDENT-LASTNAME}  ${NEW-SCHOOL}  ${STUDENT-EMAIL}
+        Click Element  xpath=//*[@id="edit-profile-cancel-btn"]
+        Wait Until Page Contains  ${TEACHER-FIRSTNAME} ${TEACHER-LASTNAME}
+        Wait Until Page Contains  ${SCHOOL}
+        Wait Until Page Contains  ${TEACHER-EMAIL}
+
+    Teacher can't edit to invalid email
+        [Tags]  Teacher Profile
+        Teacher Profile
+        Edit Info  ${TEACHER-FIRSTNAME}  ${TEACHER-LASTNAME}  ${SCHOOL}  blabla
+        Click Element  xpath=//*[@id="edit-profile-submit-btn"]
+        Wait Until Page Contains  Error
+
+    Teacher can't edit info to blank
+        [Tags]  Teacher Profile
+        Teacher Profile
+        Edit Info  ${BLANK}  ${BLANK}  ${BLANK}  ${BLANK}
+        Click Element  xpath=//*[@id="edit-profile-submit-btn"]
+        Wait Until Page Contains  Error
+
+    #Student Profile
+
+    Student can edit profile info
+        [Tags]  Student Profile
+        Student Profile
+        Edit Info  ${TEACHER-FIRSTNAME}  ${TEACHER-LASTNAME}  ${NEW-SCHOOL}  ${TEACHER-EMAIL}
+        Click Element  xpath=//*[@id="edit-profile-submit-btn"]
+        Wait Until Page Contains  ${TEACHER-FIRSTNAME} ${TEACHER-LASTNAME}
+        Wait Until Page Contains  ${NEW-SCHOOL}
+        Wait Until Page Contains  ${TEACHER-EMAIL}
+
+    Student can cancel profile info edit
+        [Tags]  Student Profile
+        Student Profile
+        Edit Info  ${STUDENT-FIRSTNAME}  ${STUDENT-LASTNAME}  ${NEW-SCHOOL}  ${STUDENT-EMAIL}
+        Click Element  xpath=//*[@id="edit-profile-cancel-btn"]
+        Wait Until Page Contains  ${STUDENT-FIRSTNAME} ${STUDENT-LASTNAME}
+        Wait Until Page Contains  ${SCHOOL}
+        Wait Until Page Contains  ${STUDENT-EMAIL}
+
+    Student can't edit to invalid email
+        [Tags]  Student Profile
+        Student Profile
+        Edit Info  ${STUDENT-FIRSTNAME}  ${STUDENT-LASTNAME}  ${SCHOOL}  blabla
+        Click Element  xpath=//*[@id="edit-profile-submit-btn"]
+        Wait Until Page Contains  Error
+
+    Student can't edit info to blank
+        [Tags]  Student Profile
+        Student Profile
+        Edit Info  ${BLANK}  ${BLANK}  ${BLANK}  ${BLANK}
+        Click Element  xpath=//*[@id="edit-profile-submit-btn"]
+        Wait Until Page Contains  Error
+
     *** Keywords ***
     Clear Database
         Run  ${DELETE DATABASE COMMAND}
@@ -336,10 +498,48 @@
         Wait Until Page Contains  Error
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[1]/div[1]/i
 
+    Teacher Profile
+        Create Valid Teacher
+        Wait Until Page Contains Element  xpath=//a[@id="edit-profile-link"]
+        Click Element  xpath=//a[@id="edit-profile-link"]
+
+    Edit Info
+        [Arguments]  ${firstname}  ${lastname}  ${school}  ${email}
+        Wait Until Page Contains Element  name=firstName
+        Input Text  name=firstName  ${firstname}
+        Input Text  name=lastName  ${lastname}
+        Input Text  name=school  ${school}
+        Input Text  name=email  ${email}
+
+    Student Profile
+        Create Valid Student
+        Wait Until Page Contains Element  xpath=//a[@id="edit-profile-link"]
+        Click Element  xpath=//a[@id="edit-profile-link"]
+
+    Create Course
+        [Arguments]  ${coursename}
+        Create Valid Teacher
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains Element  xpath=//a[@id="add-course-link"]
+        Click Element  xpath=//a[@id="add-course-link"]
+        Wait Until Page Contains Element  name=courseName
+        Input Text  name=courseName  ${coursename}
+        Click Element  xpath=//input[@class="btn btn-MD btn-primary"]
+
+    Add Course Activity
+        [Arguments]  ${activityname}
+        Wait Until Page Contains Element  xpath=//a[@class="btn btn-default pull-right"]
+        Click Element  xpath=//a[@class="btn btn-default pull-right"]
+        Wait Until Page Contains Element  id=titulo
+        Input Text  id=titulo  ${activityname}
+
+
     *** Variables ***
     ${TEACHER-FIRSTNAME}  Patricio
     ${TEACHER-LASTNAME}  Ortiz
     ${SCHOOL}  The Grange School
+    ${NEW-SCHOOL}  The Grange
     ${TEACHER-EMAIL}  apo@apo.apo
     ${PASSWORD}  p4SSw0rd.
     ${STUDENT-FIRSTNAME}  Francisco
@@ -353,3 +553,5 @@
     ${OPTIOND}  Cuarto
     ${OPTIONE}  Quinto
     ${BLANK}
+    ${COURSENAME}  Computing
+    ${ACTIVITYNAME}  Programming
