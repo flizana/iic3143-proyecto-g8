@@ -390,7 +390,7 @@
 
     Student can suscribe to course
         [Tags] Suscribe
-        Suscribe
+        Suscribe ${COURSENAME}
         Wait Until Page Contains Element xpath=//div[@class="pull-right boton-inscribir-curso esperando ng-scope"]
 
     *** Keywords ***
