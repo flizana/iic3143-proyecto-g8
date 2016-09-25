@@ -386,6 +386,13 @@
         Click Element  xpath=//*[@id="edit-profile-submit-btn"]
         Wait Until Page Contains  Error
 
+    #Suscribe
+
+    Student can suscribe to course
+        [Tags] Suscribe
+        Suscribe
+        Wait Until Page Contains Element xpath=//div[@class="pull-right boton-inscribir-curso esperando ng-scope"]
+
     *** Keywords ***
     Clear Database
         Run  ${DELETE DATABASE COMMAND}
@@ -540,6 +547,15 @@
         Wait Until Page Contains Element  id=titulo
         Input Text  id=titulo  ${activityname}
 
+    Suscribe
+        [Arguments] ${coursename}
+        Create Course ${coursename}
+        Create Valid Student
+        Wait Until Page Contains Element xpath=//*[@id="side-menu"]/li[0]/div/input
+        Input Text ng-model=searchFor ${coursename}
+        Click Element xpath=//button[@ng-click="search()"]
+        Wait Until Page Contains Element xpath=//button[@class="boton-inscribir-curso ng-scope"]
+        Click Element xpath=//button[@class="boton-inscribir-curso ng-scope"]
 
     *** Variables ***
     ${TEACHER-FIRSTNAME}  Patricio
