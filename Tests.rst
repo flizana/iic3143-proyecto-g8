@@ -54,6 +54,12 @@
         Create Teacher  ${TEACHER-FIRSTNAME}  ${TEACHER-LASTNAME}  ${BLANK}  ${TEACHER-EMAIL}  ${PASSWORD}  ${PASSWORD}
         Wait Until Page Contains  Por favor rellene todos los campos.
 
+    Can't create user with invalid password
+        [Tags]  Creating Users
+        Click Element  xpath=//a[@href='/teacher']
+        Create Teacher  ${TEACHER-FIRSTNAME}  ${TEACHER-LASTNAME}  ${SCHOOL}  ${TEACHER-EMAIL}  123  123
+        Wait Until Page Contains  La contraseña no es valida
+
     #Logging in
 
     Teacher can login with correct credentials
