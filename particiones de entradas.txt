@@ -1,0 +1,28 @@
+Particion del espacio de entrada
+
+Creando Usuarios
+
+First Name {string, vacio}
+Last Name {string, vacio}
+School {string, vacio}
+Email {con @ con punto, sin @ con punto, con @ sin punto, sin @ sin punto, vacio}
+Password {string valido , string invalido,  vacio }
+Password Confirmation {calza con password, no calza con password}
+
+Logging in
+
+Email {existe, no existe}
+Password {correcto, incorrecto}
+
+Edit Profile
+
+First Name {string, vacio}
+Last Name {string, vacio}
+School {string, vacio}
+Email {con @ con punto, sin @ con punto, con @ sin punto, sin @ sin punto, vacio}
+
+Forms
+
+
+
+Courses
