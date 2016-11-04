@@ -15,7 +15,7 @@
 
     #Creating Users
 
-    
+
     Teacher can create an account and will be automatically logged in
         [Tags]  Creating Users
         Create Valid Teacher
@@ -38,7 +38,7 @@
         Click Element  xpath=//a[@href='/teacher']
         Create Teacher  ${TEACHER-FIRSTNAME}  ${TEACHER-LASTNAME}  ${BLANK}  ${TEACHER-EMAIL}  ${PASSWORD}  ${PASSWORD}
         Wait Until Page Contains  Por favor rellene todos los campos.
-    
+
     Can't create user if email doesn't contain @
         [Tags]  Creating Users
         Click Element  xpath=//a[@href='/teacher']
@@ -68,7 +68,7 @@
         Click Element  xpath=//a[@href='/teacher']
         Create Teacher  ${TEACHER-FIRSTNAME}  ${TEACHER-LASTNAME}  ${SCHOOL}  ${TEACHER-EMAIL}  ${PASSWORD}  differentPassword
         Wait Until Page Contains  Contraseñas no coinciden. Por favor intente nuevamente.
-    
+
 
     #Logging in
 
@@ -152,7 +152,171 @@
         Click Element  xpath=//*[@id="edit-profile-submit-btn"]
         Wait Until Page Contains  Error
 
-   
+    # Forms
+
+    Create new form to enter title edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+
+    Create new form to create question edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+
+    Create new form to save form edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+
+    Enter title to save form edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+
+    Create question to enter question title edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+
+    Create question to enter alternatives edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+
+    Create question to add alternative edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Option For Multiplechoice  ${OPTIONE}  1
+
+    Create question to save form edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+
+    Edit form to save form edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        # Form edition page entered at this point, now save
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+
+
+    Edit form to change form title edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        # Form edition page entered at this point, now change title
+        Input Text  xpath=//*[@id="titulo"]  Nuevo titulo
+
+    Edit form to edit question edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        # Form edition page entered at this point, now edit question
+        Edit Multiplechoice Question  New OptionA  New OptionB  New OptionC  New OptionD  1
+
+    Edit question to edit question title edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        # Form edition page entered at this point, now edit question
+        Add Title To Multiplechoice Question  Nuevo Titulo de Pregunta  1
+
+    Edit question to edit alternatives edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Edit Multiplechoice Question  New OptionA  New OptionB  New OptionC  New OptionD  1
+
+    Edit question to add alternative edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        # Form edition page entered at this point, now edit question
+        Add Option For Multiplechoice  ${OPTIONE}  1
+
+    Edit question to save question edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        # Form edition page entered at this point, now edit question
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+
+    Delete form successfully edge
+        [Tags]  Forms
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div/a
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[3]/button
 
     *** Keywords ***
     Clear Database
@@ -230,16 +394,30 @@
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/a
 
     Multiplechoice Question
-        [Arguments]  ${title}  ${optionA}  ${optionB}  ${optionC}  ${optionD}  ${optionE}  ${number}
+        [Arguments]  ${optionA}  ${optionB}  ${optionC}  ${optionD}  ${number}
         Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[1]
         Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[1]
-        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[1]/div/input  ${optionA}
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[2]/div/input  ${optionB}
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[3]/div/input  ${optionC}
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[4]/div/input  ${optionD}
+
+    Add Title To Multiplechoice Question
+        [Arguments]  ${title}  ${number}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
+
+    Add Option For Multiplechoice
+        [Arguments]  ${optionE}  ${number}
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/button
         Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[5]/div/input  ${optionE}
+
+    Edit Multiplechoice Question
+        [Arguments]  ${optionA}  ${optionB}  ${optionC}  ${optionD}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[1]
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[1]/div/input  ${optionA}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[2]/div/input  ${optionB}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[3]/div/input  ${optionC}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[4]/div/input  ${optionD}
 
     True Or False Question
         [Arguments]  ${title}  ${optionC}  ${number}
