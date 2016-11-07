@@ -13,6 +13,188 @@
 
     *** Test Cases ***
 
+    # Courses
+
+    Teacher can add form to activity edge
+        [Tags]  Courses
+        Forms
+        Wait Until Page Contains Element  xpath=//*[@id="titulo"]
+        Input Text  xpath=//*[@id="titulo"]  Nueva planilla
+        Multiplechoice Question  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  1
+        Add Title To Multiplechoice Question  Nueva Pregunta  1
+        True Or False Question  ${TITLE}  ${OPTIONC}  2
+        Numeric Question  ${TITLE}  3
+        Short Answer Question  ${TITLE}  4
+        Long Answer Question  ${TITLE}  5
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[2]/button
+        Wait Until Page Contains  Se ha guardado la planilla
+        Create Course2  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Wait Until Page Contains Element  xpath=//div[@class="col-lg-4"]//li
+        Click Element  xpath=//div[@class="col-lg-4"]//li
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can create course edge
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+
+    Teacher can add activity to course edge
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Multiplechoice Question Title  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question Title  ${TITLE}  ${OPTIONC}  2
+        Numeric Question Title  ${TITLE}  3
+        Short Answer Question Title  ${TITLE}  4
+        Long Answer Question Title  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can add multiple choice question to activity edge
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Multiplechoice Question Title  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can add true or false question to activity edge
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        True Or False Question Title  ${TITLE}  ${OPTIONC}  1
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can add numeric question to activity edge
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Numeric Question Title  ${TITLE}  1
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can add short answer question to activity edge
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Short Answer Question Title  ${TITLE}  1
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can add long answer question to activity edge
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Long Answer Question Title  ${TITLE}  1
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher can create form through activity
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Multiplechoice Question Title  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question Title  ${TITLE}  ${OPTIONC}  2
+        Numeric Question Title  ${TITLE}  3
+        Short Answer Question Title  ${TITLE}  4
+        Long Answer Question Title  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-success"]
+        Click Element  xpath=//button[@class="btn btn-success"]
+        Wait Until Page Contains  Se ha guardado la planilla
+        Click Element  xpath=//*[@id="side-menu"]/li[4]/a
+        Wait Until Page Contains  ${ACTIVITYNAME}
+
+    Teacher cant save form with errors
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity   ${BLANK}
+        Multiplechoice Question Title  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question Title  ${TITLE}  ${OPTIONC}  2
+        Numeric Question Title  ${TITLE}  3
+        Short Answer Question Title  ${TITLE}  4
+        Long Answer Question Title  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-success"]
+        Click Element  xpath=//button[@class="btn btn-success"]
+        Wait Until Page Contains  Error
+
+    Teacher cant send activity with no title
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${BLANK}
+        Multiplechoice Question Title  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
+        True Or False Question Title  ${TITLE}  ${OPTIONC}  2
+        Numeric Question Title  ${TITLE}  3
+        Short Answer Question Title  ${TITLE}  4
+        Long Answer Question Title  ${TITLE}  5
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  Error
+
+    Teacher cant send activity with no questions
+        [Tags]  Courses
+        Create Course  ${COURSENAME}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains  ${COURSENAME}
+        Click Element  link=${COURSENAME}
+        Add Course Activity  ${ACTIVITYNAME}
+        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
+        Click Element  xpath=//button[@class="btn btn-primary"]
+        Wait Until Page Contains  Error
+
+
     #Creating Users
 
 
@@ -353,123 +535,6 @@
         Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[1]/div[3]/button
         Wait Until Page Contains  Usted todavía no tiene planillas
 
-    # Courses
-
-    Teacher can create course edge
-        [Tags] Courses
-        Create Course ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-
-    Teacher can add activity to course edge
-        [Tags]  Courses
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
-        True Or False Question  ${TITLE}  ${OPTIONC}  2
-        Numeric Question  ${TITLE}  3
-        Short Answer Question  ${TITLE}  4
-        Long Answer Question  ${TITLE}  5
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
-
-    Teacher can add name to activity edge
-        [Tags]  Courses
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
-
-    Teacher can add multiple choice question to activity edge
-        [Tags]  Courses
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        Multiplechoice Question  ${TITLE}  ${OPTIONA}  ${OPTIONB}  ${OPTIONC}  ${OPTIOND}  ${OPTIONE}  1
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
-
-    Teacher can add true or false question to activity edge
-        [Tags]  Courses
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        True Or False Question  ${TITLE}  ${OPTIONC}  2
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
-
-    Teacher can add numeric question to activity edge
-        [Tags]  Courses
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        Numeric Question  ${TITLE}  3
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
-
-    Teacher can add short answer question to activity edge
-        [Tags]  Courses
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        Short Answer Question  ${TITLE}  4
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
-
-    Teacher can add long answer question to activity edge
-        [Tags]  Courses
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        Long Answer Question  ${TITLE}  5
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
-
-    Teacher can add form to activity edge
-        [Tags] Courses
-        Forms
-        Create Course  ${COURSENAME}
-        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
-        Wait Until Page Contains  ${COURSENAME}
-        Click Element  link=${COURSENAME}
-        Add Course Activity  ${ACTIVITYNAME}
-        Wait Until Page Contains Element xpath=//div[@class="list-group"]/li[0]
-        Click Element xpath=//div[@class="list-group"]/li[0]
-        Wait Until Page Contains Element  xpath=//button[@class="btn btn-primary"]
-        Click Element  xpath=//button[@class="btn btn-primary"]
-        Wait Until Page Contains  ${ACTIVITYNAME}
 
     *** Keywords ***
     Clear Database
@@ -632,6 +697,16 @@
         Input Text  name=courseName  ${coursename}
         Click Element  xpath=//input[@class="btn btn-MD btn-primary"]
 
+    Create Course2
+        [Arguments]  ${coursename}
+        Wait Until Page Contains Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Click Element  xpath=//*[@id="side-menu"]/li[3]/a
+        Wait Until Page Contains Element  xpath=//a[@id="add-course-link"]
+        Click Element  xpath=//a[@id="add-course-link"]
+        Wait Until Page Contains Element  name=courseName
+        Input Text  name=courseName  ${coursename}
+        Click Element  xpath=//input[@class="btn btn-MD btn-primary"]
+
     Add Course Activity
         [Arguments]  ${activityname}
         Wait Until Page Contains Element  xpath=//a[@class="btn btn-default pull-right"]
@@ -649,6 +724,44 @@
         Click Element  xpath=//button[@ng-click="search()"]
         Wait Until Page Contains Element  xpath=//button[@class="boton-inscribir-curso ng-scope"]
         Click Element  xpath=//button[@class="boton-inscribir-curso ng-scope"]
+
+    Multiplechoice Question Title
+        [Arguments]  ${title}  ${optionA}  ${optionB}  ${optionC}  ${optionD}  ${optionE}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[1]
+        Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[1]
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[1]/div/input  ${optionA}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[2]/div/input  ${optionB}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[3]/div/input  ${optionC}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[4]/div/input  ${optionD}
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/button
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[5]/div/input  ${optionE}
+
+    True Or False Question Title
+        [Arguments]  ${title}  ${optionC}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[2]
+        Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[2]
+        Click Element  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/button
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/div[3]/div/input  ${optionC}
+
+    Numeric Question Title
+        [Arguments]  ${title}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[3]
+        Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[3]
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
+
+    Short Answer Question Title
+        [Arguments]  ${title}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[4]
+        Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[4]
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
+
+    Long Answer Question Title
+        [Arguments]  ${title}  ${number}
+        Wait Until Page Contains Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[5]
+        Click Element  xpath=//*[@id="page-wrapper"]/div[3]/div[1]/div/div[2]/ul/li[5]
+        Input Text  xpath=//*[@id="page-wrapper"]/div[2]/div/div/div[2]/div[${number}]/div[2]/input  ${title}
 
     *** Variables ***
     ${TEACHER-FIRSTNAME}  Patricio

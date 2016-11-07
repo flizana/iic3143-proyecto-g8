@@ -23,6 +23,20 @@ Email {con @ con punto, sin @ con punto, con @ sin punto, sin @ sin punto, vacio
 
 Forms
 
-
+titulo {string, vacío}
+preguntas {todas, solo 4, solo 3, solo 2, solo 1, vacío}
+pregunta alternativas {
+    titulo {string, vacío}
+    opciones{1 o más, 0}
+    opción {string, vacío}
+  }
+pregunta si o no{
+    titulo {string, vacío}
+    opción {string, vacío}
+  }
+pregunta numerica {string, vacío}
+pregunta respuesta corta {string, vacío}
+comentario {string, vacío}
 
 Courses
+nombre {string, vacío}
